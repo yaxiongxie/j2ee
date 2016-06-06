@@ -29,5 +29,11 @@ public class TestControl {
 		}
 		//sd/
 	}
+	
+	@RequestMapping("yy.do")
+	public void yy(String yyString){
+		
+	}
+	
 
 }
