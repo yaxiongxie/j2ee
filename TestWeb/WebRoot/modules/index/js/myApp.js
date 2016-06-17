@@ -33,4 +33,33 @@
     });
 }(angular));
 
-var myApp=angular.module('myApp',['ngLoadScript','ui.router']);
+var myApp=angular.module('myApp',['ngLoadScript','ui.router','oc.lazyLoad']);
+
+myApp.config(function($stateProvider, $urlRouterProvider) {
+    //
+    $urlRouterProvider.otherwise("/state1");
+    //
+    $stateProvider
+        .state('state1', {
+            url: "/state1",
+            templateUrl: "content.html"
+        })
+        
+        .state('state2', {
+        	url: "/state2",
+        	templateUrl: "content.html",
+            controller:'testControl',
+            resolve:{
+                loadMyCtrl:function($ocLazyLoad){
+                    return $ocLazyLoad.load("js/control.js");
+                }
+            }
+        })
+        .state('state2.list', {
+            url: "/list",
+            templateUrl: "partials/state2.list.html",
+            controller: function($scope) {
+                $scope.things = ["A", "Set", "Of", "Things"];
+            }
+        });
+});
