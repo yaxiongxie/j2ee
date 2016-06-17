@@ -4,7 +4,29 @@
             <h1 class="page-header">Dashboard</h1>
         </div>
         <!-- /.col-lg-12 -->
-        <h1>hello {{name}}</h1>
+        <table class="table table-bordered table-striped table-hover" >
+            <thead>
+            <tr>
+                <th>编号</th>
+                <th>设备mac</th>
+                <th>操作类型</th>
+                <th>操作状态</th>
+                <th>附加内容</th>
+                <th>时间</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="history in historylist">
+                <td>{{history.id}}</td>
+                <td>{{history.devicemac}}</td>
+                <td>{{history.operatetype | replacetext}}</td>
+                <td>{{history.operate}}</td>
+                <td>{{history.othercontent}}</td>
+                <td>{{history.createtime}}</td>
+            </tr>
+
+            </tbody>
+        </table>
 
     </div>
      

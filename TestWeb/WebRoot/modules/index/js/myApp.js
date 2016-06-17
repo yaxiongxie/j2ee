@@ -33,7 +33,7 @@
     });
 }(angular));
 
-var myApp=angular.module('myApp',['ngLoadScript','ui.router','oc.lazyLoad']);
+var myApp=angular.module('myApp',['ngLoadScript','ui.router','oc.lazyLoad','ui.bootstrap']);
 
 myApp.config(function($stateProvider, $urlRouterProvider) {
     //
@@ -55,8 +55,8 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
                 }
             }
         })
-        .state('state2.list', {
-            url: "/list",
+        .state('table', {
+            url: "/table",
             templateUrl: "partials/state2.list.html",
             controller: function($scope) {
                 $scope.things = ["A", "Set", "Of", "Things"];
