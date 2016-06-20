@@ -2,10 +2,7 @@ package com.xyx.processfile.txt;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.InputStreamReader;
-import java.nio.charset.Charset;
-import java.nio.charset.CharsetEncoder;
 
 public class TxtUtil {
 

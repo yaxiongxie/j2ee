@@ -2,9 +2,11 @@ package com.xyx.control;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.xyx.dao.TestDao;
 
 
 
@@ -14,26 +16,14 @@ public class TestControl {
 	Logger logger=Logger.getLogger(TestControl.class);
 	
 	@Autowired
-	private JdbcTemplate jdbcTemplate;
+	private TestDao testDao;
 	
 	
 	@RequestMapping("xx.do")
-	public void xx(String xx){
-		System.out.println("save");
-		jdbcTemplate.update("insert into test(name) values('xx') ");
-		try{
-			throw new NullPointerException();
-		}catch (Exception e) {
-			// TODO: handle exception
-			logger.error(e);
-		}
-		//sd/
+	@ResponseBody
+	public String xx(String xx){
+		testDao.test();
+		return "success";
 	}
-	
-	@RequestMapping("yy.do")
-	public void yy(String yyString){
-		
-	}
-	
 
 }

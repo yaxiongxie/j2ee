@@ -40,7 +40,7 @@ public class SendEmailUtil {
 	}
 	
 	public static void main(String[] args) {
-		sendEmail("935545467@qq.com", "测试主题","测试内容");
+		sendEmail("xieyaxiong@163.com", "测试主题","测试内容");
 	}
 
 }
