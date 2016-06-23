@@ -33,7 +33,46 @@
     });
 }(angular));
 
-var myApp=angular.module('myApp',['ngLoadScript','ui.router','oc.lazyLoad','ui.bootstrap']);
+var myApp=angular.module('myApp',['ngLoadScript','ui.router','oc.lazyLoad','ui.bootstrap','angularBootstrapNavTree']);
+myApp.directive('myTable', function() {
+    return {
+        restrict: 'E',
+        templateUrl: 'my-table.html'
+    };
+});
+
+myApp.directive('fileUpload', function () {
+    return {
+        scope: true,        //create a new scope
+        link: function (scope, el, attrs) {
+            el.bind('change', function (event) {
+                var files = event.target.files;
+                //iterate files since 'multiple' may be specified on the element
+                for (var i = 0;i<files.length;i++) {
+                    //emit event upward
+                    scope.$emit("fileSelected", { file: files[i] });
+                }
+            });
+        }
+    };
+});
+
+angular.module('myApp').controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, items) {
+
+    $scope.items = items;
+    $scope.selected = {
+        item: $scope.items[0]
+    };
+
+    $scope.ok = function () {
+        $uibModalInstance.close($scope.selected.item);
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+});
+
 
 myApp.config(function($stateProvider, $urlRouterProvider) {
     //

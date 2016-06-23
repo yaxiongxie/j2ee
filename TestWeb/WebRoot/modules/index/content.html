@@ -4,29 +4,28 @@
             <h1 class="page-header">Dashboard</h1>
         </div>
         <!-- /.col-lg-12 -->
-        <table class="table table-bordered table-striped table-hover" >
-            <thead>
-            <tr>
-                <th>编号</th>
-                <th>设备mac</th>
-                <th>操作类型</th>
-                <th>操作状态</th>
-                <th>附加内容</th>
-                <th>时间</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="history in historylist">
-                <td>{{history.id}}</td>
-                <td>{{history.devicemac}}</td>
-                <td>{{history.operatetype | replacetext}}</td>
-                <td>{{history.operate}}</td>
-                <td>{{history.othercontent}}</td>
-                <td>{{history.createtime}}</td>
-            </tr>
-
-            </tbody>
-        </table>
-
+        <my-table></my-table>
     </div>
-     
+    <div class="row">
+        <div class="col-md-3">
+            <abn-tree tree-data="example_treedata" on-select= "my_tree_handler(branch)"></abn-tree>
+        </div>
+    </div>
+    <div class="row">
+        <button type="button" class="btn btn-default" ng-click="open()">Open me!</button>
+        <button type="button" class="btn btn-default" ng-click="open('lg')">Large modal</button>
+        <button type="button" class="btn btn-default" ng-click="open('sm')">Small modal</button>
+    </div>
+
+    <form>
+        <div>
+            <input type="file" file-upload multiple/>
+            <ul>
+                <li ng-repeat="file in files">{{file.name}}</li>
+            </ul>
+            <button type="button" class="btn btn-default" ng-click="save()">submit!</button>
+        </div>
+
+    </form>
+
+
