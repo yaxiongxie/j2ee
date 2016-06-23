@@ -17,6 +17,8 @@ public class TestDaoImpl extends BaseDao implements TestDao{
 	@SuppressWarnings("unchecked")
 	@Override
 	public void test() {
+		Test test2=new Test();
+		test2.setName("xieyaxiong");
 		Page page=findPageByFetchedHql("from Test", null, 1, 5, new Object[]{});
 		System.out.println("page:"+page.getCurrentPage()+":"+page.getPageNo()+":"+page.getPageSize()+":"+page.getTotalCount());
 		List<Test> list=(List<Test>)page.getList();
