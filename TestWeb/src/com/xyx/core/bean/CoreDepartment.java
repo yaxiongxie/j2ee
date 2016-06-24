@@ -22,7 +22,11 @@ public class CoreDepartment  implements java.io.Serializable {
 
     // Fields    
 
-     private Integer id;
+     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Integer id;
      private String name;
      private String code;
      private Integer parentId;

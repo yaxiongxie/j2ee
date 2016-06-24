@@ -1,5 +1,7 @@
-package com.xyx.dao.impl;
+package com.xyx.core.dao;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import net.sf.json.JSONObject;
@@ -9,21 +11,17 @@ import org.springframework.stereotype.Component;
 import com.xyx.bean.Test;
 import com.xyx.common.orm.BaseDao;
 import com.xyx.common.orm.Page;
-import com.xyx.dao.TestDao;
+import com.xyx.core.bean.CoreRole;
 
 @Component
-public class TestDaoImpl extends BaseDao{
+public class CoreDao extends BaseDao{
 	
 	@SuppressWarnings("unchecked")
-	public void test() {
-		Test test2=new Test();
-		test2.setName("xieyaxiong");
-		save(test2);
-		System.out.println("id==="+test2.getId());
-		Page page=findPageByFetchedHql("from Test", null, 1, 5, new Object[]{});
+	public void addRole() {
+		Page page=findPageByFetchedHql("from CoreRole", null, 1, 5, new Object[]{});
 		System.out.println("page:"+page.getCurrentPage()+":"+page.getPageNo()+":"+page.getPageSize()+":"+page.getTotalCount());
-		List<Test> list=(List<Test>)page.getList();
-		for(Test test:list){
+		List<CoreRole> list=(List<CoreRole>)page.getList();
+		for(CoreRole test:list){
 			System.out.println(test.getId()+"========"+test.getName());
 		}
 		JSONObject jsonObject=JSONObject.fromObject(page);

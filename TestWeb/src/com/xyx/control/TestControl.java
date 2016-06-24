@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.xyx.dao.TestDao;
+import com.xyx.dao.impl.TestDaoImpl;
 
 
 
@@ -16,7 +16,7 @@ public class TestControl {
 	Logger logger=Logger.getLogger(TestControl.class);
 	
 	@Autowired
-	private TestDao testDao;
+	private TestDaoImpl testDao;
 	
 	
 	@RequestMapping("xx.do")

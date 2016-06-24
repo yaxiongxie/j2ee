@@ -21,7 +21,11 @@ public class CoreRoleAuth  implements java.io.Serializable {
 
     // Fields    
 
-     private Integer id;
+     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Integer id;
      private Integer roleId;
      private Integer authId;
 

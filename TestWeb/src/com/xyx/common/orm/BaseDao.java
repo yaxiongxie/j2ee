@@ -27,9 +27,9 @@ public class BaseDao extends HibernateDaoSupport{
     } 
 	
 	/**
-     * <±£´æÊµÌå>
-     * <ÍêÕû±£´æÊµÌå>
-     * @param t ÊµÌå²ÎÊý
+     * <ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½>
+     * <ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½>
+     * @param t Êµï¿½ï¿½ï¿½ï¿½ï¿½
      * @see com.itv.launcher.util.IBaseDao#save(java.lang.Object)
      */
     public void save(Object t) {
@@ -37,8 +37,8 @@ public class BaseDao extends HibernateDaoSupport{
     }
      
     /**
-     * <±£´æ»òÕß¸üÐÂÊµÌå>
-     * @param t ÊµÌå
+     * <ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¸ï¿½ï¿½ï¿½Êµï¿½ï¿½>
+     * @param t Êµï¿½ï¿½
      * @see com.itv.launcher.util.IBaseDao#saveOrUpdate(java.lang.Object)
      */
     public void saveOrUpdate(Object t) {
@@ -47,35 +47,37 @@ public class BaseDao extends HibernateDaoSupport{
      
     /**
      * <load>
-     * <¼ÓÔØÊµÌåµÄload·½·¨>
+     * <ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½loadï¿½ï¿½ï¿½ï¿½>
      * @param <T>
      * @param <T>
-     * @param id ÊµÌåµÄid
-     * @return ²éÑ¯³öÀ´µÄÊµÌå
+     * @param id Êµï¿½ï¿½ï¿½id
+     * @return ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½
      * @see com.itv.launcher.util.IBaseDao#load(java.io.Serializable)
      */
-    public <T> T load(Class<T> t,int id) {
+    @SuppressWarnings("unchecked")
+	public <T> T load(Class<T> t,int id) {
         T load = (T) this.getSession().load(t, id);
         return load;
     }
      
     /**
      * <get>
-     * <²éÕÒµÄget·½·¨>
+     * <ï¿½ï¿½ï¿½Òµï¿½getï¿½ï¿½ï¿½ï¿½>
      * @param <T>
-     * @param id ÊµÌåµÄid
-     * @return ²éÑ¯³öÀ´µÄÊµÌå
+     * @param id Êµï¿½ï¿½ï¿½id
+     * @return ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½
      * @see com.itv.launcher.util.IBaseDao#get(java.io.Serializable)
      */
-    public <T> T get(Class<T> t,int id) {
+    @SuppressWarnings("unchecked")
+	public <T> T get(Class<T> t,int id) {
         T load = (T) this.getSession().get(t, id);
         return load;
     }
      
     /**
      * <contains>
-     * @param t ÊµÌå
-     * @return ÊÇ·ñ°üº¬
+     * @param t Êµï¿½ï¿½
+     * @return ï¿½Ç·ï¿½ï¿½
      * @see com.itv.launcher.util.IBaseDao#contains(java.lang.Object)
      */
     public boolean contains(Object object) {
@@ -84,8 +86,8 @@ public class BaseDao extends HibernateDaoSupport{
  
     /**
      * <delete>
-     * <É¾³ý±íÖÐµÄtÊý¾Ý>
-     * @param t ÊµÌå
+     * <É¾ï¿½ï¿½ï¿½ï¿½Ðµï¿½tï¿½ï¿½ï¿½>
+     * @param t Êµï¿½ï¿½
      * @see com.itv.launcher.util.IBaseDao#delete(java.lang.Object)
      */
     public void delete(Object object) {
@@ -93,10 +95,10 @@ public class BaseDao extends HibernateDaoSupport{
     }
      
     /**
-     * <¸ù¾ÝIDÉ¾³ýÊý¾Ý>
+     * <ï¿½ï¿½ï¿½IDÉ¾ï¿½ï¿½ï¿½ï¿½ï¿½>
      * @param <T>
-     * @param Id ÊµÌåid
-     * @return ÊÇ·ñÉ¾³ý³É¹¦
+     * @param Id Êµï¿½ï¿½id
+     * @return ï¿½Ç·ï¿½É¾ï¿½ï¿½É¹ï¿½
      * @see com.itv.launcher.util.IBaseDao#deleteById(java.io.Serializable)
      */
     public <T> boolean deleteById(Class<T> tt,int Id) {
@@ -109,9 +111,9 @@ public class BaseDao extends HibernateDaoSupport{
     }
  
     /**
-     * <É¾³ýËùÓÐ>
+     * <É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½>
      * @param <T>
-     * @param entities ÊµÌåµÄCollection¼¯ºÏ
+     * @param entities Êµï¿½ï¿½ï¿½Collectionï¿½ï¿½ï¿½ï¿½
      * @see com.itv.launcher.util.IBaseDao#deleteAll(java.util.Collection)
      */
     public <T> void deleteAll(Collection<T> entities) {
@@ -121,9 +123,9 @@ public class BaseDao extends HibernateDaoSupport{
     }
  
     /**
-     * <Ö´ÐÐHqlÓï¾ä>
+     * <Ö´ï¿½ï¿½Hqlï¿½ï¿½ï¿½>
      * @param hqlString hql
-     * @param values ²»¶¨²ÎÊýÊý×é
+     * @param values ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      * @see com.itv.launcher.util.IBaseDao#queryHql(java.lang.String, java.lang.Object[])
      */
     public void queryHql(String hqlString, Object... values) {
@@ -139,9 +141,9 @@ public class BaseDao extends HibernateDaoSupport{
     }
  
     /**
-     * <Ö´ÐÐSqlÓï¾ä>
+     * <Ö´ï¿½ï¿½Sqlï¿½ï¿½ï¿½>
      * @param sqlString sql
-     * @param values ²»¶¨²ÎÊýÊý×é
+     * @param values ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      * @see com.itv.launcher.util.IBaseDao#querySql(java.lang.String, java.lang.Object[])
      */
     public void querySql(String sqlString, Object... values) {
@@ -157,11 +159,11 @@ public class BaseDao extends HibernateDaoSupport{
     }
  
     /**
-     * <¸ù¾ÝHQLÓï¾ä²éÕÒÎ¨Ò»ÊµÌå>
+     * <ï¿½ï¿½ï¿½HQLï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î¨Ò»Êµï¿½ï¿½>
      * @param <T>
-     * @param hqlString HQLÓï¾ä
-     * @param values ²»¶¨²ÎÊýµÄObjectÊý×é
-     * @return ²éÑ¯ÊµÌå
+     * @param hqlString HQLï¿½ï¿½ï¿½
+     * @param values ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Objectï¿½ï¿½ï¿½ï¿½
+     * @return ï¿½ï¿½Ñ¯Êµï¿½ï¿½
      * @see com.itv.launcher.util.IBaseDao#getByHQL(java.lang.String, java.lang.Object[])
      */
 	public Object getByHQL(String hqlString, Object... values) {
@@ -177,11 +179,11 @@ public class BaseDao extends HibernateDaoSupport{
     }
  
     /**
-     * <¸ù¾ÝSQLÓï¾ä²éÕÒÎ¨Ò»ÊµÌå>
+     * <ï¿½ï¿½ï¿½SQLï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î¨Ò»Êµï¿½ï¿½>
      * @param <T>
-     * @param sqlString SQLÓï¾ä
-     * @param values ²»¶¨²ÎÊýµÄObjectÊý×é
-     * @return ²éÑ¯ÊµÌå
+     * @param sqlString SQLï¿½ï¿½ï¿½
+     * @param values ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Objectï¿½ï¿½ï¿½ï¿½
+     * @return ï¿½ï¿½Ñ¯Êµï¿½ï¿½
      * @see com.itv.launcher.util.IBaseDao#getBySQL(java.lang.String, java.lang.Object[])
      */
     public Object getBySQL(String sqlString, Object... values) {
@@ -197,11 +199,11 @@ public class BaseDao extends HibernateDaoSupport{
     }
  
     /**
-     * <¸ù¾ÝHQLÓï¾ä£¬µÃµ½¶ÔÓ¦µÄlist>
+     * <ï¿½ï¿½ï¿½HQLï¿½ï¿½ä£¬ï¿½Ãµï¿½ï¿½ï¿½Ó¦ï¿½ï¿½list>
      * @param <T>
-     * @param hqlString HQLÓï¾ä
-     * @param values ²»¶¨²ÎÊýµÄObjectÊý×é
-     * @return ²éÑ¯¶à¸öÊµÌåµÄList¼¯ºÏ
+     * @param hqlString HQLï¿½ï¿½ï¿½
+     * @param values ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Objectï¿½ï¿½ï¿½ï¿½
+     * @return ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½Listï¿½ï¿½ï¿½ï¿½
      * @see com.itv.launcher.util.IBaseDao#getListByHQL(java.lang.String, java.lang.Object[])
      */
     @SuppressWarnings("rawtypes")
@@ -218,11 +220,11 @@ public class BaseDao extends HibernateDaoSupport{
     }
  
     /**
-     * <¸ù¾ÝSQLÓï¾ä£¬µÃµ½¶ÔÓ¦µÄlist>
+     * <ï¿½ï¿½ï¿½SQLï¿½ï¿½ä£¬ï¿½Ãµï¿½ï¿½ï¿½Ó¦ï¿½ï¿½list>
      * @param <T>
-     * @param sqlString HQLÓï¾ä
-     * @param values ²»¶¨²ÎÊýµÄObjectÊý×é
-     * @return ²éÑ¯¶à¸öÊµÌåµÄList¼¯ºÏ
+     * @param sqlString HQLï¿½ï¿½ï¿½
+     * @param values ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Objectï¿½ï¿½ï¿½ï¿½
+     * @return ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½Listï¿½ï¿½ï¿½ï¿½
      * @see com.itv.launcher.util.IBaseDao#getListBySQL(java.lang.String, java.lang.Object[])
      */
     @SuppressWarnings("rawtypes")
@@ -241,7 +243,7 @@ public class BaseDao extends HibernateDaoSupport{
     /**
      * <refresh>
      * @param <T>
-     * @param t ÊµÌå
+     * @param t Êµï¿½ï¿½
      * @see com.itv.launcher.util.IBaseDao#refresh(java.lang.Object)
      */
     public <T> void refresh(T t) {
@@ -251,7 +253,7 @@ public class BaseDao extends HibernateDaoSupport{
     /**
      * <update>
      * @param <T>
-     * @param t ÊµÌå
+     * @param t Êµï¿½ï¿½
      * @see com.itv.launcher.util.IBaseDao#update(java.lang.Object)
      */
     public <T> void update(T t) {
@@ -259,10 +261,10 @@ public class BaseDao extends HibernateDaoSupport{
     }
      
     /**
-     * <¸ù¾ÝHQLµÃµ½¼ÇÂ¼Êý>
-     * @param hql HQLÓï¾ä
-     * @param values ²»¶¨²ÎÊýµÄObjectÊý×é
-     * @return ¼ÇÂ¼×ÜÊý
+     * <ï¿½ï¿½ï¿½HQLï¿½Ãµï¿½ï¿½ï¿½Â¼ï¿½ï¿½>
+     * @param hql HQLï¿½ï¿½ï¿½
+     * @param values ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Objectï¿½ï¿½ï¿½ï¿½
+     * @return ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½
      * @see com.itv.launcher.util.IBaseDao#countByHql(java.lang.String, java.lang.Object[])
      */
     public Long countByHql(String hql, Object... values) {
@@ -276,13 +278,13 @@ public class BaseDao extends HibernateDaoSupport{
     }
  
     /**
-     * <HQL·ÖÒ³²éÑ¯>
-     * @param hql HQLÓï¾ä
-     * @param countHql ²éÑ¯¼ÇÂ¼ÌõÊýµÄHQLÓï¾ä
-     * @param pageNo ÏÂÒ»Ò³
-     * @param pageSize Ò»Ò³×ÜÌõÊý
-     * @param values ²»¶¨ObjectÊý×é²ÎÊý
-     * @return PageResultsµÄ·â×°Àà£¬ÀïÃæ°üº¬ÁËÒ³ÂëµÄÐÅÏ¢ÒÔ¼°²éÑ¯µÄÊý¾ÝList¼¯ºÏ
+     * <HQLï¿½ï¿½Ò³ï¿½ï¿½Ñ¯>
+     * @param hql HQLï¿½ï¿½ï¿½
+     * @param countHql ï¿½ï¿½Ñ¯ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½HQLï¿½ï¿½ï¿½
+     * @param pageNo ï¿½ï¿½Ò»Ò³
+     * @param pageSize Ò»Ò³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+     * @param values ï¿½ï¿½ï¿½ï¿½Objectï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+     * @return PageResultsï¿½Ä·ï¿½×°ï¿½à£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½Ô¼ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½Listï¿½ï¿½ï¿½ï¿½
      * @see com.itv.launcher.util.IBaseDao#findPageByFetchedHql(java.lang.String, java.lang.String, int, int, java.lang.Object[])
      */
     @SuppressWarnings("rawtypes")
@@ -302,7 +304,7 @@ public class BaseDao extends HibernateDaoSupport{
         {
             ScrollableResults results = query.scroll();
             results.last();
-            retValue.setTotalCount(results.getRowNumber() + 1);// ÉèÖÃ×Ü¼ÇÂ¼Êý
+            retValue.setTotalCount(results.getRowNumber() + 1);// ï¿½ï¿½ï¿½ï¿½ï¿½Ü¼ï¿½Â¼ï¿½ï¿½
         }
         else
         {
@@ -325,19 +327,19 @@ public class BaseDao extends HibernateDaoSupport{
      * @return session
      */
     public Session getSession() {
-        //ÐèÒª¿ªÆôÊÂÎï£¬²ÅÄÜµÃµ½CurrentSession
+        //ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï£¬ï¿½ï¿½ï¿½ÜµÃµï¿½CurrentSession
         return this.getSessionFactory().getCurrentSession();
     }
      
     /**
      * 
-     * ÉèÖÃÃ¿ÐÐÅú´¦Àí²ÎÊý
+     * ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      * 
      * @param ps
-     * @param pos ?Õ¼Î»·ûË÷Òý£¬´Ó0¿ªÊ¼
+     * @param pos ?Õ¼Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½Ê¼
      * @param data
      * @throws SQLException
-     * @see [Àà¡¢Àà#·½·¨¡¢Àà#³ÉÔ±]
+     * @see [ï¿½à¡¢ï¿½ï¿½#ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½#ï¿½ï¿½Ô±]
      */
     @SuppressWarnings({ "unused", "rawtypes" })
 	private void setParameter(PreparedStatement ps, int pos, Object data)
@@ -376,7 +378,7 @@ public class BaseDao extends HibernateDaoSupport{
         }
         else
         {
-            // Î´ÖªÀàÐÍ
+            // Î´Öªï¿½ï¿½ï¿½ï¿½
             ps.setObject(pos + 1, data);
         }
          
