@@ -17,7 +17,6 @@ angular.module("myApp").controller("testControl", ['$scope','$uibModal','$http',
                 ];
     
     $scope.pageChanged = function() {
-      alert($scope.bigCurrentPage);
     };
     $scope.maxSize = 6;
     $scope.bigTotalItems = 586;
@@ -29,7 +28,6 @@ angular.module("myApp").controller("testControl", ['$scope','$uibModal','$http',
     }];
 
     $scope.my_tree_handler=function(branch){
-        alert(branch.id);
     }
     $scope.items = ['item1', 'item2', 'item3'];
     $scope.open = function (size) {
@@ -47,8 +45,6 @@ angular.module("myApp").controller("testControl", ['$scope','$uibModal','$http',
 
         modalInstance.result.then(function (selectedItem) {
             $scope.selected = selectedItem;
-            toaster.pop('success', "title", "xxx");
-            alert($scope.selected)
         });
     };
 
@@ -111,5 +107,41 @@ angular.module("myApp").controller("testControl", ['$scope','$uibModal','$http',
             toaster.pop('success', "保存成功");
         });
     };
+
+    var tree = [
+        {
+            text: "Parent 1",
+            nodes: [
+                {
+                    text: "Child 1",
+                    nodes: [
+                        {
+                            text: "Grandchild 1"
+                        },
+                        {
+                            text: "Grandchild 2"
+                        }
+                    ]
+                },
+                {
+                    text: "Child 2"
+                }
+            ]
+        },
+        {
+            text: "Parent 2"
+        },
+        {
+            text: "Parent 3"
+        },
+        {
+            text: "Parent 4"
+        },
+        {
+            text: "Parent 5"
+        }
+    ];
+
+    $('#tree').treeview({data: tree,showCheckbox:true});
 
 }]);

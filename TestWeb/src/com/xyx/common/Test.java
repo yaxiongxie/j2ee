@@ -6,8 +6,10 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 
 
 public class Test {
@@ -32,13 +34,6 @@ public class Test {
 //			bytes[i]=(byte)Integer.parseInt(strings[i]);
 //		}
 		if(true){
-			JSONObject jObject=new JSONObject();
-			try {
-				System.out.println(jObject.isNull("id"));
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			return ;
 		}
 		
