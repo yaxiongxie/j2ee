@@ -1,4 +1,4 @@
-angular.module("myApp").controller("testControl", ['$scope','$uibModal','$http',function($scope,$uibModal,$http){
+angular.module("myApp").controller("testControl", ['$scope','$uibModal','$http','toaster',function($scope,$uibModal,$http,toaster){
     $scope.name="xieyaxiong";
     $scope.columns=[
         {name:"编号",width:"5%",columnName:"id"},
@@ -47,6 +47,7 @@ angular.module("myApp").controller("testControl", ['$scope','$uibModal','$http',
 
         modalInstance.result.then(function (selectedItem) {
             $scope.selected = selectedItem;
+            toaster.pop('success', "title", "xxx");
             alert($scope.selected)
         });
     };
@@ -102,11 +103,12 @@ angular.module("myApp").controller("testControl", ['$scope','$uibModal','$http',
         }).
         success(function (data, status, headers, config) {
         	alert(data.status);
-        	
+            toaster.pop('success', "保存成功");
             alert("success!");
         }).
         error(function (data, status, headers, config) {
             alert("failed!");
+            toaster.pop('success', "保存成功");
         });
     };
 
