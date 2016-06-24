@@ -28,7 +28,7 @@ public class CoreRole  implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer id;
      private String name;
-     private Timestamp createtime;
+     private String createtime;
 
 
     // Constructors
@@ -39,7 +39,7 @@ public class CoreRole  implements java.io.Serializable {
 
     
     /** full constructor */
-    public CoreRole(String name, Timestamp createtime) {
+    public CoreRole(String name, String createtime) {
         this.name = name;
         this.createtime = createtime;
     }
@@ -70,11 +70,11 @@ public class CoreRole  implements java.io.Serializable {
     
     @Column(name="createtime", length=19)
 
-    public Timestamp getCreatetime() {
+    public String getCreatetime() {
         return this.createtime;
     }
     
-    public void setCreatetime(Timestamp createtime) {
+    public void setCreatetime(String createtime) {
         this.createtime = createtime;
     }
    

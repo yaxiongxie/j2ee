@@ -1,4 +1,5 @@
+#Fri Jun 24 13:19:38 CST 2016
 eclipse.preferences.version=1
-encoding//src/com/xyx/Test.java=UTF-8
-encoding//src/com/xyx/socket/MessageListener.java=UTF-8
+encoding//src/com/xyx/common/Test.java=UTF-8
+encoding//src/com/xyx/common/socket/MessageListener.java=UTF-8
 encoding/<project>=UTF-8
