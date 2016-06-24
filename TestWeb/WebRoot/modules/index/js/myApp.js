@@ -33,7 +33,7 @@
     });
 }(angular));
 
-var myApp=angular.module('myApp',['ngLoadScript','ui.router','oc.lazyLoad','ui.bootstrap','angularBootstrapNavTree']);
+var myApp=angular.module('myApp',['ngLoadScript','ui.router','angular-loading-bar', 'ngAnimate','oc.lazyLoad','ui.bootstrap','angularBootstrapNavTree']);
 myApp.directive('myTable', function() {
     return {
         restrict: 'E',
@@ -72,6 +72,11 @@ angular.module('myApp').controller('ModalInstanceCtrl', function ($scope, $uibMo
         $uibModalInstance.dismiss('cancel');
     };
 });
+
+myApp.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+    cfpLoadingBarProvider.parentSelector = '#loading-bar-container';
+    cfpLoadingBarProvider.spinnerTemplate = '<div><span class="fa fa-spinner">Custom Loading Message...</div>';
+  }])
 
 
 myApp.config(function($stateProvider, $urlRouterProvider) {

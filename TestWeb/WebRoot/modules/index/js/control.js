@@ -88,7 +88,7 @@ angular.module("myApp").controller("testControl", ['$scope','$uibModal','$http',
                 //need to convert our json object to a string version of json otherwise
                 // the browser will do a 'toString()' on the object which will result
                 // in the value '[Object object]' on the server.
-                formData.append("model", angular.toJson(data.model));
+                formData.append("jsonData", angular.toJson(data.model));
                 //now add all of the assigned files
                 for (var i = 0; i < data.files.length; i++) {
                     //add each file to the form data and iteratively name them

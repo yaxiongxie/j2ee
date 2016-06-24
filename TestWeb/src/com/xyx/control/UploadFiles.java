@@ -1,11 +1,14 @@
 package com.xyx.control;
 
 import java.io.File;
-import java.io.IOException;
+import java.util.Iterator;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,50 +16,68 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 
 
 @Controller
-public class UploadFiles {
-	
-	@Autowired  
-    private HttpServletRequest request; 
+public class UploadFiles extends BaseControl{
 	
 	Logger logger=Logger.getLogger(UploadFiles.class);
 	
 	//947752974
 	@ResponseBody
 	@RequestMapping(value="updateFiles.do", method=RequestMethod.POST)
-	public String updateFiles(@RequestParam MultipartFile[] Filedata){
-		for(MultipartFile myfile : Filedata){  
-            if(myfile.isEmpty()){  
-                System.out.println("ÎÄ¼şÎ´ÉÏ´«");  
-            }else{  
-                System.out.println("ÎÄ¼ş³¤¶È: " + myfile.getSize());  
-                System.out.println("ÎÄ¼şÀàĞÍ: " + myfile.getContentType());  
-                System.out.println("ÎÄ¼şÃû³Æ: " + myfile.getName());  
-                System.out.println("ÎÄ¼şÔ­Ãû: " + myfile.getOriginalFilename());  
-
-                String filePath = request.getSession().getServletContext().getRealPath("/") + "upload/"  
-                        + myfile.getOriginalFilename();  
-                // ×ª´æÎÄ¼ş  
-                try {
-					myfile.transferTo(new File(filePath));
-				} catch (IllegalStateException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-                System.out.println("========================================");  
-                //Èç¹ûÓÃµÄÊÇTomcat·şÎñÆ÷£¬ÔòÎÄ¼ş»áÉÏ´«µ½\\%TOMCAT_HOME%\\webapps\\YourWebProject\\WEB-INF\\upload\\ÎÄ¼ş¼ĞÖĞ  
-//                String realPath = request.getSession().getServletContext().getRealPath("/WEB-INF/upload");  
-//                //ÕâÀï²»±Ø´¦ÀíIOÁ÷¹Ø±ÕµÄÎÊÌâ£¬ÒòÎªFileUtils.copyInputStreamToFile()·½·¨ÄÚ²¿»á×Ô¶¯°ÑÓÃµ½µÄIOÁ÷¹Øµô£¬ÎÒÊÇ¿´ËüµÄÔ´Âë²ÅÖªµÀµÄ  
-//                FileUtils.copyInputStreamToFile(myfile.getInputStream(), new File(realPath, myfile.getOriginalFilename()));  
+	public String updateFiles(HttpServletRequest request){
+		try{
+			Thread.sleep(1000);
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		JSONObject jsonObject=getJSONData(request);
+		System.out.println(jsonObject.toString());
+		//åˆ›å»ºä¸€ä¸ªé€šç”¨çš„å¤šéƒ¨åˆ†è§£æå™¨  
+        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());  
+        //åˆ¤æ–­ request æ˜¯å¦æœ‰æ–‡ä»¶ä¸Šä¼ ,å³å¤šéƒ¨åˆ†è¯·æ±‚  
+        if(multipartResolver.isMultipart(request)){  
+            //è½¬æ¢æˆå¤šéƒ¨åˆ†request    
+            MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest)request;  
+            //å–å¾—requestä¸­çš„æ‰€æœ‰æ–‡ä»¶å  
+            Iterator<String> iter = multiRequest.getFileNames();  
+            while(iter.hasNext()){  
+                //è®°å½•ä¸Šä¼ è¿‡ç¨‹èµ·å§‹æ—¶çš„æ—¶é—´ï¼Œç”¨æ¥è®¡ç®—ä¸Šä¼ æ—¶é—´  
+                int pre = (int) System.currentTimeMillis();  
+                //å–å¾—ä¸Šä¼ æ–‡ä»¶  
+                MultipartFile file = multiRequest.getFile(iter.next());  
+                if(file != null){  
+                    //å–å¾—å½“å‰ä¸Šä¼ æ–‡ä»¶çš„æ–‡ä»¶åç§°  
+                    String myFileName = file.getOriginalFilename();  
+                    //å¦‚æœåç§°ä¸ä¸ºâ€œâ€,è¯´æ˜è¯¥æ–‡ä»¶å­˜åœ¨ï¼Œå¦åˆ™è¯´æ˜è¯¥æ–‡ä»¶ä¸å­˜åœ¨  
+                    if(myFileName.trim() !=""){  
+                    	String filePath = request.getSession().getServletContext().getRealPath("/") + "upload/"  
+                                + myFileName; 
+                        System.out.println(myFileName);  
+                        File localFile = new File(filePath);  
+                        try {
+							file.transferTo(localFile);
+						} catch (Exception e) {
+                    }  
+                }  
+                //è®°å½•ä¸Šä¼ è¯¥æ–‡ä»¶åçš„æ—¶é—´  
+                int finaltime = (int) System.currentTimeMillis();  
+                System.out.println(finaltime - pre);  
             }  
-        }
-		return "success";
+            }
+              
+        }  
+        try {
+			jsonObject.put("status", "success");
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return jsonObject.toString();
 	}
 
 }
