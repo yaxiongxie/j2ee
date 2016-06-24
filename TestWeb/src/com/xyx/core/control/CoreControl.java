@@ -22,15 +22,19 @@ public class CoreControl extends BaseControl{
 	Logger logger=Logger.getLogger(TestControl.class);
 	
 	@RequestMapping("core/addrole.do")
-	public void addRole(HttpServletRequest request,HttpServletResponse response){
-		coreService.addRole();
-		JSONObject jObject=new JSONObject();
+	public void saveRole(HttpServletRequest request,HttpServletResponse response){
+		JSONObject jsonObject=getJSONData(request);
 		try {
-			jObject.put("status", "success");
+			jsonObject.put("name", "xieyaxiong");
+			jsonObject.put("id", 0);
 		} catch (JSONException e) {
-			logger.error("error", e);
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		returnJson(response, jObject.toString());
+		
+		coreService.saveRole(jsonObject);
+		
+		returnSuccess(response);
 	}
 
 }

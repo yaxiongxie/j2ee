@@ -6,6 +6,9 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 public class Test {
 	
@@ -28,6 +31,17 @@ public class Test {
 //		for(int i=0;i<strings.length;i++){
 //			bytes[i]=(byte)Integer.parseInt(strings[i]);
 //		}
+		if(true){
+			JSONObject jObject=new JSONObject();
+			try {
+				System.out.println(jObject.isNull("id"));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return ;
+		}
+		
 		String string="读取匹配关键字";
 		byte[] bytes=getbytes(string);
 		bytes=sendMessage(bytes);

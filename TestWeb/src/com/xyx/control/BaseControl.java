@@ -16,7 +16,11 @@ public class BaseControl {
 	public JSONObject getJSONData(HttpServletRequest request){
 		String jsonData=request.getParameter("jsonData");
 		try {
-			return new JSONObject(jsonData);
+			if(jsonData==null){
+				return new JSONObject();
+			}else{
+				return new JSONObject(jsonData);
+			}
 		} catch (JSONException e) {
 			log.error("json", e);
 		}
@@ -28,6 +32,17 @@ public class BaseControl {
 		try {
 			response.getWriter().print(body);
 		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void returnSuccess(HttpServletResponse response){
+		response.setContentType("application/json; charset=UTF-8");
+		try {
+			JSONObject jObject=new JSONObject();
+			jObject.put("status", "success");
+			response.getWriter().print(jObject.toString());
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

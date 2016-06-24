@@ -7,12 +7,11 @@ import net.sf.json.JSONObject;
 import org.springframework.stereotype.Component;
 
 import com.xyx.bean.Test;
-import com.xyx.common.orm.BaseDao;
+import com.xyx.common.orm.BaseService;
 import com.xyx.common.orm.Page;
-import com.xyx.dao.TestDao;
 
 @Component
-public class TestDaoImpl extends BaseDao{
+public class TestDaoImpl extends BaseService{
 	
 	@SuppressWarnings("unchecked")
 	public void test() {

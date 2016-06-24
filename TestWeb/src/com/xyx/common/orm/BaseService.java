@@ -19,7 +19,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
 
-public class BaseDao extends HibernateDaoSupport{
+public class BaseService extends HibernateDaoSupport{
 	
 	@Resource  
     public void setSessionFacotry(SessionFactory sessionFacotry) {  
