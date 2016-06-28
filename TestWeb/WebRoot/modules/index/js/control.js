@@ -142,6 +142,6 @@ angular.module("myApp").controller("testControl", ['$scope','$uibModal','$http',
         }
     ];
 
-    $('#tree').treeview({data: tree,showCheckbox:true});
+    $('#tree').treeview({color: "#428bca",data: tree,showCheckbox:true,showBorder: false});
 
 }]);
