@@ -6,11 +6,6 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-
 
 public class Test {
 	
@@ -26,6 +21,7 @@ public class Test {
 		return bytes;
 	}
 	
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 //		String string="111,79,195,100,232,209,71,30,184,137,40,105,61,177,238,33,41,126,149,54,125,154,242,183,211,19,54,146,151,218,85,16,189,200,56,109,187,17,7,79,212,72,123,110,81,61,158,244,44,247,192,61,8,183,128,104,116,185,175,167,151,69,29,81,170,253,156,230,247,34,55,82,184,122,125,228,138,187,175,78,119,41,235,62,113,204,127,168,79,153,105,155,118,118,0,248,226,194,16,161,164,100,172,119,114,85,113,16,44,136,4,124,170,124,177,249,169,230,243,93,124,93,80,206,154,27,90,12,223,13,75,86,20,59";
 //		byte[] bytes=new byte[134];

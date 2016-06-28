@@ -93,6 +93,7 @@ public abstract class MessageListener {
 		dealMessage(message);
 	}
 	
+	@SuppressWarnings("unused")
 	private String getGBKString(byte[] bytes){
 		for(byte b:bytes){
 			System.out.print(b+",");
