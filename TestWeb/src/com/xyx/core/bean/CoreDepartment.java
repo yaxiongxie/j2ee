@@ -1,6 +1,5 @@
 package com.xyx.core.bean;
 
-import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,7 +30,7 @@ public class CoreDepartment  implements java.io.Serializable {
      private String code;
      private Integer parentId;
      private Integer ordernum;
-     private Timestamp createtime;
+     private String createtime;
 
 
     // Constructors
@@ -42,7 +41,7 @@ public class CoreDepartment  implements java.io.Serializable {
 
     
     /** full constructor */
-    public CoreDepartment(String name, String code, Integer parentId, Integer ordernum, Timestamp createtime) {
+    public CoreDepartment(String name, String code, Integer parentId, Integer ordernum, String createtime) {
         this.name = name;
         this.code = code;
         this.parentId = parentId;
@@ -106,11 +105,11 @@ public class CoreDepartment  implements java.io.Serializable {
     
     @Column(name="createtime", length=19)
 
-    public Timestamp getCreatetime() {
+    public String getCreatetime() {
         return this.createtime;
     }
     
-    public void setCreatetime(Timestamp createtime) {
+    public void setCreatetime(String createtime) {
         this.createtime = createtime;
     }
    

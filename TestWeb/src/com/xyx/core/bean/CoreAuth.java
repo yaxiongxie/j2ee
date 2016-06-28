@@ -1,6 +1,5 @@
 package com.xyx.core.bean;
 
-import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,7 +28,7 @@ public class CoreAuth  implements java.io.Serializable {
 	private Integer id;
      private String functionName;
      private String functionUrl;
-     private Timestamp createtime;
+     private String createtime;
 
 
     // Constructors
@@ -40,7 +39,7 @@ public class CoreAuth  implements java.io.Serializable {
 
     
     /** full constructor */
-    public CoreAuth(String functionName, String functionUrl, Timestamp createtime) {
+    public CoreAuth(String functionName, String functionUrl, String createtime) {
         this.functionName = functionName;
         this.functionUrl = functionUrl;
         this.createtime = createtime;
@@ -82,11 +81,11 @@ public class CoreAuth  implements java.io.Serializable {
     
     @Column(name="createtime", length=19)
 
-    public Timestamp getCreatetime() {
+    public String getCreatetime() {
         return this.createtime;
     }
     
-    public void setCreatetime(Timestamp createtime) {
+    public void setCreatetime(String createtime) {
         this.createtime = createtime;
     }
    
