@@ -1,6 +1,8 @@
 package com.xyx.common;
 
 import java.io.IOException;
+import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,14 +16,15 @@ public class BaseControl {
 	private static Logger log = Logger.getLogger(BaseControl.class);  
 	
 	public JSONObject getJSONData(HttpServletRequest request){
-		String jsonData=request.getParameter("jsonData");
+		Map<String, String[]>jsonData =request.getParameterMap();
+		JSONObject jsonObject=new JSONObject();
+		Set<String> keySet=jsonData.keySet();
 		try {
-			if(jsonData==null){
-				return new JSONObject();
-			}else{
-				return new JSONObject(jsonData);
+			for(String string:keySet){
+				jsonObject.put(string, jsonData.get(string)[0]);
 			}
-		} catch (JSONException e) {
+			return jsonObject;
+		}catch (Exception e) {
 			log.error("json", e);
 		}
 		return null;

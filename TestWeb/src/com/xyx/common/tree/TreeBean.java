@@ -3,21 +3,21 @@ package com.xyx.common.tree;
 public class TreeBean {
 	
 	private int id;
-	private int parentid;
+	private int parentId;
 	
-	private String nodename;
+	private String name;
 	
 	public TreeBean(){
 		
 	}
 	
-	public TreeBean(int id,int parentid,String nodename){
+	public TreeBean(int id,int parentId,String name){
 		this.id=id;
-		this.parentid=parentid;
-		this.nodename=nodename;
+		this.parentId=parentId;
+		this.name=name;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -25,21 +25,22 @@ public class TreeBean {
 		this.id = id;
 	}
 
-	public int getParentid() {
-		return parentid;
+	public Integer getParentId() {
+		return parentId;
 	}
 
-	public void setParentid(int parentid) {
-		this.parentid = parentid;
+	public void setParentId(int parentId) {
+		this.parentId = parentId;
 	}
 
-	public String getNodename() {
-		return nodename;
+	public String getName() {
+		return name;
 	}
 
-	public void setNodename(String nodename) {
-		this.nodename = nodename;
+	public void setName(String name) {
+		this.name = name;
 	}
+
 	
 	
 }

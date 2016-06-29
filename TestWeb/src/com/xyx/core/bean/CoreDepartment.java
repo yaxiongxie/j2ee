@@ -7,6 +7,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.xyx.common.tree.TreeBean;
+
 
 /**
  * CoreDepartment entity. @author MyEclipse Persistence Tools
@@ -16,7 +18,7 @@ import javax.persistence.Table;
     ,catalog="platform"
 )
 
-public class CoreDepartment  implements java.io.Serializable {
+public class CoreDepartment extends TreeBean implements java.io.Serializable {
 
 
     // Fields    

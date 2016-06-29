@@ -7,10 +7,13 @@
 	<div class="col-lg-3">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<button type="button" class="btn btn-default"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 新增部门</button>
-				<button type="button" class="btn btn-default"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 修改部门</button>
+				<button type="button" class="btn btn-default" ng-click="addDept()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 新增部门</button>
+				<button type="button" class="btn btn-default" ng-click="editDept()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 修改部门</button>
+				<button type="button" class="btn btn-default" ng-click="deleteDept()"><i class="fa fa-times" aria-hidden="true"></i> 删除</button>
 			</div>
-			<div class="panel-body">Panel content</div>
+			<div class="panel-body">
+				<div id="tree"></div>
+			</div>
 		</div>
 	</div>
 	<div class="col-lg-9">

@@ -12,6 +12,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.hibernate.FlushMode;
 import org.hibernate.Query;
 import org.hibernate.ScrollableResults;
 import org.hibernate.Session;
@@ -33,7 +34,9 @@ public class BaseService extends HibernateDaoSupport{
      * @see com.itv.launcher.util.IBaseDao#save(java.lang.Object)
      */
     public void save(Object t) {
+    	this.getSession().setFlushMode(FlushMode.AUTO);
         this.getSession().save(t);
+        this.getSession().flush();
     }
      
     /**
@@ -42,7 +45,9 @@ public class BaseService extends HibernateDaoSupport{
      * @see com.itv.launcher.util.IBaseDao#saveOrUpdate(java.lang.Object)
      */
     public void saveOrUpdate(Object t) {
+    	this.getSession().setFlushMode(FlushMode.AUTO);
         this.getSession().saveOrUpdate(t);
+        this.getSession().flush();
     }
      
     /**
@@ -91,7 +96,9 @@ public class BaseService extends HibernateDaoSupport{
      * @see com.itv.launcher.util.IBaseDao#delete(java.lang.Object)
      */
     public void delete(Object object) {
+    	this.getSession().setFlushMode(FlushMode.AUTO);
         this.getSession().delete(object);
+        this.getSession().flush();
     }
      
     /**
@@ -257,7 +264,9 @@ public class BaseService extends HibernateDaoSupport{
      * @see com.itv.launcher.util.IBaseDao#update(java.lang.Object)
      */
     public <T> void update(T t) {
+    	this.getSession().setFlushMode(FlushMode.AUTO);
         this.getSession().update(t);
+        this.getSession().flush();
     }
      
     /**
