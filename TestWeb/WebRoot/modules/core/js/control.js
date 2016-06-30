@@ -1,33 +1,102 @@
 angular.module("myApp").controller("core.person", ['$scope','$uibModal','$http','toaster',function($scope,$uibModal,$http,toaster){
     $scope.name="xieyaxiong";
     $scope.columns=[
-        {name:"编号",width:"5%",columnName:"id"},
-        {name:"设备mac",width:"15%",columnName:"mac"},
-        {name:"操作类型",width:"15%",columnName:"operatetype"},
-        {name:"操作状态",width:"35%",columnName:"operatestatus"},
-        {name:"操作内容",width:"15%",columnName:"operatecontent"},
-        {name:"操作时间",width:"15%",columnName:"createtime"}
+        {name:"id",width:"5%",columnName:"id"},
+        {name:"realname",width:"15%",columnName:"realname"},
+        {name:"sex",width:"15%",columnName:"sex"},
+        {name:"email",width:"20%",columnName:"email"},
+        {name:"telephone",width:"15%",columnName:"telephone"},
+        {name:"status",width:"15%",columnName:"status"}
     ];
-    
-    $scope.tableData=[
-                    {id:"1",mac:"28-d9-8a-05-10-52",operatetype:"add",operatestatus:"open",operatecontent:"content",createtime:"2016"},
-                    {id:"2",mac:"28-d9-8a-05-10-53",operatetype:"add",operatestatus:"open",operatecontent:"content",createtime:"2017"},
-                    {id:"1",mac:"28-d9-8a-05-10-52",operatetype:"add",operatestatus:"open",operatecontent:"content",createtime:"2016"},
-                    {id:"2",mac:"28-d9-8a-05-10-53",operatetype:"add",operatestatus:"open",operatecontent:"content",createtime:"2017"},
-                    {id:"1",mac:"28-d9-8a-05-10-52",operatetype:"add",operatestatus:"open",operatecontent:"content",createtime:"2016"},
-                    {id:"2",mac:"28-d9-8a-05-10-53",operatetype:"add",operatestatus:"open",operatecontent:"content",createtime:"2017"},
-                    {id:"1",mac:"28-d9-8a-05-10-52",operatetype:"add",operatestatus:"open",operatecontent:"content",createtime:"2016"},
-                    {id:"2",mac:"28-d9-8a-05-10-53",operatetype:"add",operatestatus:"open",operatecontent:"content",createtime:"2017"}, {id:"1",mac:"28-d9-8a-05-10-52",operatetype:"add",operatestatus:"open",operatecontent:"content",createtime:"2016"},
-                    {id:"2",mac:"28-d9-8a-05-10-53",operatetype:"add",operatestatus:"open",operatecontent:"content",createtime:"2017"},
-                    {id:"1",mac:"28-d9-8a-05-10-52",operatetype:"add",operatestatus:"open",operatecontent:"content",createtime:"2016"},
-                    {id:"2",mac:"28-d9-8a-05-10-53",operatetype:"add",operatestatus:"open",operatecontent:"content",createtime:"2017"}
-                ];
-    
+    $scope.operations=[
+        {name:"editT",title:"编辑",imgClass:"fa fa-pencil-square-o"},
+        {name:"deleteT",title:"删除",imgClass:"fa fa-times"}
+	];
+    $scope.pageOption={"currentPage":1,"pageSize":12};
     $scope.pageChanged = function() {
+    	refreshTable();
     };
-    $scope.maxSize = 6;
-    $scope.bigTotalItems = 586;
-    $scope.bigCurrentPage = 1;
+    $scope.clickOperate=function(id,type){
+    	if(type=="deleteT"){
+    		var selectnode=$('#tree').treeview('getSelected');
+        	var modalInstance = $uibModal.open({
+                templateUrl: 'common/confirmDialog.html',
+                controller: 'common.confirmDialog',
+                size: "sm",
+                resolve: {
+                    obj: function () {
+                        return {"title":"删除人员","content":"确定删除吗？"}
+                    },
+                    loadMyCtrl:function($ocLazyLoad){
+                        return $ocLazyLoad.load("common/js/confirmDialog.js");
+                    }
+                }
+            });
+            modalInstance.result.then(function () {
+            	deletePerson(id);
+            });
+    	}else{
+    		addPerson(id);
+    	}
+    }
+    
+    function addPerson(id){
+    	var jsonData={"id":id};
+    	$http.post('core/loadPerson.do',jsonData).success(function(data){
+    		var modalInstance = $uibModal.open({
+                templateUrl: 'modules/core/addPerson.html',
+                controller: 'core.addPerson',
+                size: "",
+                resolve: {
+                    obj: function () {
+                        return data;
+                    },
+                    loadMyCtrl:function($ocLazyLoad){
+                        return $ocLazyLoad.load("modules/core/js/addPerson.js");
+                    }
+                }
+            });
+            modalInstance.result.then(function (obj) {
+            	$http.post('core/savePerson.do',obj).success(function(){
+            		toaster.pop('success', "保存成功");
+            		refreshTable();
+            	});
+            });
+    	});
+    }
+    
+    function deletePerson(id){
+    	var jsonData={"id":id};
+    	$http.post('core/deletePerson.do',jsonData).success(function(){
+    		refreshTable();
+    	});
+    }
+    
+    $scope.queryTable=function(){
+    	$scope.pageOption.currentPage=1;
+    	refreshTable();
+    }
+    
+    $scope.addPerson=function(){
+    	var modalInstance = $uibModal.open({
+            templateUrl: 'modules/core/addPerson.html',
+            controller: 'core.addPerson',
+            size: "",
+            resolve: {
+                obj: function () {
+                    return {};
+                },
+                loadMyCtrl:function($ocLazyLoad){
+                    return $ocLazyLoad.load("modules/core/js/addPerson.js");
+                }
+            }
+        });
+        modalInstance.result.then(function (obj) {
+        	$http.post('core/savePerson.do',obj).success(function(){
+        		toaster.pop('success', "保存成功");
+        	});
+        });
+    }
     
     $scope.addDept=function(){
     	var selectnode=$('#tree').treeview('getSelected');
@@ -109,6 +178,13 @@ angular.module("myApp").controller("core.person", ['$scope','$uibModal','$http',
         　　　　$('#tree').treeview({color: "#428bca",data: data,showBorder: false});
         　　});
     }
+    function refreshTable(){
+    	$http.post('core/loadPersonPage.do',$scope.pageOption).success(function(data) {
+    		$scope.pageOption.currentPage=data.currentPage;
+    		$scope.page=data;
+        　　});
+    }
     refreshTree();
+    refreshTable();
 
 }]);

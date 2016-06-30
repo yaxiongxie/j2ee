@@ -33,7 +33,7 @@
     });
 }(angular));
 
-var myApp=angular.module('myApp',['ngLoadScript','ui.router','angular-loading-bar', 'ngAnimate','oc.lazyLoad','ui.bootstrap','angularBootstrapNavTree','toaster'],function($httpProvider) {
+var myApp=angular.module('myApp',['ngLoadScript','ui.router','angular-loading-bar', 'ngAnimate','oc.lazyLoad','ui.bootstrap','angularBootstrapNavTree','toaster','ng-bootstrap-datepicker','elif'],function($httpProvider) {
 	  // Use x-www-form-urlencoded Content-Type
 	 $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
 	    $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
@@ -102,6 +102,25 @@ myApp.directive('fileUpload', function () {
         }
     };
 });
+
+myApp.filter('sex', function() {
+	  return function(input) {
+	    if(input==1){
+	    	return 'man';
+	    }else{
+	    	return 'woman';
+	    }
+	  };
+	});
+myApp.filter('personStatus', function() {
+	  return function(input) {
+	    if(input==1){
+	    	return 'formal';
+	    }else{
+	    	return 'trial';
+	    }
+	  };
+	})
 
 //angular.module('myApp').controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, items) {
 //

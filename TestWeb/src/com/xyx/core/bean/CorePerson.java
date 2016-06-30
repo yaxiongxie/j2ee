@@ -21,7 +21,11 @@ public class CorePerson  implements java.io.Serializable {
 
     // Fields    
 
-     private Integer id;
+     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Integer id;
      private String username;
      private String realname;
      private String code;

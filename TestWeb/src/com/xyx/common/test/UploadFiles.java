@@ -34,8 +34,8 @@ public class UploadFiles extends BaseControl{
 		}catch (Exception e) {
 			// TODO: handle exception
 		}
-		JSONObject jsonObject=getJSONData(request);
-		System.out.println(jsonObject.toString());
+//		JSONObject jsonObject=getJSONData(request);
+//		System.out.println(jsonObject.toString());
 		//创建一个通用的多部分解析器  
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());  
         //判断 request 是否有文件上传,即多部分请求  
@@ -70,13 +70,14 @@ public class UploadFiles extends BaseControl{
             }
               
         }  
-        try {
-			jsonObject.put("status", "success");
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return jsonObject.toString();
+        return "";
+//        try {
+//			jsonObject.put("status", "success");
+//		} catch (JSONException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		return jsonObject.toString();
 	}
 
 }

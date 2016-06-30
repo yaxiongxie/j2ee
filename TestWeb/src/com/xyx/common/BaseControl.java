@@ -7,9 +7,9 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONObject;
+
 import org.apache.log4j.Logger;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class BaseControl {
 	
@@ -34,6 +34,7 @@ public class BaseControl {
 		response.setContentType("application/json; charset=UTF-8");
 		try {
 			response.getWriter().print(body);
+			System.out.println("response json===="+body);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

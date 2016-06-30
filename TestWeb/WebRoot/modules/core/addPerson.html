@@ -1,0 +1,80 @@
+<div class="modal-header">
+	<h3 class="modal-title" ng-if="person.id">编辑人员</h3>
+	<h3 class="modal-title" ng-else>新增人员</h3>
+</div>
+<div class="modal-body">
+
+	<form class="form-horizontal">
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">username</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control"  placeholder="username" ng-model="person.username">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">realname</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control"  placeholder="realname" ng-model="person.realname">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label">password</label>
+    <div class="col-sm-10">
+      <input type="password" class="form-control" placeholder="password" ng-model="person.password">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">sex</label>
+    <div class="col-sm-10">
+       <label class="checkbox-inline">
+	      <input type="radio" name="sex" value="1" ng-model="person.sex"> man
+	   </label>
+	   <label class="checkbox-inline">
+	      <input type="radio" name="sex" value="2" ng-model="person.sex"> woman
+	   </label>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">telephone</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control"  placeholder="telephone" ng-model="person.telephone">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">birthday</label>
+    <div class="col-sm-10">
+   	 <input id="datepicker" type="text" class="form-control" placeholder="birthday" ng-model="person.birthday" >
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">email</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control"  placeholder="email" ng-model="person.email">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">department</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control"  placeholder="department" ng-model="person.department">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">status</label>
+    <div class="col-sm-10">
+       <label class="checkbox-inline">
+	      <input type="radio" name="status" value="1" ng-model="person.status"> Formal
+	   </label>
+	   <label class="checkbox-inline">
+	      <input type="radio" name="status" value="2" ng-model="person.status"> Trial
+	   </label>
+    </div>
+  </div>
+  
+  
+</form>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+	<button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+</div>
+

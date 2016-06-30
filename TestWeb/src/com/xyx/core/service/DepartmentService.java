@@ -4,14 +4,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import org.json.JSONObject;
+import net.sf.json.JSONObject;
+
 import org.springframework.stereotype.Component;
 
 import com.xyx.common.BaseService;
-import com.xyx.common.Page;
 import com.xyx.common.tree.TreeUtil;
 import com.xyx.core.bean.CoreDepartment;
-import com.xyx.core.bean.CoreRole;
 
 @Component
 public class DepartmentService extends BaseService {

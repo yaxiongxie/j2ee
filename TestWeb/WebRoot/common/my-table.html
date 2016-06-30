@@ -2,12 +2,20 @@
     <thead>
     <tr>
         <th ng-repeat="column in columns" width="{{column.width}}">{{column.name}}</th>
+        <th ng-if="operations" width="15%">操作</th>
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="td in tableData">
-        <td ng-repeat="column in columns">{{td[column.columnName]}}</td>
+    <tr ng-repeat="td in page.list">
+        <td ng-repeat="column in columns">
+        	<span ng-if="column.columnName=='sex'">{{td[column.columnName] |sex}}</span>
+        	<span ng-else-if="column.columnName=='status'">{{td[column.columnName] |personStatus}}</span>
+        	<span ng-else>{{td[column.columnName]}}</span>
+        </td>
+        <td ng-if="operations" >
+        	<button type="button" ng-repeat="operation in operations" class="btn btn-default btn-xs" ng-click="clickOperate(td.id,operation.name)"><i class="{{operation.imgClass}}" aria-hidden="true"></i> {{operation.title}}</button>
+        </td>
     </tr>
     </tbody>
 </table>
-<uib-pagination ng-change="pageChanged()" previous-text="上一页" next-text="下一页" first-text="首页" last-text="尾页"  total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination>
+<uib-pagination ng-change="pageChanged()" previous-text="上一页" next-text="下一页" first-text="首页" last-text="尾页"  total-items="page.totalCount" ng-model="pageOption.currentPage" items-per-page="pageOption.pageSize" max-size="5" class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination>
