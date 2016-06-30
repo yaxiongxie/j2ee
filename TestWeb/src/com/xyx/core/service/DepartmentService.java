@@ -43,6 +43,7 @@ public class DepartmentService extends BaseService {
 		deleteById(CoreDepartment.class, id);
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public String loadDeptAll() throws Exception{
 		List list=getListByHQL("from CoreDepartment",null);
 		String result=new TreeUtil().getJson(list, -1).toString();

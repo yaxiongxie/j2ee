@@ -9,6 +9,7 @@ import net.sf.json.JSONObject;
 
 public class TreeUtil {
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public JSONArray getJson(List list,int parentid){
 		List tempList=new ArrayList();
 		for(Object bean:list){
