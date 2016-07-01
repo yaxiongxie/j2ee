@@ -36,13 +36,15 @@ angular.module("myApp").controller("core.person", ['$scope','$uibModal','$http',
             	deletePerson(id);
             });
     	}else{
-    		addPerson(id);
+    		editPerson(id);
     	}
     }
     
-    function addPerson(id){
+    function editPerson(id){
+    	var selectnode=$('#tree').treeview('getSelected');
     	var jsonData={"id":id};
     	$http.post('core/loadPerson.do',jsonData).success(function(data){
+    		data.department=selectnode[0].text;
     		var modalInstance = $uibModal.open({
                 templateUrl: 'modules/core/addPerson.html',
                 controller: 'core.addPerson',
@@ -57,6 +59,7 @@ angular.module("myApp").controller("core.person", ['$scope','$uibModal','$http',
                 }
             });
             modalInstance.result.then(function (obj) {
+            	obj.departmentId=selectnode[0].id;
             	$http.post('core/savePerson.do',obj).success(function(){
             		toaster.pop('success', "保存成功");
             		refreshTable();
@@ -78,13 +81,14 @@ angular.module("myApp").controller("core.person", ['$scope','$uibModal','$http',
     }
     
     $scope.addPerson=function(){
+    	var selectnode=$('#tree').treeview('getSelected');
     	var modalInstance = $uibModal.open({
             templateUrl: 'modules/core/addPerson.html',
             controller: 'core.addPerson',
             size: "",
             resolve: {
                 obj: function () {
-                    return {};
+                    return {department:selectnode[0].text};
                 },
                 loadMyCtrl:function($ocLazyLoad){
                     return $ocLazyLoad.load("modules/core/js/addPerson.js");
@@ -92,6 +96,7 @@ angular.module("myApp").controller("core.person", ['$scope','$uibModal','$http',
             }
         });
         modalInstance.result.then(function (obj) {
+        	obj.departmentId=selectnode[0].id;
         	$http.post('core/savePerson.do',obj).success(function(){
         		toaster.pop('success', "保存成功");
         	});
