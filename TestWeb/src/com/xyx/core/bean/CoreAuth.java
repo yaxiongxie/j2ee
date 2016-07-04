@@ -1,9 +1,11 @@
 package com.xyx.core.bean;
 
+
+import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -28,6 +30,7 @@ public class CoreAuth  implements java.io.Serializable {
 	private Integer id;
      private String functionName;
      private String functionUrl;
+     private String groupname;
      private String createtime;
 
 
@@ -39,9 +42,10 @@ public class CoreAuth  implements java.io.Serializable {
 
     
     /** full constructor */
-    public CoreAuth(String functionName, String functionUrl, String createtime) {
+    public CoreAuth(String functionName, String functionUrl, String groupname, String createtime) {
         this.functionName = functionName;
         this.functionUrl = functionUrl;
+        this.groupname = groupname;
         this.createtime = createtime;
     }
 
@@ -77,6 +81,16 @@ public class CoreAuth  implements java.io.Serializable {
     
     public void setFunctionUrl(String functionUrl) {
         this.functionUrl = functionUrl;
+    }
+    
+    @Column(name="groupname")
+
+    public String getGroupname() {
+        return this.groupname;
+    }
+    
+    public void setGroupname(String groupname) {
+        this.groupname = groupname;
     }
     
     @Column(name="createtime", length=19)
