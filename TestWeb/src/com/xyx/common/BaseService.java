@@ -136,6 +136,7 @@ public class BaseService extends HibernateDaoSupport{
      * @see com.itv.launcher.util.IBaseDao#queryHql(java.lang.String, java.lang.Object[])
      */
     public void queryHql(String hqlString, Object... values) {
+    	this.getSession().setFlushMode(FlushMode.AUTO);
         Query query = this.getSession().createQuery(hqlString);
         if (values != null)
         {
@@ -145,6 +146,7 @@ public class BaseService extends HibernateDaoSupport{
             }
         }
         query.executeUpdate();
+        this.getSession().flush();
     }
  
     /**
@@ -154,6 +156,7 @@ public class BaseService extends HibernateDaoSupport{
      * @see com.itv.launcher.util.IBaseDao#querySql(java.lang.String, java.lang.Object[])
      */
     public void querySql(String sqlString, Object... values) {
+    	this.getSession().setFlushMode(FlushMode.AUTO);
         Query query = this.getSession().createSQLQuery(sqlString);
         if (values != null)
         {
@@ -163,6 +166,7 @@ public class BaseService extends HibernateDaoSupport{
             }
         }
         query.executeUpdate();
+        this.getSession().flush();
     }
  
     /**

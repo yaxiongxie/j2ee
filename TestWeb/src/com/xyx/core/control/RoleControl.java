@@ -16,7 +16,7 @@ import com.xyx.core.service.RoleService;
 @Controller
 public class RoleControl extends BaseControl{
 	@Autowired
-	public RoleService coreService;
+	public RoleService roleService;
 	
 	Logger logger=Logger.getLogger(RoleControl.class);
 	
@@ -24,9 +24,7 @@ public class RoleControl extends BaseControl{
 	public void saveRole(HttpServletRequest request,HttpServletResponse response){
 		try{
 			JSONObject jsonObject=getJSONData(request);
-			jsonObject.put("name", "xieyaxiong");
-			jsonObject.put("id", 0);
-			coreService.saveRole(jsonObject);
+			roleService.saveRole(jsonObject);
 			returnSuccess(response);
 		}catch (Exception e) {
 			logger.error("role", e);
@@ -38,7 +36,7 @@ public class RoleControl extends BaseControl{
 		try{
 			JSONObject jsonObject=getJSONData(request);
 			jsonObject.put("id", 10);
-			String result=coreService.loadRole(jsonObject);
+			String result=roleService.loadRole(jsonObject);
 			returnJson(response, result);
 		}catch (Exception e) {
 			logger.error("role", e);
@@ -50,8 +48,18 @@ public class RoleControl extends BaseControl{
 		try{
 			JSONObject jsonObject=getJSONData(request);
 			jsonObject.put("id", 10);
-			coreService.deleteRole(jsonObject);
+			roleService.deleteRole(jsonObject);
 			returnSuccess(response);
+		}catch (Exception e) {
+			logger.error("role", e);
+		}
+	}
+	
+	@RequestMapping("core/getAuthAll.do")
+	public void getAuthAll(HttpServletRequest request,HttpServletResponse response){
+		try{
+			String result=roleService.getAuthAll();
+			returnJson(response, result);
 		}catch (Exception e) {
 			logger.error("role", e);
 		}
@@ -61,9 +69,7 @@ public class RoleControl extends BaseControl{
 	public void loadRolePage(HttpServletRequest request,HttpServletResponse response){
 		try{
 			JSONObject jsonObject=getJSONData(request);
-			jsonObject.put("pageNo", 1);
-			jsonObject.put("pageSize", 8);
-			String result=coreService.loadRolePage(jsonObject);
+			String result=roleService.loadRolePage(jsonObject);
 			returnJson(response, result);
 		}catch (Exception e) {
 			logger.error("role", e);

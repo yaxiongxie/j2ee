@@ -29,6 +29,8 @@ public class Test {
 //		for(int i=0;i<strings.length;i++){
 //			bytes[i]=(byte)Integer.parseInt(strings[i]);
 //		}
+		String name="sdfsdf";
+		System.out.println(name.substring(0,name.length()-1));
 		if(true){
 			return ;
 		}

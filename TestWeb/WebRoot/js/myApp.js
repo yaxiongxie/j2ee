@@ -153,17 +153,8 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
             url: "/index",
             templateUrl: "modules/index/newindex.html"
         })
-        
-        .state('core/person', {
-        	url: "/core/person",
-        	templateUrl: "modules/core/person.html",
-            controller:'core.person',
-            resolve:{
-                loadMyCtrl:function($ocLazyLoad){
-                    return $ocLazyLoad.load("modules/core/js/control.js");
-                }
-            }
-        })
+        .state('core/person', {url: "/core/person",templateUrl: "modules/core/corePerson.html",controller:'core.person',resolve:{loadMyCtrl:function($ocLazyLoad){return $ocLazyLoad.load("modules/core/js/corePerson.js");}}})
+         .state('core/role', {url: "/core/role",templateUrl: "modules/core/coreRole.html",controller:'core.role',resolve:{loadMyCtrl:function($ocLazyLoad){return $ocLazyLoad.load("modules/core/js/coreRole.js");}}})
         .state('table', {
             url: "/table",
             templateUrl: "partials/state2.list.html",

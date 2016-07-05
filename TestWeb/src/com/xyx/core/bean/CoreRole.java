@@ -25,9 +25,11 @@ public class CoreRole  implements java.io.Serializable {
      /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 7618826611204395131L;
 	private Integer id;
      private String name;
+     private Integer pcount;
+     private String names;
      private String createtime;
 
 
@@ -39,8 +41,10 @@ public class CoreRole  implements java.io.Serializable {
 
     
     /** full constructor */
-    public CoreRole(String name, String createtime) {
+    public CoreRole(String name, Integer pcount, String names, String createtime) {
         this.name = name;
+        this.pcount = pcount;
+        this.names = names;
         this.createtime = createtime;
     }
 
@@ -66,6 +70,26 @@ public class CoreRole  implements java.io.Serializable {
     
     public void setName(String name) {
         this.name = name;
+    }
+    
+    @Column(name="pcount")
+
+    public Integer getPcount() {
+        return this.pcount;
+    }
+    
+    public void setPcount(Integer pcount) {
+        this.pcount = pcount;
+    }
+    
+    @Column(name="names")
+
+    public String getNames() {
+        return this.names;
+    }
+    
+    public void setNames(String names) {
+        this.names = names;
     }
     
     @Column(name="createtime", length=19)
