@@ -28,5 +28,23 @@ public class CommonControl extends BaseControl{
 			logger.error("role", e);
 		}
 	}
+	
+	@RequestMapping("core/login.do")
+	public String login(HttpServletRequest request,HttpServletResponse response){
+		try{
+			String username=request.getParameter("username");
+			String password=request.getParameter("password");
+			Object object=commonService.login(username, password);
+			if(object!=null){
+				request.getSession().setAttribute("isLogin", true);
+				request.getSession().setAttribute("user", object);
+				return "redirect:/index.html";
+			}
+		}catch (Exception e) {
+			logger.error("core", e);
+		}
+		return "redirect:/login.html?msg=loginfail";
+		
+	}
 
 }

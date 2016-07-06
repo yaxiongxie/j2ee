@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import com.xyx.common.BaseService;
 import com.xyx.common.Page;
+import com.xyx.common.encrypt.MD5;
 import com.xyx.core.bean.CorePerson;
 
 @Component
@@ -18,6 +19,7 @@ public class PersonService extends BaseService {
 
 	public void savePerson(JSONObject jsonObject) throws Exception {
 		CorePerson corePerson=(CorePerson) net.sf.json.JSONObject.toBean(jsonObject,CorePerson.class);
+		corePerson.setPassword(new MD5().GetMD5Code(corePerson.getPassword()));
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		corePerson.setCreatetime(sdf.format(new Date()));
 		saveOrUpdate(corePerson);

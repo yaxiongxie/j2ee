@@ -18,6 +18,11 @@ public class CommonService extends BaseService {
 		String result=new TreeUtil().getDepartmentAndPersonTree(list,persons,"", -1).toString();
 		return result;
 	}
+	
+	public Object login(String username,String password){
+		Object object=getByHQL("from CorePerson where username=? and password=?", username,password);
+		return object;
+	}
 
 	
 }
