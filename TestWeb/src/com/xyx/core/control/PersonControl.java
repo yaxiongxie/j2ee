@@ -43,6 +43,17 @@ public class PersonControl extends BaseControl{
 		}
 	}
 	
+	@RequestMapping("core/deletePersonByIds.do")
+	public void deletePersonByIds(HttpServletRequest request,HttpServletResponse response){
+		try{
+			JSONObject jsonObject=getJSONData(request);
+			personService.deletePersonByIds(jsonObject);
+			returnSuccess(response);
+		}catch (Exception e) {
+			logger.error("role", e);
+		}
+	}
+	
 	@RequestMapping("core/loadPerson.do")
 	public void loadPerson(HttpServletRequest request,HttpServletResponse response){
 		try{

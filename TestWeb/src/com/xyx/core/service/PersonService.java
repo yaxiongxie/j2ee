@@ -36,6 +36,16 @@ public class PersonService extends BaseService {
 		deleteById(CorePerson.class, id);
 	}
 	
+	public void deletePersonByIds(JSONObject jsonObject) throws Exception {
+		String ids=jsonObject.getString("ids");
+		for(String id:ids.split(",")){
+			if(id.equals("")){
+				continue;
+			}
+			deleteById(CorePerson.class, Integer.parseInt(id));
+		}
+	}
+	
 	public String loadPersonPage(JSONObject jsonObject) throws Exception{
 		System.out.println("jsonObject===="+jsonObject);
 		int pageNo=jsonObject.getInt("currentPage");

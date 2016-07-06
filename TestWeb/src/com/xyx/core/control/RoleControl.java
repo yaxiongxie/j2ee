@@ -35,7 +35,6 @@ public class RoleControl extends BaseControl{
 	public void loadRole(HttpServletRequest request,HttpServletResponse response){
 		try{
 			JSONObject jsonObject=getJSONData(request);
-			jsonObject.put("id", 10);
 			String result=roleService.loadRole(jsonObject);
 			returnJson(response, result);
 		}catch (Exception e) {
@@ -47,7 +46,6 @@ public class RoleControl extends BaseControl{
 	public void deleteRole(HttpServletRequest request,HttpServletResponse response){
 		try{
 			JSONObject jsonObject=getJSONData(request);
-			jsonObject.put("id", 10);
 			roleService.deleteRole(jsonObject);
 			returnSuccess(response);
 		}catch (Exception e) {
@@ -60,6 +58,28 @@ public class RoleControl extends BaseControl{
 		try{
 			String result=roleService.getAuthAll();
 			returnJson(response, result);
+		}catch (Exception e) {
+			logger.error("role", e);
+		}
+	}
+	
+	@RequestMapping("core/role/getDepartmentTree.do")
+	public void getDepartmentTree(HttpServletRequest request,HttpServletResponse response){
+		try{
+			JSONObject jsonObject=getJSONData(request);
+			String result=roleService.getDepartmentTree(jsonObject);
+			returnJson(response, result);
+		}catch (Exception e) {
+			logger.error("role", e);
+		}
+	}
+	
+	@RequestMapping("core/addAuth.do")
+	public void addAuth(HttpServletRequest request,HttpServletResponse response){
+		try{
+			JSONObject jsonObject=getJSONData(request);
+			roleService.addAuth(jsonObject);
+			returnSuccess(response);
 		}catch (Exception e) {
 			logger.error("role", e);
 		}

@@ -1,10 +1,32 @@
-angular.module("myApp").controller("core.person", ['$scope','$uibModal','$http','toaster',function($scope,$uibModal,$http,toaster){
+angular.module("myApp").controller("core.person", ['$scope','$uibModal','$http','toaster','confirmDialog',function($scope,$uibModal,$http,toaster,confirmDialog){
     $scope.name="xieyaxiong";
+    $scope.selected=[];
+    $scope.updateSelection = function($event, id){
+    	var checkbox = $event.target;
+    	if(id=='all'){
+    		 $scope.selected=[];
+    		$("input[name='cbname']").each(function(){
+    			$(this).prop("checked",checkbox.checked); 
+    			if(checkbox.checked){
+    				$scope.selected.push($(this).attr("cid"));
+    			}
+    		})
+    		return ;
+    	}
+    	var action = (checkbox.checked?'add':'remove');
+    	if(action == 'add' && $scope.selected.indexOf(id) == -1){
+            $scope.selected.push(id);
+        }
+        if(action == 'remove' && $scope.selected.indexOf(id)!=-1){
+            var idx = $scope.selected.indexOf(id);
+            $scope.selected.splice(idx,1);
+        }
+    }
     $scope.columns=[
         {name:"id",width:"5%",columnName:"id"},
         {name:"realname",width:"15%",columnName:"realname"},
         {name:"sex",width:"15%",columnName:"sex"},
-        {name:"email",width:"20%",columnName:"email"},
+        {name:"email",width:"15%",columnName:"email"},
         {name:"telephone",width:"15%",columnName:"telephone"},
         {name:"status",width:"15%",columnName:"status"}
     ];
@@ -16,24 +38,19 @@ angular.module("myApp").controller("core.person", ['$scope','$uibModal','$http',
     $scope.pageChanged = function() {
     	refreshTable();
     };
+    $scope.deleteBatch=function(){
+    	confirmDialog("删除人员","确定删除吗？",function () {
+        	var jsonData={ids:$scope.selected.join(",")};
+        	$http.post('core/deletePersonByIds.do',jsonData).success(function(){
+        		refreshTable();
+        	});
+        });
+    }
+    
     $scope.clickOperate=function(id,type){
     	if(type=="deleteT"){
-    		var selectnode=$('#tree').treeview('getSelected');
-        	var modalInstance = $uibModal.open({
-                templateUrl: 'common/confirmDialog.html',
-                controller: 'common.confirmDialog',
-                size: "sm",
-                resolve: {
-                    obj: function () {
-                        return {"title":"删除人员","content":"确定删除吗？"}
-                    },
-                    loadMyCtrl:function($ocLazyLoad){
-                        return $ocLazyLoad.load("common/js/confirmDialog.js");
-                    }
-                }
-            });
-            modalInstance.result.then(function () {
-            	deletePerson(id);
+    		confirmDialog("删除人员","确定删除吗？",function () {
+    			deletePerson(id);
             });
     	}else{
     		editPerson(id);
@@ -144,22 +161,8 @@ angular.module("myApp").controller("core.person", ['$scope','$uibModal','$http',
     }
     
     $scope.deleteDept=function(){
-    	var selectnode=$('#tree').treeview('getSelected');
-    	var modalInstance = $uibModal.open({
-            templateUrl: 'common/confirmDialog.html',
-            controller: 'common.confirmDialog',
-            size: "sm",
-            resolve: {
-                obj: function () {
-                    return {"title":"删除部门","content":"确定删除吗？"}
-                },
-                loadMyCtrl:function($ocLazyLoad){
-                    return $ocLazyLoad.load("common/js/confirmDialog.js");
-                }
-            }
-        });
-        modalInstance.result.then(function () {
-        	deleteDept();
+    	confirmDialog("删除部门","确定删除吗？",function () {
+    		deleteDept();
         });
     }
     

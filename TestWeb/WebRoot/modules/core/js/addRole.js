@@ -4,6 +4,9 @@ angular.module('myApp').controller('core.addRole', function ($scope, $uibModalIn
     
     $scope.groups=[];
     $scope.selected = [];
+    if(obj.auths){
+    	$scope.selected=obj.auths;
+    }
     for(var i in obj.authAll){
     	var auth=obj.authAll[i];
     	var index=$.inArray(auth.groupname, $scope.groups);
@@ -30,7 +33,8 @@ angular.module('myApp').controller('core.addRole', function ($scope, $uibModalIn
     }
 
     $scope.ok = function () {
-        $uibModalInstance.close($scope.person);
+    	$scope.role.auths=$scope.selected.join(",");
+        $uibModalInstance.close($scope.role);
     };
 
     $scope.cancel = function () {

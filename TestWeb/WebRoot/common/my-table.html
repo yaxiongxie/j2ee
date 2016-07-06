@@ -1,12 +1,16 @@
 <table class="table table-bordered table-striped table-hover" >
     <thead>
     <tr>
+    	<th ng-if="selected" width="5%"><input type="checkbox" ng-click="updateSelection($event,'all')"></th>
         <th ng-repeat="column in columns" width="{{column.width}}">{{column.name}}</th>
         <th ng-if="operations" width="15%">操作</th>
     </tr>
     </thead>
     <tbody>
     <tr ng-repeat="td in page.list">
+    	<td ng-if="selected" >
+        	<input type="checkbox" cid="{{td.id}}" name="cbname" ng-click="updateSelection($event,td.id)">
+        </td>
         <td ng-repeat="column in columns">
         	<span ng-if="column.columnName=='sex'">{{td[column.columnName] |sex}}</span>
         	<span ng-else-if="column.columnName=='status'">{{td[column.columnName] |personStatus}}</span>

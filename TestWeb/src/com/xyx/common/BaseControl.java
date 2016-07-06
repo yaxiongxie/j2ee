@@ -23,6 +23,7 @@ public class BaseControl {
 			for(String string:keySet){
 				jsonObject.put(string, jsonData.get(string)[0]);
 			}
+			log.debug("request json==="+jsonObject.toString());
 			return jsonObject;
 		}catch (Exception e) {
 			log.error("json", e);

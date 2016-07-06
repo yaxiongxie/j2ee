@@ -1,4 +1,4 @@
-angular.module("myApp").controller("core.role", ['$scope','$uibModal','$http','toaster',function($scope,$uibModal,$http,toaster){
+angular.module("myApp").controller("core.role", ['$scope','$uibModal','$http','toaster','confirmDialog',function($scope,$uibModal,$http,toaster,confirmDialog){
     $scope.name="xieyaxiong";
     $scope.columns=[
         {name:"id",width:"5%",columnName:"id"},
@@ -7,6 +7,7 @@ angular.module("myApp").controller("core.role", ['$scope','$uibModal','$http','t
         {name:"names",width:"45%",columnName:"names"}
     ];
     $scope.operations=[
+        {name:"addT",title:"添加人员",imgClass:"fa fa-plus"},
         {name:"editT",title:"编辑",imgClass:"fa fa-pencil-square-o"},
         {name:"deleteT",title:"删除",imgClass:"fa fa-times"}
 	];
@@ -14,51 +15,64 @@ angular.module("myApp").controller("core.role", ['$scope','$uibModal','$http','t
     $scope.pageChanged = function() {
     	refreshTable();
     };
+    $scope.selectRowId=0;
+    
     $scope.clickOperate=function(id,type){
+    	$scope.selectRowId=id;
     	if(type=="deleteT"){
-    		var selectnode=$('#tree').treeview('getSelected');
-        	var modalInstance = $uibModal.open({
-                templateUrl: 'common/confirmDialog.html',
-                controller: 'common.confirmDialog',
-                size: "sm",
-                resolve: {
-                    obj: function () {
-                        return {"title":"删除人员","content":"确定删除吗？"}
-                    },
-                    loadMyCtrl:function($ocLazyLoad){
-                        return $ocLazyLoad.load("common/js/confirmDialog.js");
-                    }
-                }
-            });
-            modalInstance.result.then(function () {
-            	deletePerson(id);
-            });
+    		confirmDialog("删除角色","确定删除吗？",function(){
+    			deleteRole(id);
+    		})
+    	}else if(type=="addT"){
+    		addAuth(id);
     	}else{
-    		editPerson(id);
+    		editRole(id);
     	}
     }
     
-    function editPerson(id){
-    	var selectnode=$('#tree').treeview('getSelected');
-    	var jsonData={"id":id};
-    	$http.post('core/loadPerson.do',jsonData).success(function(data){
-    		data.department=selectnode[0].text;
+    function addAuth(id){
+    	$http.post('core/role/getDepartmentTree.do',{id:id}).success(function(data){
     		var modalInstance = $uibModal.open({
-                templateUrl: 'modules/core/addPerson.html',
-                controller: 'core.addPerson',
+                templateUrl: 'modules/core/addAuth.html',
+                controller: 'core.addAuth',
                 size: "",
                 resolve: {
                     obj: function () {
                         return data;
                     },
                     loadMyCtrl:function($ocLazyLoad){
-                        return $ocLazyLoad.load("modules/core/js/addPerson.js");
+                        return $ocLazyLoad.load("modules/core/js/addAuth.js");
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (obj) {
+            	$http.post('core/addAuth.do',{id:$scope.selectRowId,ps:obj}).success(function(data){
+            		toaster.pop('success', "设置成功");
+            		refreshTable();
+            	});
+            });
+    	});
+    }
+    
+    function editRole(id){
+    	var jsonData={"id":id};
+    	$http.post('core/loadRole.do',jsonData).success(function(data){
+    		var modalInstance = $uibModal.open({
+                templateUrl: 'modules/core/addRole.html',
+                controller: 'core.addRole',
+                size: "",
+                resolve: {
+                    obj: function () {
+                        return data;
+                    },
+                    loadMyCtrl:function($ocLazyLoad){
+                        return $ocLazyLoad.load("modules/core/js/addRole.js");
                     }
                 }
             });
             modalInstance.result.then(function (obj) {
-            	obj.departmentId=selectnode[0].id;
-            	$http.post('core/savePerson.do',obj).success(function(){
+            	$http.post('core/saveRole.do',obj).success(function(){
             		toaster.pop('success', "保存成功");
             		refreshTable();
             	});
@@ -66,7 +80,7 @@ angular.module("myApp").controller("core.role", ['$scope','$uibModal','$http','t
     	});
     }
     
-    function deletePerson(id){
+    function deleteRole(id){
     	var jsonData={"id":id};
     	$http.post('core/deleteRole.do',jsonData).success(function(){
     		refreshTable();
@@ -86,7 +100,7 @@ angular.module("myApp").controller("core.role", ['$scope','$uibModal','$http','t
                 size: "",
                 resolve: {
                     obj: function () {
-                        return {authAll:data};
+                        return {authAll:data,id:0};
                     },
                     loadMyCtrl:function($ocLazyLoad){
                         return $ocLazyLoad.load("modules/core/js/addRole.js");
@@ -94,7 +108,6 @@ angular.module("myApp").controller("core.role", ['$scope','$uibModal','$http','t
                 }
             });
             modalInstance.result.then(function (obj) {
-            	obj.departmentId=selectnode[0].id;
             	$http.post('core/saveRole.do',obj).success(function(){
             		toaster.pop('success', "保存成功");
             	});
@@ -102,68 +115,6 @@ angular.module("myApp").controller("core.role", ['$scope','$uibModal','$http','t
     	});
     	
     }
-    
-    $scope.addDept=function(){
-    	var selectnode=$('#tree').treeview('getSelected');
-    	var modalInstance = $uibModal.open({
-            templateUrl: 'common/inputName.html',
-            controller: 'common.inputName',
-            size: "sm",
-            resolve: {
-                obj: function () {
-                    return {"title":"新增部门","content":""}
-                },
-                loadMyCtrl:function($ocLazyLoad){
-                    return $ocLazyLoad.load("common/js/inputName.js");
-                }
-            }
-        });
-        modalInstance.result.then(function (obj) {
-            saveDept(0,obj,selectnode[0].id);
-        });
-    }
-    $scope.editDept=function(){
-    	var selectnode=$('#tree').treeview('getSelected');
-    	var modalInstance = $uibModal.open({
-            templateUrl: 'common/inputName.html',
-            controller: 'common.inputName',
-            size: "sm",
-            resolve: {
-                obj: function () {
-                    return {"title":"编辑部门","content":selectnode[0].text}
-                },
-                loadMyCtrl:function($ocLazyLoad){
-                    return $ocLazyLoad.load("common/js/inputName.js");
-                }
-            }
-        });
-        modalInstance.result.then(function (obj) {
-        	var treeObj=selectnode[0];
-            saveDept(selectnode[0].id,obj,selectnode[0].pid);
-        });
-    }
-    
-    $scope.deleteDept=function(){
-    	var selectnode=$('#tree').treeview('getSelected');
-    	var modalInstance = $uibModal.open({
-            templateUrl: 'common/confirmDialog.html',
-            controller: 'common.confirmDialog',
-            size: "sm",
-            resolve: {
-                obj: function () {
-                    return {"title":"删除部门","content":"确定删除吗？"}
-                },
-                loadMyCtrl:function($ocLazyLoad){
-                    return $ocLazyLoad.load("common/js/confirmDialog.js");
-                }
-            }
-        });
-        modalInstance.result.then(function () {
-        	deleteDept();
-        });
-    }
-    
-
     function refreshTable(){
     	$http.post('core/loadRolePage.do',$scope.pageOption).success(function(data) {
     		$scope.pageOption.currentPage=data.currentPage;

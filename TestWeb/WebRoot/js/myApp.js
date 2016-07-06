@@ -121,6 +121,27 @@ myApp.filter('personStatus', function() {
 	    }
 	  };
 	})
+	
+	
+	
+myApp.factory('confirmDialog',['$uibModal',function($uibModal){
+	return function(title,content,fun){
+		var modalInstance = $uibModal.open({
+            templateUrl: 'common/confirmDialog.html',
+            controller: 'common.confirmDialog',
+            size: "sm",
+            resolve: {
+                obj: function () {
+                    return {"title":title,"content":content}
+                },
+                loadMyCtrl:function($ocLazyLoad){
+                    return $ocLazyLoad.load("common/js/confirmDialog.js");
+                }
+            }
+        });
+        modalInstance.result.then(fun);
+	}
+}])
 
 //angular.module('myApp').controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, items) {
 //

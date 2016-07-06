@@ -7,10 +7,14 @@ import java.util.List;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Component;
 
 import com.xyx.common.BaseService;
 import com.xyx.common.Page;
+import com.xyx.common.tree.TreeUtil;
+import com.xyx.core.bean.CorePerson;
+import com.xyx.core.bean.CorePersonRole;
 import com.xyx.core.bean.CoreRole;
 import com.xyx.core.bean.CoreRoleAuth;
 
@@ -21,11 +25,10 @@ public class RoleService extends BaseService {
 		CoreRole coreRole = new CoreRole();
 		int id = jsonObject.getInt("id");
 		if(id!=0){
-			coreRole=load(CoreRole.class, id);
+			coreRole=get(CoreRole.class, id);
 		}
 		String name = jsonObject.getString("name");
 		coreRole.setName(name);
-		coreRole.setId(id);
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		coreRole.setCreatetime(sdf.format(new Date()));
 		saveOrUpdate(coreRole);
@@ -45,7 +48,9 @@ public class RoleService extends BaseService {
 	public String loadRole(JSONObject jsonObject) throws Exception {
 		int id = jsonObject.getInt("id");
 		CoreRole role = load(CoreRole.class, id);
-		JSONObject rJsonObject=JSONObject.fromObject(role);
+		CoreRole coreRole=new CoreRole();
+		BeanUtils.copyProperties(coreRole, role);
+		JSONObject rJsonObject=JSONObject.fromObject(coreRole);
 		List list=getListByHQL("from CoreRoleAuth where roleId=?", id);
 		JSONArray array=new JSONArray();
 		for(Object object:list){
@@ -53,6 +58,8 @@ public class RoleService extends BaseService {
 			array.add(coreRoleAuth.getAuthId());
 		}
 		rJsonObject.put("auths", array);
+		List authlist=getListByHQL("from CoreAuth", null);
+		rJsonObject.put("authAll", authlist);
 		return rJsonObject.toString();
 	}
 
@@ -65,6 +72,47 @@ public class RoleService extends BaseService {
 	public String getAuthAll() throws Exception {
 		List list=getListByHQL("from CoreAuth", null);
 		return JSONArray.fromObject(list).toString();
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public String getDepartmentTree(JSONObject jsonObject) throws Exception {
+		int id=jsonObject.getInt("id");
+		List personlist=getListByHQL("from CorePersonRole where roleId=? ", new Integer(id));
+		String ids="";
+		for(Object object:personlist){
+			CorePersonRole corePersonRole=(CorePersonRole)object;
+			ids=ids+corePersonRole.getPersonId()+",";
+		}
+		List list=getListByHQL("from CoreDepartment",null);
+		List<CorePerson> persons=getListByHQL("from CorePerson", null);
+		String result=new TreeUtil().getDepartmentAndPersonTree(list,persons,ids, -1).toString();
+		return result;
+	}
+	
+	public void addAuth(JSONObject jsonObject) throws Exception {
+		int id=jsonObject.getInt("id");
+		String ids=jsonObject.getString("ps");
+		queryHql("delete CorePersonRole where roleId=?", new Integer(id));
+		String[] sArr=ids.split(",");
+		String pnames="";
+		for(String string:sArr){
+			if(string.equals("")){
+				continue;
+			}
+			CorePersonRole corePersonRole=new CorePersonRole();
+			corePersonRole.setPersonId(new Integer(string));
+			corePersonRole.setRoleId(id);
+			saveOrUpdate(corePersonRole);
+			CorePerson corePerson=load(CorePerson.class, new Integer(string));
+			pnames=pnames+corePerson.getRealname()+",";
+		}
+		if(!pnames.equals("")){
+			pnames=pnames.substring(0,pnames.length()-1);
+		}
+		CoreRole coreRole=load(CoreRole.class, id);
+		coreRole.setNames(pnames);
+		coreRole.setPcount(sArr.length);
+		saveOrUpdate(coreRole);
 	}
 	
 	public String loadRolePage(JSONObject jsonObject) throws Exception{
