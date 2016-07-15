@@ -48,7 +48,6 @@ angular.module("myApp").controller("core.role", ['$scope','$uibModal','$http','t
 
             modalInstance.result.then(function (obj) {
             	$http.post('core/addAuth.do',{id:$scope.selectRowId,ps:obj}).success(function(data){
-            		toaster.pop('success', "设置成功");
             		refreshTable();
             	});
             });
@@ -73,7 +72,6 @@ angular.module("myApp").controller("core.role", ['$scope','$uibModal','$http','t
             });
             modalInstance.result.then(function (obj) {
             	$http.post('core/saveRole.do',obj).success(function(){
-            		toaster.pop('success', "保存成功");
             		refreshTable();
             	});
             });
@@ -108,9 +106,7 @@ angular.module("myApp").controller("core.role", ['$scope','$uibModal','$http','t
                 }
             });
             modalInstance.result.then(function (obj) {
-            	$http.post('core/saveRole.do',obj).success(function(){
-            		toaster.pop('success', "保存成功");
-            	});
+            	$http.post('core/saveRole.do',obj);
             });
     	});
     	

@@ -32,10 +32,10 @@ public class DepartmentService extends BaseService {
 		saveOrUpdate(department);
 	}
 
-	public String loadDept(JSONObject jsonObject) throws Exception {
+	public CoreDepartment loadDept(JSONObject jsonObject) throws Exception {
 		int id = jsonObject.getInt("id");
 		CoreDepartment department = load(CoreDepartment.class, id);
-		return net.sf.json.JSONObject.fromObject(department).toString();
+		return department;
 	}
 
 	public void deleteDept(JSONObject jsonObject) throws Exception {

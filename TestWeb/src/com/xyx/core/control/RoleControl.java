@@ -3,6 +3,7 @@ package com.xyx.core.control;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.apache.log4j.Logger;
@@ -56,7 +57,7 @@ public class RoleControl extends BaseControl{
 	@RequestMapping("core/getAuthAll.do")
 	public void getAuthAll(HttpServletRequest request,HttpServletResponse response){
 		try{
-			String result=roleService.getAuthAll();
+			String result=JSONArray.fromObject(roleService.getAuthAll()).toString();
 			returnJson(response, result);
 		}catch (Exception e) {
 			logger.error("role", e);

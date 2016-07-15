@@ -2,12 +2,14 @@ package com.xyx.core.service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import net.sf.json.JSONObject;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.xyx.common.BaseService;
 import com.xyx.common.Page;
@@ -64,5 +66,10 @@ public class PersonService extends BaseService {
 		Page page=findPageByFetchedHql(hqlString+whereString, null, pageNo, pageSize, new Object[]{});
 		System.out.println("page:"+page.getCurrentPage()+":"+page.getPageCount()+":"+page.getPageSize()+":"+page.getTotalCount());
 		return net.sf.json.JSONObject.fromObject(page).toString();
+	}
+	
+	public List loadPersonAll(){
+		String hqlString="from CorePerson ";
+		return getListByHQL(hqlString, null);
 	}
 }

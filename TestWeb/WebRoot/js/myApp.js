@@ -163,6 +163,34 @@ myApp.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
     cfpLoadingBarProvider.parentSelector = '#loading-bar-container';
     cfpLoadingBarProvider.spinnerTemplate = '<div><span class="fa fa-spinner">Custom Loading Message...</div>';
   }])
+  
+myApp.factory('httpInterceptor', ['$q','toaster',function($q,toaster){
+	var httpInterceptor = {  
+            'responseError' : function(response) {  
+            	toaster.pop('error',"操作失败");
+                return $q.reject(response);  
+            },  
+            'response' : function(response) {
+            	if(response.data.status=='success'){
+            		toaster.pop('success', "操作完成");
+            	}
+                return response;  
+            },  
+            'request' : function(config) {  
+                return config;  
+            },  
+            'requestError' : function(config){  
+            	toaster.pop('error', "网络断开");
+                return $q.reject(config);  
+            }  
+        }  
+    return httpInterceptor;  
+}]);
+
+// 添加对应的 Interceptors
+myApp.config(['$httpProvider', function($httpProvider){
+  $httpProvider.interceptors.push('httpInterceptor');
+}]);
 
 
 myApp.config(function($stateProvider, $urlRouterProvider) {

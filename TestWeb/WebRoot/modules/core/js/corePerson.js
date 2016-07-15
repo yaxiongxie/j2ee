@@ -78,7 +78,6 @@ angular.module("myApp").controller("core.person", ['$scope','$uibModal','$http',
             modalInstance.result.then(function (obj) {
             	obj.departmentId=selectnode[0].id;
             	$http.post('core/savePerson.do',obj).success(function(){
-            		toaster.pop('success', "保存成功");
             		refreshTable();
             	});
             });
@@ -114,9 +113,7 @@ angular.module("myApp").controller("core.person", ['$scope','$uibModal','$http',
         });
         modalInstance.result.then(function (obj) {
         	obj.departmentId=selectnode[0].id;
-        	$http.post('core/savePerson.do',obj).success(function(){
-        		toaster.pop('success', "保存成功");
-        	});
+        	$http.post('core/savePerson.do',obj);
         });
     }
     

@@ -69,10 +69,21 @@ public class RoleService extends BaseService {
 		deleteById(CoreRole.class, id);
 	}
 	
-	public String getAuthAll() throws Exception {
+	@SuppressWarnings("rawtypes")
+	public List getAuthAll(){
 		List list=getListByHQL("from CoreAuth", null);
-		return JSONArray.fromObject(list).toString();
+		return list;
 	}
+	
+	public List getRoleAuthAll(){
+		List list=getListByHQL("from CoreRoleAuth", null);
+		return list;
+	}
+	public List getPersonRoleAll(){
+		List list=getListByHQL("from CorePersonRole", null);
+		return list;
+	}
+	
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public String getDepartmentTree(JSONObject jsonObject) throws Exception {
