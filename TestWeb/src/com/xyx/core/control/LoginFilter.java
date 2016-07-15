@@ -12,6 +12,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONObject;
+
 import com.xyx.core.bean.CommonData;
 import com.xyx.core.bean.CoreAuth;
 import com.xyx.core.bean.CorePerson;
@@ -52,11 +54,29 @@ public class LoginFilter implements Filter{
 			List<CoreAuth> auths = CommonData.authMap.get(corePerson
 					.getUsername());
 			System.out.println("request path" + path);
+			boolean isAuth=true;
 			for (CoreAuth coreAuth : auths) {
-				System.out.println("auth" + coreAuth.getFunctionUrl());
+				if(coreAuth.getFunctionUrl().contains(path)){
+					isAuth=true;
+					break;
+				}
 			}
+			if(!isAuth){
+				HttpServletResponse resp=(HttpServletResponse)response;
+				resp.setContentType("application/json; charset=UTF-8");
+				try {
+					JSONObject jObject=new JSONObject();
+					jObject.put("status", "noauth");
+					resp.getWriter().print(jObject.toString());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}else{
+				chain.doFilter(request, response);
+			}
+		}else{
+			chain.doFilter(request, response);
 		}
-		chain.doFilter(request, response);
 	}
 
 	public void init(FilterConfig filterConfig) throws ServletException {

@@ -174,6 +174,9 @@ myApp.factory('httpInterceptor', ['$q','toaster',function($q,toaster){
             	if(response.data.status=='success'){
             		toaster.pop('success', "操作完成");
             	}
+            	if(response.data.status=='noauth'){
+            		toaster.pop('success', "没有访问权限");
+            	}
                 return response;  
             },  
             'request' : function(config) {  
