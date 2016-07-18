@@ -1,6 +1,7 @@
 package com.xyx.core.control;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.Filter;
@@ -55,6 +56,9 @@ public class LoginFilter implements Filter{
 					.getUsername());
 			System.out.println("request path" + path);
 			boolean isAuth=true;
+			if(auths==null){
+				auths=new ArrayList<CoreAuth>();
+			}
 			for (CoreAuth coreAuth : auths) {
 				if(coreAuth.getFunctionUrl().contains(path)){
 					isAuth=true;

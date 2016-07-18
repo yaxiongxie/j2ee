@@ -23,6 +23,9 @@ public class CommonService extends BaseService {
 		Object object=getByHQL("from CorePerson where username=? and password=?", username,password);
 		return object;
 	}
+	
+	
+	
 
 	
 }
