@@ -1,5 +1,7 @@
 package com.xyx.core.bean;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,6 +27,7 @@ public class CoreAttachment  implements java.io.Serializable {
      private String filename;
      private Integer filesize;
      private String filetype;
+     private byte[] filedata;
      private String tablename;
      private Integer relationid;
      private String createtime;
@@ -38,10 +41,11 @@ public class CoreAttachment  implements java.io.Serializable {
 
     
     /** full constructor */
-    public CoreAttachment(String filename, Integer filesize, String filetype, String tablename, Integer relationid, String createtime) {
+    public CoreAttachment(String filename, Integer filesize, String filetype, byte[] filedata, String tablename, Integer relationid, String createtime) {
         this.filename = filename;
         this.filesize = filesize;
         this.filetype = filetype;
+        this.filedata = filedata;
         this.tablename = tablename;
         this.relationid = relationid;
         this.createtime = createtime;
@@ -89,6 +93,16 @@ public class CoreAttachment  implements java.io.Serializable {
     
     public void setFiletype(String filetype) {
         this.filetype = filetype;
+    }
+    
+    @Column(name="filedata")
+
+    public byte[] getFiledata() {
+        return this.filedata;
+    }
+    
+    public void setFiledata(byte[] filedata) {
+        this.filedata = filedata;
     }
     
     @Column(name="tablename")

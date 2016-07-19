@@ -1,4 +1,4 @@
-angular.module("myApp").controller("core.person", ['$scope','$uibModal','$http','toaster','confirmDialog',function($scope,$uibModal,$http,toaster,confirmDialog){
+angular.module("myApp").controller("core.person", ['$scope','$uibModal','$http','toaster','confirmDialog','uploadFiles',function($scope,$uibModal,$http,toaster,confirmDialog,uploadFiles){
     $scope.name="xieyaxiong";
     $scope.selected=[];
     $scope.updateSelection = function($event, id){
@@ -112,8 +112,11 @@ angular.module("myApp").controller("core.person", ['$scope','$uibModal','$http',
             }
         });
         modalInstance.result.then(function (obj) {
+        	var fileObj=obj.fileObj;
+        	obj.fileObj=undefined;
         	obj.departmentId=selectnode[0].id;
         	$http.post('core/savePerson.do',obj);
+        	uploadFiles(fileObj);
         });
     }
     
@@ -191,5 +194,5 @@ angular.module("myApp").controller("core.person", ['$scope','$uibModal','$http',
     }
     refreshTree();
     refreshTable();
-
+    
 }]);

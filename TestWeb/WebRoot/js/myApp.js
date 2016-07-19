@@ -190,6 +190,31 @@ myApp.factory('httpInterceptor', ['$q','toaster',function($q,toaster){
     return httpInterceptor;  
 }]);
 
+
+myApp.factory('uploadFiles', ['$http',function($http){
+	
+	return function(data){
+		alert(data.files.length);
+		$http({
+	        method: 'POST',
+	        url: "core/uploadFiles.do",
+	        headers: { 'Content-Type': undefined },
+	        transformRequest: function (data) {
+	            var formData = new FormData();
+	            formData.append("jsonData", angular.toJson(data.model));
+	            for (var i = 0; i < data.files.length; i++) {
+	                formData.append("file" + i, data.files[i]);
+	            }
+	            return formData;
+	        },
+	        //Create an object that contains the model and files which will be transformed
+	        // in the above transformRequest method
+	        data: data
+	    })
+	}
+}]);
+
+
 // 添加对应的 Interceptors
 myApp.config(['$httpProvider', function($httpProvider){
   $httpProvider.interceptors.push('httpInterceptor');

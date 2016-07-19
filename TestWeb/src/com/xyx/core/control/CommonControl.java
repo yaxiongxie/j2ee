@@ -2,21 +2,29 @@ package com.xyx.core.control;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONObject;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.xyx.common.BaseControl;
 import com.xyx.core.bean.CommonData;
+import com.xyx.core.bean.CoreAttachment;
 import com.xyx.core.bean.CoreAuth;
 import com.xyx.core.bean.CorePerson;
 import com.xyx.core.bean.CorePersonRole;
@@ -35,38 +43,60 @@ public class CommonControl extends BaseControl{
 	public RoleService roleService;
 	
 	Logger logger=Logger.getLogger(CommonControl.class);
+	DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
 	
 	@RequestMapping("core/uploadFiles.do")
-	public void uploadFiles(HttpServletRequest request,HttpServletResponse response,@RequestParam MultipartFile[] Filedata){
-		for(MultipartFile myfile : Filedata){  
-            if(myfile.isEmpty()){  
-                System.out.println("文件未上传");  
-            }else{  
-                System.out.println("文件长度: " + myfile.getSize());  
-                System.out.println("文件类型: " + myfile.getContentType());  
-                System.out.println("文件名称: " + myfile.getName());  
-                System.out.println("文件原名: " + myfile.getOriginalFilename());  
-
-                String filePath = request.getSession().getServletContext().getRealPath("/") + "upload/"  
-                        + myfile.getOriginalFilename();  
-                // 转存文件  
-                try {
-					myfile.transferTo(new File(filePath));
-				} catch (IllegalStateException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-                System.out.println("========================================");  
-                //如果用的是Tomcat服务器，则文件会上传到\\%TOMCAT_HOME%\\webapps\\YourWebProject\\WEB-INF\\upload\\文件夹中  
-//                String realPath = request.getSession().getServletContext().getRealPath("/WEB-INF/upload");  
-//                //这里不必处理IO流关闭的问题，因为FileUtils.copyInputStreamToFile()方法内部会自动把用到的IO流关掉，我是看它的源码才知道的  
-//                FileUtils.copyInputStreamToFile(myfile.getInputStream(), new File(realPath, myfile.getOriginalFilename()));  
+	public void uploadFiles(HttpServletRequest request,HttpServletResponse response){
+		JSONObject jsonObject=getJSONData(request).getJSONObject("jsonData");
+		System.out.println(jsonObject.toString());
+		int relateId=jsonObject.getInt("relateId");
+		String tableName=jsonObject.getString("tableName");
+		//创建一个通用的多部分解析器  
+        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());  
+        //判断 request 是否有文件上传,即多部分请求  
+        if(multipartResolver.isMultipart(request)){  
+            //转换成多部分request    
+            MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest)request;  
+            //取得request中的所有文件名  
+            Iterator<String> iter = multiRequest.getFileNames();  
+            while(iter.hasNext()){  
+                //取得上传文件  
+                MultipartFile file = multiRequest.getFile(iter.next());  
+                if(file != null){  
+                    CoreAttachment attachment=new CoreAttachment();
+                    attachment.setCreatetime(dateFormat.format(new Date()));
+                    byte[] filebytes=null;
+					try {
+						filebytes = file.getBytes();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+                    attachment.setFiledata(filebytes);
+                    attachment.setFilename(file.getOriginalFilename());
+                    attachment.setFilesize(filebytes.length);
+                    attachment.setFiletype(file.getContentType());
+                    attachment.setRelationid(relateId);
+                    attachment.setTablename(tableName);
+                    commonService.saveOrUpdate(attachment);
+                
+//                    //如果名称不为“”,说明该文件存在，否则说明该文件不存在  
+//                    if(myFileName.trim() !=""){  
+//                    	String filePath = request.getSession().getServletContext().getRealPath("/") + "upload/"  
+//                                + myFileName; 
+//                        System.out.println(myFileName);  
+//                        System.out.println(filePath);
+//                        File localFile = new File(filePath);  
+//                        try {
+//							file.transferTo(localFile);
+//						} catch (Exception e) {
+//							
+//						}
+//                    }  
+                }  
             }  
-        }
+              
+        }  
 		returnSuccess(response);
 	}
 	
