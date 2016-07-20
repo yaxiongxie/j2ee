@@ -33,7 +33,7 @@ public class TxtUtil {
 	}
 	
 	public static void main(String[] args) {
-		String string=new TxtUtil().getContent("C:\\Users\\Administrator\\Desktop\\New Text Document.txt","GBK");
+		String string=new TxtUtil().getContent("C:\\Users\\Administrator\\Desktop\\新建文本文档.txt","GBK");
 		System.out.println(string);
 	}
 

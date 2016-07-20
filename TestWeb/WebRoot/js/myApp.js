@@ -232,7 +232,8 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
         })
         .state('core/person', {url: "/core/person",templateUrl: "modules/core/corePerson.html",controller:'core.person',resolve:{loadMyCtrl:function($ocLazyLoad){return $ocLazyLoad.load("modules/core/js/corePerson.js");}}})
          .state('core/role', {url: "/core/role",templateUrl: "modules/core/coreRole.html",controller:'core.role',resolve:{loadMyCtrl:function($ocLazyLoad){return $ocLazyLoad.load("modules/core/js/coreRole.js");}}})
-        .state('table', {
+         .state('document', {url: "/document",templateUrl: "modules/document/document.html",controller:'document',resolve:{loadMyCtrl:function($ocLazyLoad){return $ocLazyLoad.load("modules/document/js/document.js");}}})
+         .state('table', {
             url: "/table",
             templateUrl: "partials/state2.list.html",
             controller: function($scope) {

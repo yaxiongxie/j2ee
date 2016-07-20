@@ -11,6 +11,8 @@ import net.sf.json.JSONObject;
 
 import org.apache.log4j.Logger;
 
+import com.xyx.core.bean.CorePerson;
+
 public class BaseControl {
 	
 	private static Logger log = Logger.getLogger(BaseControl.class);  
@@ -29,6 +31,11 @@ public class BaseControl {
 			log.error("json", e);
 		}
 		return null;
+	}
+	
+	public CorePerson getLoginPerson(HttpServletRequest request){
+		Object object=request.getSession().getAttribute("user");
+		return (CorePerson)object;
 	}
 	
 	public void returnJson(HttpServletResponse response,String body){

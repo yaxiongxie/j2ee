@@ -44,7 +44,7 @@ public class HttpUtil {
 	}
 	
 	public static void main(String[] args) {
-		String resultString=new HttpUtil().getTxtContent("D:\\Downloads\\jsoup Java HTML������������һ��bodyƬ��.html");
+		String resultString=new HttpUtil().getTxtContent("C:\\Users\\Administrator\\Desktop\\main.fxml");
 		System.out.println(resultString);
 	}
 	

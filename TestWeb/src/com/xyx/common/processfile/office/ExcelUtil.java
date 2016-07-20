@@ -151,7 +151,7 @@ public class ExcelUtil {
 	
 	public static void main(String[] args) {
 		try{
-			List<List<String>> list=new ExcelUtil().readExcel("D:\\Documents\\Tencent Files\\1413122249\\FileRecv\\minik���Է���.xls");
+			List<List<String>> list=new ExcelUtil().readExcel("C:\\Users\\Administrator\\Desktop\\新建 Microsoft Excel 工作表.xlsx");
 			for(List<String> l:list){
 				System.out.println(l);
 			}

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.xyx.common.BaseService;
+import com.xyx.common.encrypt.MD5;
 import com.xyx.common.tree.TreeUtil;
 import com.xyx.core.bean.CorePerson;
 
@@ -20,7 +21,7 @@ public class CommonService extends BaseService {
 	}
 	
 	public Object login(String username,String password){
-		Object object=getByHQL("from CorePerson where username=? and password=?", username,password);
+		Object object=getByHQL("from CorePerson where username=? and password=?", username,MD5.GetMD5Code(password));
 		return object;
 	}
 	
