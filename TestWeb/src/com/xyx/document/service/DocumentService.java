@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 import com.xyx.common.BaseService;
 import com.xyx.common.tree.TreeUtil;
-import com.xyx.core.bean.CoreDepartment;
 import com.xyx.document.bean.DocumentCategory;
 
 @Component

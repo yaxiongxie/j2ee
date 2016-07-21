@@ -15,7 +15,8 @@ public class OCR {
     private String tessPath = "E://Tesseract-OCR";    
     //private String tessPath = new File("tesseract").getAbsolutePath();    
         
-    public String recognizeText(File imageFile,String imageFormat,int flag)throws Exception{    
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	public String recognizeText(File imageFile,String imageFormat,int flag)throws Exception{    
         File tempImage = ImageIOHelper.createImage(imageFile,imageFormat);    
         File outputFile = new File(imageFile.getParentFile(),"output");    
         System.out.println(outputFile.getAbsolutePath());

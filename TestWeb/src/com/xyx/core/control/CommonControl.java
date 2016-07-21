@@ -1,6 +1,5 @@
 package com.xyx.core.control;
 
-import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -125,6 +124,7 @@ public class CommonControl extends BaseControl{
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	@RequestMapping("core/initSystem.do")
 	public void initSystem(HttpServletRequest request,HttpServletResponse response){
 		CommonData.personList.clear();

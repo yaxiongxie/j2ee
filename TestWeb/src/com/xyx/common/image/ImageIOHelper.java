@@ -19,7 +19,8 @@ import com.sun.media.imageio.plugins.tiff.TIFFImageWriteParam;
 
 public class ImageIOHelper {    
     
-    public static File createImage(File imageFile, String imageFormat) {    
+    @SuppressWarnings("rawtypes")
+	public static File createImage(File imageFile, String imageFormat) {    
         File tempFile = null;    
         try {    
             Iterator readers = ImageIO.getImageReadersByFormatName(imageFormat);    

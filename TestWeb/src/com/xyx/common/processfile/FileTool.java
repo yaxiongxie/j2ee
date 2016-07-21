@@ -1,6 +1,5 @@
 package com.xyx.common.processfile;
 
-import java.io.IOException;
 import java.io.InputStream;
 
 import com.xyx.common.io.ByteToInputStream;

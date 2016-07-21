@@ -45,6 +45,7 @@ public class RoleService extends BaseService {
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
 	public String loadRole(JSONObject jsonObject) throws Exception {
 		int id = jsonObject.getInt("id");
 		CoreRole role = load(CoreRole.class, id);
