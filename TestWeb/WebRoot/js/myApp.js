@@ -103,6 +103,17 @@ myApp.directive('fileUpload', function () {
     };
 });
 
+myApp.directive('onFinishRenderFilters', function ($timeout) {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attr) {
+                $timeout(function() {
+                    scope.$emit('ngLoadpageFinished');
+                });
+        }
+    };
+});
+
 myApp.filter('sex', function() {
 	  return function(input) {
 	    if(input==1){

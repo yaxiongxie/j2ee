@@ -96,27 +96,20 @@ angular.module("myApp").controller("document", ['$scope','$uibModal','$http','to
     	refreshTable();
     }
     
-    $scope.addPerson=function(){
+    $scope.addDocument=function(){
     	var selectnode=$('#tree').treeview('getSelected');
     	var modalInstance = $uibModal.open({
-            templateUrl: 'modules/core/addPerson.html',
-            controller: 'core.addPerson',
-            size: "",
+            templateUrl: 'modules/document/addDocument.html',
+            controller: 'document.addDocument',
+            size: "lg",
             resolve: {
                 obj: function () {
-                    return {department:selectnode[0].text};
+                    return {categoryid:selectnode[0].id};
                 },
                 loadMyCtrl:function($ocLazyLoad){
-                    return $ocLazyLoad.load("modules/core/js/addPerson.js");
+                    return $ocLazyLoad.load("modules/document/js/addDocument.js");
                 }
             }
-        });
-        modalInstance.result.then(function (obj) {
-        	var fileObj=obj.fileObj;
-        	obj.fileObj=undefined;
-        	obj.departmentId=selectnode[0].id;
-        	$http.post('core/savePerson.do',obj);
-        	uploadFiles(fileObj);
         });
     }
     
@@ -128,7 +121,7 @@ angular.module("myApp").controller("document", ['$scope','$uibModal','$http','to
             size: "sm",
             resolve: {
                 obj: function () {
-                    return {"title":"新增部门","content":""}
+                    return {"title":"新建文件夹","content":""}
                 },
                 loadMyCtrl:function($ocLazyLoad){
                     return $ocLazyLoad.load("common/js/inputName.js");
@@ -136,7 +129,7 @@ angular.module("myApp").controller("document", ['$scope','$uibModal','$http','to
             }
         });
         modalInstance.result.then(function (obj) {
-            saveDept(0,obj,selectnode[0].id);
+            saveCategory(0,obj,selectnode[0].id);
         });
     }
     $scope.editCategory=function(){
@@ -147,7 +140,7 @@ angular.module("myApp").controller("document", ['$scope','$uibModal','$http','to
             size: "sm",
             resolve: {
                 obj: function () {
-                    return {"title":"编辑部门","content":selectnode[0].text}
+                    return {"title":"修改名称","content":selectnode[0].text}
                 },
                 loadMyCtrl:function($ocLazyLoad){
                     return $ocLazyLoad.load("common/js/inputName.js");
@@ -156,27 +149,27 @@ angular.module("myApp").controller("document", ['$scope','$uibModal','$http','to
         });
         modalInstance.result.then(function (obj) {
         	var treeObj=selectnode[0];
-            saveDept(selectnode[0].id,obj,selectnode[0].pid);
+            saveCategory(selectnode[0].id,obj,selectnode[0].pid);
         });
     }
     
     $scope.deleteCategory=function(){
-    	confirmDialog("删除部门","确定删除吗？",function () {
-    		deleteDept();
+    	confirmDialog("删除文件夹","确定删除吗？",function () {
+    		deleteCategory();
         });
     }
     
-    function saveDept(id,name,pid){
+    function saveCategory(id,name,pid){
     	var selectnode=$('#tree').treeview('getSelected');
     	var jsonData={"id":id,"name":name,"pid":pid};
-    	$http.post('core/saveDept.do',jsonData).success(function(){
+    	$http.post('document/saveCategory.do',jsonData).success(function(){
     	    refreshTree();
     	});
     }
-    function deleteDept(){
+    function deleteCategory(){
     	var selectnode=$('#tree').treeview('getSelected');
     	var jsonData={"id":selectnode[0].id};
-    	$http.post('core/deleteDept.do',jsonData).success(function(){
+    	$http.post('document/deleteCategory.do',jsonData).success(function(){
     	    refreshTree();
     	});
     }

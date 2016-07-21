@@ -3,11 +3,9 @@ package com.xyx.common.processfile.office;
 import java.io.File;
 import java.io.InputStream;
 
-import org.apache.poi.POIXMLDocument;
-import org.apache.poi.POIXMLTextExtractor;
 import org.apache.poi.hwpf.extractor.WordExtractor;
-import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
 public class WordUtil {
 
@@ -15,7 +13,7 @@ public class WordUtil {
 		if(s.endsWith(".doc")){
 			return getContent2003(new java.io.FileInputStream(s));
 		}else{
-			return getContent2007(s);
+			return getContent2007(new java.io.FileInputStream(s));
 		}
 	}
 
@@ -23,7 +21,7 @@ public class WordUtil {
 		if(f.getName().endsWith(".doc")){
 			return getContent2003(new java.io.FileInputStream(f));
 		}else{
-			return getContent2007(f.getAbsolutePath());
+			return getContent2007(new java.io.FileInputStream(f));
 		}
 	}
 
@@ -34,18 +32,18 @@ public class WordUtil {
 		return bodyText;
 	}
 	
-	public String getContent2007(String fileName) throws Exception {
-		OPCPackage opcPackage = POIXMLDocument.openPackage(fileName);   
-	     POIXMLTextExtractor ex = new XWPFWordExtractor(opcPackage);      
+	public String getContent2007(InputStream is) throws Exception {
+		XWPFDocument doc = new XWPFDocument(is);  
+	      XWPFWordExtractor extractor = new XWPFWordExtractor(doc);  
+	      return extractor.getText();     
 	  
-	        return ex.getText();   
 	}
 	
 	
 	
 	public static void main(String[] args) throws Exception {
 		try{
-			String resultString=new WordUtil().getContent(new File("C:\\Users\\Administrator\\Desktop\\新建 Microsoft Word 文档.doc"));
+			String resultString=new WordUtil().getContent(new File("C:\\Users\\Administrator\\Desktop\\新建 Microsoft Word 文档.docx"));
 			System.out.println(resultString);
 		}catch (Exception e) {
 			// TODO: handle exception

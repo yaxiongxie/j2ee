@@ -2,6 +2,7 @@ package com.xyx.common.processfile.xml;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import org.jsoup.Jsoup;
@@ -29,6 +30,29 @@ public class HttpUtil {
 			try {
 				bufferedReader.close();
 				fileInputStream.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return "";
+	}
+	
+	public String getXmlContent(InputStream is) {
+		BufferedReader bufferedReader = null;
+
+		try {
+			bufferedReader = new BufferedReader(new InputStreamReader(is, "GBK"));
+			StringBuffer stringBuffer = new StringBuffer();
+			String tempString = null;
+			while ((tempString = bufferedReader.readLine()) != null) {
+				stringBuffer.append(tempString+"\r\n");
+			}
+			return stringBuffer.toString();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				bufferedReader.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

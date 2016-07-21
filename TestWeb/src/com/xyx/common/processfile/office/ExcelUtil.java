@@ -53,6 +53,18 @@ public class ExcelUtil {
 		return null;
 
 	}
+	
+	public List<List<String>> readExcel(String filename,InputStream is) throws IOException {
+
+		String postfix = getPostfix(filename);
+		if (OFFICE_EXCEL_2003_POSTFIX.equals(postfix)) {
+			return readXls(is);
+		} else if (OFFICE_EXCEL_2010_POSTFIX.equals(postfix)) {
+			return readXlsx(is);
+		}
+		return null;
+
+	}
 
 	/**
 	 * Read the Excel 2010
@@ -88,6 +100,40 @@ public class ExcelUtil {
 		}
 		return list;
 	}
+	
+	/**
+	 * Read the Excel 2010
+	 * 
+	 * @param path
+	 *            the path of the excel file
+	 * @return
+	 * @throws IOException
+	 */
+	public List<List<String>> readXlsx(InputStream is) throws IOException {
+		System.out.println("read excel 2010");
+		XSSFWorkbook xssfWorkbook = new XSSFWorkbook(is);
+		List<List<String>> list = new ArrayList<List<String>>();
+		// Read the Sheet
+		for (int numSheet = 0; numSheet < xssfWorkbook.getNumberOfSheets(); numSheet++) {
+			XSSFSheet xssfSheet = xssfWorkbook.getSheetAt(numSheet);
+			if (xssfSheet == null) {
+				continue;
+			}
+			// Read the Row
+			for (int rowNum = 1; rowNum <= xssfSheet.getLastRowNum(); rowNum++) {
+				XSSFRow xssfRow = xssfSheet.getRow(rowNum);
+				if (xssfRow != null) {
+					List<String> rowList = new ArrayList<String>();
+					for(int cellNum=0;cellNum<xssfRow.getLastCellNum();cellNum++){
+						rowList.add(getValue(xssfRow.getCell(cellNum)));
+					}
+					
+					list.add(rowList);
+				}
+			}
+		}
+		return list;
+	}
 
 	/**
 	 * Read the Excel 2003-2007
@@ -100,6 +146,32 @@ public class ExcelUtil {
 	public List<List<String>> readXls(String path) throws IOException {
 		System.out.println("read excel 2003-2007");
 		InputStream is = new FileInputStream(path);
+		HSSFWorkbook hssfWorkbook = new HSSFWorkbook(is);
+		List<List<String>> list = new ArrayList<List<String>>();
+		// Read the Sheet
+		for (int numSheet = 0; numSheet < hssfWorkbook.getNumberOfSheets(); numSheet++) {
+			HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(numSheet);
+			if (hssfSheet == null) {
+				continue;
+			}
+			// Read the Row
+			for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
+				HSSFRow hssfRow = hssfSheet.getRow(rowNum);
+				if (hssfRow != null) {
+					List<String> rowList=new ArrayList<String>();
+					for(int cellNum=0;cellNum<hssfRow.getLastCellNum();cellNum++){
+						rowList.add(getValue(hssfRow.getCell(cellNum)));
+					}
+					
+					list.add(rowList);
+				}
+			}
+		}
+		return list;
+	}
+	
+	public List<List<String>> readXls(InputStream is) throws IOException {
+		System.out.println("read excel 2003-2007");
 		HSSFWorkbook hssfWorkbook = new HSSFWorkbook(is);
 		List<List<String>> list = new ArrayList<List<String>>();
 		// Read the Sheet
