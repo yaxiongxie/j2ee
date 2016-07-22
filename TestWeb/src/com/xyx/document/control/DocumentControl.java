@@ -100,7 +100,7 @@ public class DocumentControl extends BaseControl{
                 	Document document=new Document();
                 	document.setCategoryid(categoryid);
                 	document.setCreatetime(dateFormat.format(new Date()));
-                	document.setDoccontent(content);
+                	document.setDoccontent(content.length()>300?content.substring(0,300):content);
                 	document.setDocsize(filebytes.length);
                 	document.setDoctitle(filename);
                 	document.setDoctype(filename.substring(filename.lastIndexOf(".")+1));
@@ -119,11 +119,27 @@ public class DocumentControl extends BaseControl{
                     attachment.setTablename("document");
                     commonService.saveOrUpdate(attachment);
                     
+                    document.setDoccontent(content);
                     SolrjTool.AddDoc(document);
                 }  
             }  
         }  
 		returnSuccess(response);
+	}
+	
+	
+	@RequestMapping("document/loadDocumentPage.do")
+	public void loadPersonPage(HttpServletRequest request,HttpServletResponse response){
+		try{
+			JSONObject jsonObject=getJSONData(request);
+			jsonObject.put("personid", getLoginPerson(request).getId());
+//			jsonObject.put("pageNo", 1);
+//			jsonObject.put("pageSize", 8);
+			String result=documentService.loadDocumentPage(jsonObject);
+			returnJson(response, result);
+		}catch (Exception e) {
+			logger.error("role", e);
+		}
 	}
 
 }

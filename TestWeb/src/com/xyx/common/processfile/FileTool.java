@@ -19,6 +19,7 @@ public class FileTool {
 	public static final String OFFICE_PPT_POSTFIX = "ppt";
 	public static final String OFFICE_PDF_POSTFIX = "pdf";
 	public static final String OFFICE_XML_POSTFIX = "xml";
+	public static final String OFFICE_TXT_POSTFIX = "txt";
 	
 	public static String getPostfix(String path) {
 		if (path.contains(".")) {
@@ -42,8 +43,10 @@ public class FileTool {
 			return new PdfUtil().readFileContent(is);
 		}else if(postfix.contains(OFFICE_XML_POSTFIX)){
 			return new HttpUtil().getXmlContent(is);
-		}else{
+		}else if(postfix.contains(OFFICE_TXT_POSTFIX)){
 			return new TxtUtil().getContent(is);
+		}else{
+			return "";
 		}
 	}
 	

@@ -4,12 +4,18 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.print.Doc;
+
 import net.sf.json.JSONObject;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
 
 import com.xyx.common.BaseService;
+import com.xyx.common.Page;
+import com.xyx.common.lucene.SolrjTool;
 import com.xyx.common.tree.TreeUtil;
+import com.xyx.document.bean.Document;
 import com.xyx.document.bean.DocumentCategory;
 
 @Component
@@ -51,5 +57,44 @@ public class DocumentService extends BaseService {
 		List list=getListByHQL("from DocumentCategory where personid=?",personid);
 		String result=new TreeUtil().getJson(list, -1).toString();
 		return result;
+	}
+	
+	public String loadDocumentPage(JSONObject jsonObject) throws Exception{
+		int pageNo=jsonObject.getInt("currentPage");
+		int pageSize=jsonObject.getInt("pageSize");
+		int categoryid=jsonObject.getInt("categoryid");
+		String queryString=jsonObject.getString("queryString");
+		int personid=jsonObject.getInt("personid");
+		Page page=SolrjTool.query(pageNo, pageSize, personid, categoryid, queryString);
+		String hqlString="from Document ";
+		List<Document> documents=page.getList();
+		String ids=getIds(documents);
+		String whereString="where id in("+ids+")";
+		List<Document> list=getListByHQL(hqlString+whereString, new Object[]{});
+		for(Document document:list){
+			for(Document doc:documents){
+				if(doc.getId()==document.getId()){
+					document.setDoctitle(doc.getDoctitle());
+					document.setDoctype(doc.getDoctype());
+					if(!StringUtils.isEmpty(doc.getDoccontent())){
+						document.setDoccontent(doc.getDoccontent());
+					}
+				}
+			}
+		}
+		page.setList(list);
+		System.out.println("page:"+page.getCurrentPage()+":"+page.getPageCount()+":"+page.getPageSize()+":"+page.getTotalCount());
+		return net.sf.json.JSONObject.fromObject(page).toString();
+	}
+	
+	public String getIds(List<Document> list){
+		String resultString="";
+		for(Document document:list){
+			resultString=resultString+document.getId()+",";
+		}
+		if(!StringUtils.isEmpty(resultString)){
+			resultString=resultString.substring(0,resultString.length()-1);
+		}
+		return resultString;
 	}
 }

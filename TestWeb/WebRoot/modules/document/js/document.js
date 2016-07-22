@@ -24,17 +24,16 @@ angular.module("myApp").controller("document", ['$scope','$uibModal','$http','to
     }
     $scope.columns=[
         {name:"id",width:"5%",columnName:"id"},
-        {name:"realname",width:"15%",columnName:"realname"},
-        {name:"sex",width:"15%",columnName:"sex"},
-        {name:"email",width:"15%",columnName:"email"},
-        {name:"telephone",width:"15%",columnName:"telephone"},
-        {name:"status",width:"15%",columnName:"status"}
+        {name:"doctitle",width:"15%",columnName:"doctitle"},
+        {name:"docsize",width:"5%",columnName:"docsize"},
+        {name:"doccontent",width:"40%",columnName:"doccontent"},
+        {name:"createtime",width:"15%",columnName:"createtime"}
     ];
     $scope.operations=[
         {name:"editT",title:"编辑",imgClass:"fa fa-pencil-square-o"},
         {name:"deleteT",title:"删除",imgClass:"fa fa-times"}
 	];
-    $scope.pageOption={"currentPage":1,"pageSize":12};
+    $scope.pageOption={"currentPage":1,"pageSize":12,"categoryid":0,"queryString":""};
     $scope.pageChanged = function() {
     	refreshTable();
     };
@@ -180,7 +179,7 @@ angular.module("myApp").controller("document", ['$scope','$uibModal','$http','to
         　　});
     }
     function refreshTable(){
-    	$http.post('core/loadPersonPage.do',$scope.pageOption).success(function(data) {
+    	$http.post('document/loadDocumentPage.do',$scope.pageOption).success(function(data) {
     		$scope.pageOption.currentPage=data.currentPage;
     		$scope.page=data;
         　　});

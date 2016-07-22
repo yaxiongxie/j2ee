@@ -30,7 +30,7 @@ public class Test {
 //			bytes[i]=(byte)Integer.parseInt(strings[i]);
 //		}
 		String name="sdfsdf";
-		System.out.println(name.substring(0,name.length()-1));
+		System.out.println(name.substring(0,2000));
 		if(true){
 			return ;
 		}

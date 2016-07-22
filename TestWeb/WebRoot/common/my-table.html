@@ -12,9 +12,9 @@
         	<input type="checkbox" cid="{{td.id}}" name="cbname" ng-click="updateSelection($event,td.id)">
         </td>
         <td ng-repeat="column in columns">
-        	<span ng-if="column.columnName=='sex'">{{td[column.columnName] |sex}}</span>
-        	<span ng-else-if="column.columnName=='status'">{{td[column.columnName] |personStatus}}</span>
-        	<span ng-else>{{td[column.columnName]}}</span>
+        	<div ng-if="column.columnName=='sex'"><p  ng-bind="td[column.columnName] |sex"></p></div>
+        	<div ng-else-if="column.columnName=='status'" ><p ng-bind="td[column.columnName] |personStatus"></p></div>
+        	<div ng-else ><p ng-bind-html="td[column.columnName]"></p></div>
         </td>
         <td ng-if="operations" >
         	<button type="button" ng-repeat="operation in operations" class="btn btn-default btn-xs" ng-click="clickOperate(td.id,operation.name)"><i class="{{operation.imgClass}}" aria-hidden="true"></i> {{operation.title}}</button>
@@ -22,4 +22,16 @@
     </tr>
     </tbody>
 </table>
-<uib-pagination ng-change="pageChanged()" previous-text="上一页" next-text="下一页" first-text="首页" last-text="尾页"  total-items="page.totalCount" ng-model="pageOption.currentPage" items-per-page="pageOption.pageSize" max-size="5" class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination>
+<div class="row">
+	<div class="col-lg-2">
+		<div  ng-if="selected">
+			<button type="button" class="btn btn-default" ng-click="deleteBatch()"><i class="fa fa-times" aria-hidden="true"></i> 批量删除</button><br/>
+		</div>
+	</div>
+	<div class="col-lg-10">
+		<div style="float: right">
+		<uib-pagination ng-change="pageChanged()" previous-text="上一页" next-text="下一页" first-text="首页" last-text="尾页"  total-items="page.totalCount" ng-model="pageOption.currentPage" items-per-page="pageOption.pageSize" max-size="5" class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination>
+		</div>
+	</div>
+</div>
+
