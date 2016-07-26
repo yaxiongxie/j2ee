@@ -153,6 +153,7 @@ angular.module("myApp").controller("document", ['$scope','$uibModal','$http','to
     }
     
     $scope.deleteCategory=function(){
+    	$("#leftmenu").hide();
     	confirmDialog("删除文件夹","确定删除吗？",function () {
     		deleteCategory();
         });
@@ -186,5 +187,14 @@ angular.module("myApp").controller("document", ['$scope','$uibModal','$http','to
     }
     refreshTree();
     refreshTable();
+    
+    
+    $scope.$on("enterFun", function (event, dom) {
+        $scope.$apply(function () {
+        	if(dom.id=='search'){
+        		$scope.queryTable();
+        	}
+        });
+    });
     
 }]);

@@ -103,6 +103,19 @@ myApp.directive('fileUpload', function () {
     };
 });
 
+myApp.directive('enterEvent', function () {
+    return {
+        scope: true,        //create a new scope
+        link: function (scope, el, attrs) {
+            el.bind('keypress', function (event) {
+            	if(event.keyCode == '13'){
+            		scope.$emit("enterFun", event.target);
+            	}
+            });
+        }
+    };
+});
+
 myApp.directive('onFinishRenderFilters', function ($timeout) {
     return {
         restrict: 'A',
@@ -170,10 +183,10 @@ myApp.factory('confirmDialog',['$uibModal',function($uibModal){
 //    };
 //});
 
-myApp.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
-    cfpLoadingBarProvider.parentSelector = '#loading-bar-container';
-    cfpLoadingBarProvider.spinnerTemplate = '<div><span class="fa fa-spinner">Custom Loading Message...</div>';
-  }])
+//myApp.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+//    cfpLoadingBarProvider.parentSelector = '#loading-bar-container';
+//    cfpLoadingBarProvider.spinnerTemplate = '<div><span class="fa fa-spinner">Custom Loading Message...</div>';
+//  }])
   
 myApp.factory('httpInterceptor', ['$q','toaster',function($q,toaster){
 	var httpInterceptor = {  
@@ -205,7 +218,6 @@ myApp.factory('httpInterceptor', ['$q','toaster',function($q,toaster){
 myApp.factory('uploadFiles', ['$http',function($http){
 	
 	return function(data){
-		alert(data.files.length);
 		$http({
 	        method: 'POST',
 	        url: "core/uploadFiles.do",
