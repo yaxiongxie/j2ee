@@ -4,8 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import javax.print.Doc;
-
 import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.StringUtils;
@@ -59,6 +57,7 @@ public class DocumentService extends BaseService {
 		return result;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public String loadDocumentPage(JSONObject jsonObject) throws Exception{
 		int pageNo=jsonObject.getInt("currentPage");
 		int pageSize=jsonObject.getInt("pageSize");
