@@ -136,7 +136,7 @@ public class SolrjTool {
 	public static void main(String[] args) {
 		Page page=null;
 		try {
-			page = query(1, 10, 60, 1, "当我跑步");
+			page = query(1, 10, 60, 1, "陈");
 			System.out.println(page.getList().size());
 			for (Document doc : (List<Document>)page.getList()) {
 				System.out.println(doc.getDoctitle()+"==="+doc.getDoctype()+"==="+doc.getDoccontent());

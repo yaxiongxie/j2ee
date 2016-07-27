@@ -94,6 +94,9 @@ public class DocumentService extends BaseService {
 		if(!StringUtils.isEmpty(resultString)){
 			resultString=resultString.substring(0,resultString.length()-1);
 		}
+		if(resultString.equals("")){
+			resultString="0";
+		}
 		return resultString;
 	}
 }
