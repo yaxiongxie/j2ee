@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50710
 File Encoding         : 65001
 
-Date: 2016-07-19 10:46:11
+Date: 2016-08-03 18:00:08
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,7 +29,7 @@ CREATE TABLE `core_attachment` (
   `relationid` int(11) DEFAULT NULL,
   `createtime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for core_auth
@@ -77,7 +77,7 @@ CREATE TABLE `core_person` (
   `department_id` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for core_person_role
@@ -113,6 +113,38 @@ CREATE TABLE `core_role_auth` (
   `auth_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for document
+-- ----------------------------
+DROP TABLE IF EXISTS `document`;
+CREATE TABLE `document` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `doctitle` varchar(255) DEFAULT NULL,
+  `doctype` varchar(255) DEFAULT NULL,
+  `docsize` int(11) DEFAULT NULL,
+  `doccontent` longtext,
+  `personid` int(11) DEFAULT NULL,
+  `createtime` varchar(20) DEFAULT NULL,
+  `isopen` int(11) DEFAULT NULL,
+  `categoryid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for document_category
+-- ----------------------------
+DROP TABLE IF EXISTS `document_category`;
+CREATE TABLE `document_category` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `code` varchar(255) DEFAULT NULL,
+  `parent_id` int(11) DEFAULT NULL,
+  `ordernum` int(11) DEFAULT NULL,
+  `personid` int(11) DEFAULT NULL,
+  `createtime` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for test
