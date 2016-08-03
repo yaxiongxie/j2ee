@@ -23,12 +23,12 @@ angular.module("myApp").controller("core.person", ['$scope','$uibModal','$http',
         }
     }
     $scope.columns=[
-        {name:"id",width:"5%",columnName:"id"},
-        {name:"realname",width:"15%",columnName:"realname"},
-        {name:"sex",width:"15%",columnName:"sex"},
-        {name:"email",width:"15%",columnName:"email"},
-        {name:"telephone",width:"15%",columnName:"telephone"},
-        {name:"status",width:"15%",columnName:"status"}
+        {name:"编号",width:"5%",columnName:"id"},
+        {name:"姓名",width:"15%",columnName:"realname"},
+        {name:"姓别",width:"15%",columnName:"sex"},
+        {name:"邮箱地址",width:"15%",columnName:"email"},
+        {name:"手机号",width:"15%",columnName:"telephone"},
+        {name:"类别",width:"15%",columnName:"status"}
     ];
     $scope.operations=[
         {name:"editT",title:"编辑",imgClass:"fa fa-pencil-square-o"},

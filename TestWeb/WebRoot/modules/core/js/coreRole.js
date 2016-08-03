@@ -1,10 +1,10 @@
 angular.module("myApp").controller("core.role", ['$scope','$uibModal','$http','toaster','confirmDialog',function($scope,$uibModal,$http,toaster,confirmDialog){
     $scope.name="xieyaxiong";
     $scope.columns=[
-        {name:"id",width:"5%",columnName:"id"},
-        {name:"name",width:"30%",columnName:"name"},
-        {name:"pcount",width:"5%",columnName:"pcount"},
-        {name:"names",width:"45%",columnName:"names"}
+        {name:"编号",width:"5%",columnName:"id"},
+        {name:"姓名",width:"30%",columnName:"name"},
+        {name:"人数",width:"5%",columnName:"pcount"},
+        {name:"用户名",width:"45%",columnName:"names"}
     ];
     $scope.operations=[
         {name:"addT",title:"添加人员",imgClass:"fa fa-plus"},

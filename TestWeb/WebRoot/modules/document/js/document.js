@@ -23,14 +23,14 @@ angular.module("myApp").controller("document", ['$scope','$uibModal','$http','to
         }
     }
     $scope.columns=[
-        {name:"id",width:"5%",columnName:"id"},
-        {name:"doctitle",width:"15%",columnName:"doctitle"},
-        {name:"docsize",width:"5%",columnName:"docsize"},
-        {name:"doccontent",width:"40%",columnName:"doccontent"},
-        {name:"createtime",width:"15%",columnName:"createtime"}
+        {name:"编号",width:"5%",columnName:"id"},
+        {name:"标题",width:"15%",columnName:"doctitle"},
+        {name:"文件大小",width:"6%",columnName:"docsize"},
+        {name:"内容摘要",width:"50%",columnName:"doccontent"},
+        {name:"上传时间",width:"12%",columnName:"createtime"}
     ];
     $scope.operations=[
-        {name:"editT",title:"编辑",imgClass:"fa fa-pencil-square-o"},
+        {name:"editT",title:"下载",imgClass:"fa fa-download"},
         {name:"deleteT",title:"删除",imgClass:"fa fa-times"}
 	];
     $scope.pageOption={"currentPage":1,"pageSize":12,"categoryid":0,"queryString":""};
@@ -48,15 +48,15 @@ angular.module("myApp").controller("document", ['$scope','$uibModal','$http','to
     
     $scope.clickOperate=function(id,type){
     	if(type=="deleteT"){
-    		confirmDialog("删除人员","确定删除吗？",function () {
-    			deletePerson(id);
+    		confirmDialog("删除文档","确定删除吗？",function () {
+    			deleteDocument(id);
             });
     	}else{
-    		editPerson(id);
+    		editDocument(id);
     	}
     }
     
-    function editPerson(id){
+    function editDocument(id){
     	var selectnode=$('#tree').treeview('getSelected');
     	var jsonData={"id":id};
     	$http.post('core/loadPerson.do',jsonData).success(function(data){
@@ -83,9 +83,9 @@ angular.module("myApp").controller("document", ['$scope','$uibModal','$http','to
     	});
     }
     
-    function deletePerson(id){
+    function deleteDocument(id){
     	var jsonData={"id":id};
-    	$http.post('core/deletePerson.do',jsonData).success(function(){
+    	$http.post('document/deleteDocument.do',jsonData).success(function(){
     		refreshTable();
     	});
     }
@@ -103,7 +103,8 @@ angular.module("myApp").controller("document", ['$scope','$uibModal','$http','to
             size: "lg",
             resolve: {
                 obj: function () {
-                    return {categoryid:selectnode[0].id};
+//                    return {categoryid:selectnode[0].id};
+                	return {categoryid:1};
                 },
                 loadMyCtrl:function($ocLazyLoad){
                     return $ocLazyLoad.load("modules/document/js/addDocument.js");

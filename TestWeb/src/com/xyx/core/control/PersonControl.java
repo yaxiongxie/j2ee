@@ -69,6 +69,7 @@ public class PersonControl extends BaseControl{
 	@RequestMapping("core/loadPersonPage.do")
 	public void loadPersonPage(HttpServletRequest request,HttpServletResponse response){
 		try{
+			Thread.sleep(3000);
 			JSONObject jsonObject=getJSONData(request);
 //			jsonObject.put("pageNo", 1);
 //			jsonObject.put("pageSize", 8);

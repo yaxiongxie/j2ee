@@ -1,7 +1,7 @@
 <table class="table table-bordered table-striped table-hover" >
     <thead>
     <tr>
-    	<th ng-if="selected" width="5%"><input type="checkbox" ng-click="updateSelection($event,'all')"></th>
+    	<th ng-if="selected" width="3%"><input type="checkbox" ng-click="updateSelection($event,'all')"></th>
         <th ng-repeat="column in columns" width="{{column.width}}">{{column.name}}</th>
         <th ng-if="operations" width="15%">操作</th>
     </tr>

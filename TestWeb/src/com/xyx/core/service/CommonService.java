@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import com.xyx.common.BaseService;
 import com.xyx.common.encrypt.MD5;
 import com.xyx.common.tree.TreeUtil;
+import com.xyx.core.bean.CoreAttachment;
 import com.xyx.core.bean.CorePerson;
 
 @Component
@@ -25,7 +26,10 @@ public class CommonService extends BaseService {
 		return object;
 	}
 	
-	
+	public List<CoreAttachment> getAttachments(int id,String tablename){
+		List<CoreAttachment> list=getListByHQL("from CoreAttachment where relationid=? and tablename=?", id,tablename);
+		return list;
+	}
 	
 
 	

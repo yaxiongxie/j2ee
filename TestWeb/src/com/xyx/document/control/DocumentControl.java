@@ -5,12 +5,14 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.xyx.common.BaseControl;
+import com.xyx.common.StringUtil;
 import com.xyx.common.lucene.SolrjTool;
 import com.xyx.common.processfile.FileTool;
 import com.xyx.core.bean.CoreAttachment;
@@ -94,13 +97,16 @@ public class DocumentControl extends BaseControl{
  					String content="";
  					try {
 						content=FileTool.getFileContent(filename, filebytes);
+						
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
                 	Document document=new Document();
                 	document.setCategoryid(categoryid);
                 	document.setCreatetime(dateFormat.format(new Date()));
-                	document.setDoccontent(content.length()>300?content.substring(0,300):content);
+                	String docContent=content.length()>100?content.substring(0,100):content;
+                	docContent=StringUtil.replaceBlank(docContent);
+                	document.setDoccontent(docContent);
                 	document.setDocsize(filebytes.length);
                 	document.setDoctitle(filename);
                 	document.setDoctype(filename.substring(filename.lastIndexOf(".")+1));
@@ -137,6 +143,23 @@ public class DocumentControl extends BaseControl{
 //			jsonObject.put("pageSize", 8);
 			String result=documentService.loadDocumentPage(jsonObject);
 			returnJson(response, result);
+		}catch (Exception e) {
+			logger.error("role", e);
+		}
+	}
+	
+	@RequestMapping("document/deleteDocument.do")
+	public void deleteDocument(HttpServletRequest request,HttpServletResponse response){
+		try{
+			JSONObject jsonObject=getJSONData(request);
+			int id = jsonObject.getInt("id");
+			SolrjTool.delDocsById("document"+id);
+			documentService.deleteById(Document.class, id);
+			List<CoreAttachment> attachments=commonService.getAttachments(id, "document");
+			for(CoreAttachment attachment:attachments){
+				commonService.delete(attachment);
+			}
+			returnSuccess(response);
 		}catch (Exception e) {
 			logger.error("role", e);
 		}

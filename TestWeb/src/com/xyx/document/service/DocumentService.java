@@ -13,6 +13,7 @@ import com.xyx.common.BaseService;
 import com.xyx.common.Page;
 import com.xyx.common.lucene.SolrjTool;
 import com.xyx.common.tree.TreeUtil;
+import com.xyx.core.bean.CoreAttachment;
 import com.xyx.document.bean.Document;
 import com.xyx.document.bean.DocumentCategory;
 

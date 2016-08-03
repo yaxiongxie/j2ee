@@ -134,17 +134,18 @@ public class SolrjTool {
 
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
-		Page page=null;
-		try {
-			page = query(1, 10, 60, 1, "陈");
-			System.out.println(page.getList().size());
-			for (Document doc : (List<Document>)page.getList()) {
-				System.out.println(doc.getDoctitle()+"==="+doc.getDoctype()+"==="+doc.getDoccontent());
-			}
-		} catch (SolrServerException e) {
-			e.printStackTrace();
-		}
-		System.out.println(page.getTotalCount());
+//		Page page=null;
+//		try {
+//			page = query(1, 10, 60, 1, "陈");
+//			System.out.println(page.getList().size());
+//			for (Document doc : (List<Document>)page.getList()) {
+//				System.out.println(doc.getDoctitle()+"==="+doc.getDoctype()+"==="+doc.getDoccontent());
+//			}
+//		} catch (SolrServerException e) {
+//			e.printStackTrace();
+//		}
+//		System.out.println(page.getTotalCount());
+		delDocs();
 	}
 
 }
