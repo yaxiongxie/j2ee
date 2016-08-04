@@ -25,8 +25,8 @@ angular.module("myApp").controller("document", ['$scope','$uibModal','$http','to
     $scope.columns=[
         {name:"编号",width:"5%",columnName:"id"},
         {name:"标题",width:"15%",columnName:"doctitle"},
-        {name:"文件大小",width:"6%",columnName:"docsize"},
-        {name:"内容摘要",width:"50%",columnName:"doccontent"},
+        {name:"大小",width:"6%",columnName:"docsize"},
+        {name:"内容摘要",width:"45%",columnName:"doccontent"},
         {name:"上传时间",width:"12%",columnName:"createtime"}
     ];
     $scope.operations=[

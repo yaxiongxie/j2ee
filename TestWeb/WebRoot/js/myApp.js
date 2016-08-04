@@ -130,18 +130,18 @@ myApp.directive('onFinishRenderFilters', function ($timeout) {
 myApp.filter('sex', function() {
 	  return function(input) {
 	    if(input==1){
-	    	return 'man';
+	    	return '男';
 	    }else{
-	    	return 'woman';
+	    	return '女';
 	    }
 	  };
 	});
 myApp.filter('personStatus', function() {
 	  return function(input) {
 	    if(input==1){
-	    	return 'formal';
+	    	return '正式员工';
 	    }else{
-	    	return 'trial';
+	    	return '试用员工';
 	    }
 	  };
 	})

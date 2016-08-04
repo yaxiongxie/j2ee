@@ -562,3 +562,10 @@ table.dataTable thead .sorting:after {
 	border-color: #ddd;
 	border-bottom: 0px;
 }
+th{
+	font-size: 14px;
+}
+
+td{
+	font-size: 12px;
+}
