@@ -1,6 +1,7 @@
 package com.xyx.core.control;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -121,7 +122,17 @@ public class CommonControl extends BaseControl{
 			logger.error("core", e);
 		}
 		return "redirect:/login.html?msg=loginfail";
-		
+	}
+	
+	@RequestMapping("core/downloadAttachment.do")
+	public void downloadAttachment(HttpServletRequest request,HttpServletResponse response){
+		try{
+			String id=request.getParameter("id");
+			CoreAttachment coreAttachment=commonService.get(CoreAttachment.class, Integer.parseInt(id));
+			downloadFile(response, coreAttachment);
+		}catch (Exception e) {
+			logger.error("core", e);
+		}
 	}
 	
 	@SuppressWarnings("unchecked")

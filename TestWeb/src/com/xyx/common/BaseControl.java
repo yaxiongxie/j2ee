@@ -1,6 +1,8 @@
 package com.xyx.common;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Map;
 import java.util.Set;
 
@@ -11,6 +13,7 @@ import net.sf.json.JSONObject;
 
 import org.apache.log4j.Logger;
 
+import com.xyx.core.bean.CoreAttachment;
 import com.xyx.core.bean.CorePerson;
 
 public class BaseControl {
@@ -55,6 +58,31 @@ public class BaseControl {
 			jObject.put("status", "success");
 			response.getWriter().print(jObject.toString());
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void returnFail(HttpServletResponse response){
+		response.setContentType("application/json; charset=UTF-8");
+		try {
+			JSONObject jObject=new JSONObject();
+			jObject.put("status", "fail");
+			response.getWriter().print(jObject.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void downloadFile(HttpServletResponse response,CoreAttachment coreAttachment) throws UnsupportedEncodingException{
+		if(coreAttachment==null){
+			return ;
+		}
+		response.setContentType("multipart/form-data"); 
+		response.setContentLength(coreAttachment.getFilesize());
+		response.setHeader("Content-Disposition", "attachment;fileName="+URLEncoder.encode(coreAttachment.getFilename(), "UTF-8"));  
+		try {
+			response.getOutputStream().write(coreAttachment.getFiledata());
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}

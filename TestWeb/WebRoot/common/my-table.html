@@ -17,7 +17,11 @@
         	<div ng-else ><p ng-bind-html="td[column.columnName]"></p></div>
         </td>
         <td ng-if="operations" >
-        	<button type="button" ng-repeat="operation in operations" class="btn btn-default btn-xs" ng-click="clickOperate(td.id,operation.name)"><i class="{{operation.imgClass}}" aria-hidden="true"></i> {{operation.title}}</button>
+        	<div ng-repeat="operation in operations" style="float:left">
+        		<div ng-if="operation.name=='downloadT'"><a type="button"  class="btn btn-default btn-xs" href="{{operation.url}}?id={{td.id}}"><i class="{{operation.imgClass}}" aria-hidden="true"></i> {{operation.title}}</a></div>
+        		<div ng-else><button type="button" class="btn btn-default btn-xs" ng-click="clickOperate(td.id,operation.name)"><i class="{{operation.imgClass}}" aria-hidden="true"></i> {{operation.title}}</button></div>
+        	</div>
+        	
         </td>
     </tr>
     </tbody>

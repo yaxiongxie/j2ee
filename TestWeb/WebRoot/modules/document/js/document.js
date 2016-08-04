@@ -30,7 +30,7 @@ angular.module("myApp").controller("document", ['$scope','$uibModal','$http','to
         {name:"上传时间",width:"12%",columnName:"createtime"}
     ];
     $scope.operations=[
-        {name:"editT",title:"下载",imgClass:"fa fa-download"},
+        {name:"downloadT",title:"下载",url:"document/downloadDocument.do",imgClass:"fa fa-download"},
         {name:"deleteT",title:"删除",imgClass:"fa fa-times"}
 	];
     $scope.pageOption={"currentPage":1,"pageSize":12,"categoryid":0,"queryString":""};
@@ -38,7 +38,7 @@ angular.module("myApp").controller("document", ['$scope','$uibModal','$http','to
     	refreshTable();
     };
     $scope.deleteBatch=function(){
-    	confirmDialog("删除人员","确定删除吗？",function () {
+    	confirmDialog("删除文档","确定删除吗？",function () {
         	var jsonData={ids:$scope.selected.join(",")};
         	$http.post('core/deletePersonByIds.do',jsonData).success(function(){
         		refreshTable();
@@ -51,36 +51,7 @@ angular.module("myApp").controller("document", ['$scope','$uibModal','$http','to
     		confirmDialog("删除文档","确定删除吗？",function () {
     			deleteDocument(id);
             });
-    	}else{
-    		editDocument(id);
     	}
-    }
-    
-    function editDocument(id){
-    	var selectnode=$('#tree').treeview('getSelected');
-    	var jsonData={"id":id};
-    	$http.post('core/loadPerson.do',jsonData).success(function(data){
-    		data.department=selectnode[0].text;
-    		var modalInstance = $uibModal.open({
-                templateUrl: 'modules/core/addPerson.html',
-                controller: 'core.addPerson',
-                size: "",
-                resolve: {
-                    obj: function () {
-                        return data;
-                    },
-                    loadMyCtrl:function($ocLazyLoad){
-                        return $ocLazyLoad.load("modules/core/js/addPerson.js");
-                    }
-                }
-            });
-            modalInstance.result.then(function (obj) {
-            	obj.departmentId=selectnode[0].id;
-            	$http.post('core/savePerson.do',obj).success(function(){
-            		refreshTable();
-            	});
-            });
-    	});
     }
     
     function deleteDocument(id){

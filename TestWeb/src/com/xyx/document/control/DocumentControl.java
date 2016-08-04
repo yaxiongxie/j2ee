@@ -164,5 +164,19 @@ public class DocumentControl extends BaseControl{
 			logger.error("role", e);
 		}
 	}
+	
+	@RequestMapping("document/downloadDocument.do")
+	public void downloadDocument(HttpServletRequest request,HttpServletResponse response){
+		try{
+			JSONObject jsonObject=getJSONData(request);
+			int id = jsonObject.getInt("id");
+			List<CoreAttachment> attachments=commonService.getAttachments(id, "document");
+			if(attachments.size()>0){
+				downloadFile(response, attachments.get(0));
+			}
+		}catch (Exception e) {
+			logger.error("role", e);
+		}
+	}
 
 }
