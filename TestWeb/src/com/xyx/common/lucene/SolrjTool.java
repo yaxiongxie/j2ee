@@ -132,7 +132,6 @@ public class SolrjTool {
 		return page;
 	}
 
-	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 //		Page page=null;
 //		try {
