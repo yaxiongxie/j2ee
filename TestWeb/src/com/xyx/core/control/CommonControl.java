@@ -149,6 +149,7 @@ public class CommonControl extends BaseControl{
 		try{
 			CorePerson corePerson=getLoginPerson(request);
 			List<CoreAttachment> attachments=commonService.getAttachments(corePerson.getId(), "coreperson");
+			System.out.println("image==="+attachments.size());
 			if(attachments!=null && attachments.size()>0){
 				response.setContentType(attachments.get(0).getFiletype()); 
 				response.setContentLength(attachments.get(0).getFilesize());

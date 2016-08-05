@@ -1,7 +1,10 @@
 package com.xyx.core.service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -12,6 +15,8 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.google.common.collect.Lists;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
 import com.xyx.common.BaseService;
 import com.xyx.common.Page;
 import com.xyx.common.encrypt.MD5;
@@ -22,7 +27,11 @@ public class PersonService extends BaseService {
 
 	public void savePerson(JSONObject jsonObject) throws Exception {
 		Set<String> keySet=jsonObject.keySet();
+		Set<String> sSet=new HashSet<String>();
 		for(String s:keySet){
+			sSet.add(s);
+		}
+		for(String s:sSet){
 			if(s.contains("fileObj")){
 				jsonObject.remove(s);
 			}
