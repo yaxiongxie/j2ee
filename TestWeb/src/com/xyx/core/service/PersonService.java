@@ -3,6 +3,7 @@ package com.xyx.core.service;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import net.sf.json.JSONObject;
 
@@ -20,6 +21,12 @@ import com.xyx.core.bean.CorePerson;
 public class PersonService extends BaseService {
 
 	public void savePerson(JSONObject jsonObject) throws Exception {
+		Set<String> keySet=jsonObject.keySet();
+		for(String s:keySet){
+			if(s.contains("fileObj")){
+				jsonObject.remove(s);
+			}
+		}
 		CorePerson corePerson=(CorePerson) net.sf.json.JSONObject.toBean(jsonObject,CorePerson.class);
 		corePerson.setPassword(MD5.GetMD5Code(corePerson.getPassword()));
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

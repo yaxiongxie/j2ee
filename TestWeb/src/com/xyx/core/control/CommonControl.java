@@ -1,6 +1,9 @@
 package com.xyx.core.control;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,6 +25,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.xyx.common.BaseControl;
+import com.xyx.common.io.ByteToInputStream;
 import com.xyx.core.bean.CommonData;
 import com.xyx.core.bean.CoreAttachment;
 import com.xyx.core.bean.CoreAuth;
@@ -123,12 +127,45 @@ public class CommonControl extends BaseControl{
 		return "redirect:/login.html?msg=loginfail";
 	}
 	
+	@RequestMapping("core/exit.do")
+	public void exit(HttpServletRequest request, HttpServletResponse response) {
+		request.getSession().removeAttribute("isLogin");
+		request.getSession().removeAttribute("user");
+	}
+	
 	@RequestMapping("core/downloadAttachment.do")
 	public void downloadAttachment(HttpServletRequest request,HttpServletResponse response){
 		try{
 			String id=request.getParameter("id");
 			CoreAttachment coreAttachment=commonService.get(CoreAttachment.class, Integer.parseInt(id));
 			downloadFile(response, coreAttachment);
+		}catch (Exception e) {
+			logger.error("core", e);
+		}
+	}
+	
+	@RequestMapping("core/loadImage.do")
+	public void loadImage(HttpServletRequest request,HttpServletResponse response){
+		try{
+			CorePerson corePerson=getLoginPerson(request);
+			List<CoreAttachment> attachments=commonService.getAttachments(corePerson.getId(), "coreperson");
+			if(attachments!=null && attachments.size()>0){
+				response.setContentType(attachments.get(0).getFiletype()); 
+				response.setContentLength(attachments.get(0).getFilesize());
+				response.setHeader("Content-Disposition", "attachment;fileName="+URLEncoder.encode(attachments.get(0).getFilename(), "UTF-8"));  
+				try {
+					response.getOutputStream().write(attachments.get(0).getFiledata());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}else{
+				FileInputStream fileInputStream=new FileInputStream(request.getRealPath("/img/test.jpg"));
+				try {
+					response.getOutputStream().write(ByteToInputStream.input2byte(fileInputStream));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}catch (Exception e) {
 			logger.error("core", e);
 		}

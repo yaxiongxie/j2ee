@@ -1,6 +1,7 @@
 package com.xyx.document.service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import com.xyx.common.BaseService;
 import com.xyx.common.Page;
 import com.xyx.common.lucene.SolrjTool;
 import com.xyx.common.tree.TreeUtil;
+import com.xyx.core.bean.CorePerson;
 import com.xyx.document.bean.Document;
 import com.xyx.document.bean.DocumentCategory;
 
@@ -70,6 +72,7 @@ public class DocumentService extends BaseService {
 		String ids=getIds(documents);
 		String whereString="where id in("+ids+")";
 		List<Document> list=getListByHQL(hqlString+whereString, new Object[]{});
+		list=sortList(list, ids);
 		for(Document document:list){
 			for(Document doc:documents){
 				if(doc.getId()==document.getId()){
@@ -86,6 +89,20 @@ public class DocumentService extends BaseService {
 		return net.sf.json.JSONObject.fromObject(page).toString();
 	}
 	
+	public List<Document> sortList(List<Document> list,String ids){
+		List<Document> returnList=new ArrayList<Document>();
+		String[] sArr=ids.split(",");
+		for(String id:sArr){
+			for(Document document:list){
+				if((document.getId()+"").equals(id)){
+					returnList.add(document);
+					break;
+				}
+			}
+		}
+		return returnList;
+	}
+	
 	public String getIds(List<Document> list){
 		String resultString="";
 		for(Document document:list){
@@ -98,5 +115,15 @@ public class DocumentService extends BaseService {
 			resultString="0";
 		}
 		return resultString;
+	}
+	
+	public void deleteDocumentByIds(JSONObject jsonObject) throws Exception {
+		String ids=jsonObject.getString("ids");
+		for(String id:ids.split(",")){
+			if(id.equals("")){
+				continue;
+			}
+			deleteById(Document.class, Integer.parseInt(id));
+		}
 	}
 }

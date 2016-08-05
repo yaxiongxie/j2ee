@@ -34,8 +34,18 @@ public class LoginFilter implements Filter{
 		 }else if(path.contains(".html") || path.contains(".do")){
 			if( req.getSession().getAttribute("isLogin")==null && (!path.contains("login.html")) && (!path.contains("login.do"))){
 				String contextPath=req.getContextPath();
-				((HttpServletResponse)response).sendRedirect(contextPath+"/login.html?msg=nologin");//��¼�µ�¼����Ҫ��ת����ҳ�棬���磺/logined/account.jsp  
-				
+				if(path.contains(".html")){
+					((HttpServletResponse)response).sendRedirect(contextPath+"/login.html?msg=nologin");//��¼�µ�¼����Ҫ��ת����ҳ�棬���磺/logined/account.jsp  
+				}else{
+					response.setContentType("application/json; charset=UTF-8");
+					try {
+						JSONObject jObject=new JSONObject();
+						jObject.put("status", "nologin");
+						response.getWriter().print(jObject.toString());
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
 			}else{
 				checkAuth(chain, request, response);
 			}

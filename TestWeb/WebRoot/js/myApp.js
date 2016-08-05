@@ -188,7 +188,7 @@ myApp.factory('confirmDialog',['$uibModal',function($uibModal){
 //    cfpLoadingBarProvider.spinnerTemplate = '<div><span class="fa fa-spinner">Custom Loading Message...</div>';
 //  }])
   
-myApp.factory('httpInterceptor', ['$q','toaster',function($q,toaster){
+myApp.factory('httpInterceptor', ['$q','toaster','$window',function($q,toaster,$window){
 	var httpInterceptor = {  
             'responseError' : function(response) {  
             	toaster.pop('error',"操作失败");
@@ -200,6 +200,9 @@ myApp.factory('httpInterceptor', ['$q','toaster',function($q,toaster){
             	}
             	if(response.data.status=='noauth'){
             		toaster.pop('success', "没有访问权限");
+            	}
+				if(response.data.status=='nologin'){
+            		$window.location.href="login.html";
             	}
                 return response;  
             },  
@@ -242,6 +245,16 @@ myApp.factory('uploadFiles', ['$http',function($http){
 myApp.config(['$httpProvider', function($httpProvider){
   $httpProvider.interceptors.push('httpInterceptor');
 }]);
+
+myApp.controller('topController',['$scope','$http','confirmDialog','$window', function PhoneListController($scope,$http,confirmDialog,$window) {
+	$scope.logout=function(){
+		confirmDialog("提示消息","确定退出吗？",function () {
+    			$http.get('core/exit.do').success(function(data) {
+					$window.location.href="login.html";
+        　　		});
+        });
+	}
+}])
 
 
 myApp.config(function($stateProvider, $urlRouterProvider) {

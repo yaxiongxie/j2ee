@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse navbar-fixed-top topbackground">
+<nav class="navbar navbar-inverse navbar-fixed-top topbackground" ng-controller="topController">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -10,7 +10,9 @@
             <a class="navbar-brand" href="#">项目名</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-        <ul class="nav navbar-nav navbar-right">
+        	<ul class="nav navbar-nav navbar-right">
+        		<li><div style="text-align:center;padding-top:5px;"><img src="core/loadImage.do" style="width:40px;height:40px;" class="img-circle"/></div></li>
+				<li><a href="javascript:void(0)">管理员</a></li>
                 <li><a href="javascript:void(0)" ng-click="logout()">退出</a></li>
             </ul>
         <!-- 

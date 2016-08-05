@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.solr.client.solrj.SolrQuery;
+import org.apache.solr.client.solrj.SolrQuery.ORDER;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrServer;
 import org.apache.solr.client.solrj.response.QueryResponse;
@@ -28,6 +29,7 @@ public class SolrjTool {
 		doc.addField("type", document.getDoctype());
 		doc.addField("categoryid", document.getCategoryid());
 		doc.addField("isopen", document.getIsopen());
+		doc.addField("tid", document.getId());
 		doc.addField("personid", document.getPersonid());
 		try {
 			HttpSolrServer server = new HttpSolrServer(SOLRHOST_STRING);
@@ -78,7 +80,7 @@ public class SolrjTool {
 		}else{
 			query.setQuery("(content:"+queryString+" OR title:"+queryString+" OR type:"+queryString+")");
 		}
-		
+		query.addSort("tid", ORDER.desc);
 		query.setStart((currentPage-1)*pageSize);
 		query.setRows(pageSize);
 		query.setFields("id","title","type");

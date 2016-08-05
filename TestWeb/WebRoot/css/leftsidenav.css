@@ -563,6 +563,7 @@ table.dataTable thead .sorting:after {
 	border-bottom: 0px;
 }
 th{
+	text-align:center;
 	font-size: 14px;
 }
 

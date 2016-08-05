@@ -8,20 +8,19 @@
     </thead>
     <tbody>
     <tr ng-repeat="td in page.list">
-    	<td ng-if="selected" >
+    	<th ng-if="selected" >
         	<input type="checkbox" cid="{{td.id}}" name="cbname" ng-click="updateSelection($event,td.id)">
-        </td>
+        </th>
         <td ng-repeat="column in columns">
         	<div ng-if="column.columnName=='sex'"><p  ng-bind="td[column.columnName] |sex"></p></div>
         	<div ng-else-if="column.columnName=='status'" ><p ng-bind="td[column.columnName] |personStatus"></p></div>
         	<div ng-else ><p ng-bind-html="td[column.columnName]"></p></div>
         </td>
-        <td ng-if="operations" >
-        	<div ng-repeat="operation in operations" style="float:left">
+        <td ng-if="operations">
+        	<div ng-repeat="operation in operations" style="float:left;padding-left:2px;">
         		<div ng-if="operation.name=='downloadT'"><a type="button"  class="btn btn-default btn-xs" href="{{operation.url}}?id={{td.id}}"><i class="{{operation.imgClass}}" aria-hidden="true"></i> {{operation.title}}</a></div>
         		<div ng-else><button type="button" class="btn btn-default btn-xs" ng-click="clickOperate(td.id,operation.name)"><i class="{{operation.imgClass}}" aria-hidden="true"></i> {{operation.title}}</button></div>
         	</div>
-        	
         </td>
     </tr>
     </tbody>

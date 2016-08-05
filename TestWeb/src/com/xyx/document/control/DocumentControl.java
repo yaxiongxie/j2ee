@@ -177,5 +177,27 @@ public class DocumentControl extends BaseControl{
 			logger.error("role", e);
 		}
 	}
+	
+	@RequestMapping("document/deleteDocumentByIds.do")
+	public void deleteDocumentByIds(HttpServletRequest request,HttpServletResponse response){
+		try{
+			JSONObject jsonObject=getJSONData(request);
+			String ids=jsonObject.getString("ids");
+			for(String id:ids.split(",")){
+				if(id.equals("")){
+					continue;
+				}
+				SolrjTool.delDocsById("document"+id);
+				documentService.deleteById(Document.class, Integer.parseInt(id));
+				List<CoreAttachment> attachments=commonService.getAttachments(Integer.parseInt(id), "document");
+				for(CoreAttachment attachment:attachments){
+					commonService.delete(attachment);
+				}
+			}
+			returnSuccess(response);
+		}catch (Exception e) {
+			logger.error("role", e);
+		}
+	}
 
 }

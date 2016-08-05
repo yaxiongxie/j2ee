@@ -40,7 +40,7 @@ angular.module("myApp").controller("document", ['$scope','$uibModal','$http','to
     $scope.deleteBatch=function(){
     	confirmDialog("删除文档","确定删除吗？",function () {
         	var jsonData={ids:$scope.selected.join(",")};
-        	$http.post('core/deletePersonByIds.do',jsonData).success(function(){
+        	$http.post('document/deleteDocumentByIds.do',jsonData).success(function(){
         		refreshTable();
         	});
         });
