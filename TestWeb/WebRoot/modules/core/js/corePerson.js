@@ -76,10 +76,13 @@ angular.module("myApp").controller("core.person", ['$scope','$uibModal','$http',
                 }
             });
             modalInstance.result.then(function (obj) {
-            	obj.departmentId=selectnode[0].id;
-            	$http.post('core/savePerson.do',obj).success(function(){
-            		refreshTable();
-            	});
+            	var fileObj=obj.fileObj;
+	        	obj.fileObj=undefined;
+	        	obj.departmentId=selectnode[0].id;
+	        	$http.post('core/savePerson.do',obj).success(function(data){
+					fileObj.model.relateId=data.id;
+					uploadFiles(fileObj);
+				});
             });
     	});
     }
@@ -115,8 +118,10 @@ angular.module("myApp").controller("core.person", ['$scope','$uibModal','$http',
         	var fileObj=obj.fileObj;
         	obj.fileObj=undefined;
         	obj.departmentId=selectnode[0].id;
-        	$http.post('core/savePerson.do',obj);
-        	uploadFiles(fileObj);
+        	$http.post('core/savePerson.do',obj).success(function(data){
+				fileObj.model.relateId=data.id;
+				uploadFiles(fileObj);
+			});
         });
     }
     

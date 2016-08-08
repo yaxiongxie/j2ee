@@ -1,22 +1,15 @@
 package com.xyx.core.service;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import net.sf.json.JSONObject;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.google.common.collect.Lists;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
 import com.xyx.common.BaseService;
 import com.xyx.common.Page;
 import com.xyx.common.encrypt.MD5;
@@ -25,22 +18,14 @@ import com.xyx.core.bean.CorePerson;
 @Component
 public class PersonService extends BaseService {
 
-	public void savePerson(JSONObject jsonObject) throws Exception {
-		Set<String> keySet=jsonObject.keySet();
-		Set<String> sSet=new HashSet<String>();
-		for(String s:keySet){
-			sSet.add(s);
-		}
-		for(String s:sSet){
-			if(s.contains("fileObj")){
-				jsonObject.remove(s);
-			}
-		}
+	public String savePerson(JSONObject jsonObject) throws Exception {
 		CorePerson corePerson=(CorePerson) net.sf.json.JSONObject.toBean(jsonObject,CorePerson.class);
 		corePerson.setPassword(MD5.GetMD5Code(corePerson.getPassword()));
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		corePerson.setCreatetime(sdf.format(new Date()));
 		saveOrUpdate(corePerson);
+		JSONObject returnObject=JSONObject.fromObject(corePerson);
+		return returnObject.toString();
 	}
 
 	public String loadPerson(JSONObject jsonObject) throws Exception {

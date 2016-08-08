@@ -55,6 +55,10 @@ public class CommonControl extends BaseControl{
 		System.out.println(jsonObject.toString());
 		int relateId=jsonObject.getInt("relateId");
 		String tableName=jsonObject.getString("tableName");
+		List<CoreAttachment> attachments=commonService.getAttachments(relateId,tableName);
+		for(CoreAttachment attachment:attachments){
+			commonService.delete(attachment);
+		}
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());  
         if(multipartResolver.isMultipart(request)){  
             MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest)request;  

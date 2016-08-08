@@ -25,8 +25,8 @@ public class PersonControl extends BaseControl{
 		try{
 			System.out.println(request.getParameterMap());
 			JSONObject jsonObject=getJSONData(request);
-			personService.savePerson(jsonObject);
-			returnSuccess(response);
+			String result=personService.savePerson(jsonObject);
+			returnJson(response, result);
 		}catch (Exception e) {
 			logger.error("person", e);
 		}
