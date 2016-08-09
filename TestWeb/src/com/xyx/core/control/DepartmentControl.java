@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.xyx.common.BaseControl;
 import com.xyx.core.service.DepartmentService;
 
-@Controller
+@Controller("DepartmentControl")
 public class DepartmentControl extends BaseControl{
-	@Autowired
+	
 	public DepartmentService deptService;
 	
 	Logger logger=Logger.getLogger(DepartmentControl.class);
@@ -54,4 +54,10 @@ public class DepartmentControl extends BaseControl{
 		}
 	}
 
+	@Autowired
+	public void setDeptService(DepartmentService deptService) {
+		this.deptService = deptService;
+	}
+
+	
 }

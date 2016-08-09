@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.xyx.common.BaseControl;
 import com.xyx.core.service.PersonService;
 
-@Controller
+@Controller("PersonControl")
 public class PersonControl extends BaseControl{
-	@Autowired
+	
 	public PersonService personService;
 	
 	Logger logger=Logger.getLogger(PersonControl.class);
@@ -77,6 +77,11 @@ public class PersonControl extends BaseControl{
 		}catch (Exception e) {
 			logger.error("role", e);
 		}
+	}
+
+	@Autowired
+	public void setPersonService(PersonService personService) {
+		this.personService = personService;
 	}
 
 }

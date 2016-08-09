@@ -12,7 +12,7 @@ import com.xyx.common.BaseService;
 import com.xyx.common.tree.TreeUtil;
 import com.xyx.core.bean.CoreDepartment;
 
-@Component
+@Component("DepartmentService")
 public class DepartmentService extends BaseService {
 
 	public void saveDept(JSONObject jsonObject) throws Exception {

@@ -15,7 +15,7 @@ import com.xyx.common.Page;
 import com.xyx.common.encrypt.MD5;
 import com.xyx.core.bean.CorePerson;
 
-@Component
+@Component("PersonService")
 public class PersonService extends BaseService {
 
 	public String savePerson(JSONObject jsonObject) throws Exception {

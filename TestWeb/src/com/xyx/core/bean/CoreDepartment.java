@@ -13,7 +13,7 @@ import com.xyx.common.tree.TreeBean;
 /**
  * CoreDepartment entity. @author MyEclipse Persistence Tools
  */
-@Entity
+@Entity(name="CoreDepartment")
 @Table(name="core_department"
     ,catalog="platform"
 )

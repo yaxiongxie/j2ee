@@ -13,7 +13,7 @@ import javax.persistence.Table;
 /**
  * CoreAuth entity. @author MyEclipse Persistence Tools
  */
-@Entity
+@Entity(name="CoreAuth")
 @Table(name="core_auth"
     ,catalog="platform"
 )

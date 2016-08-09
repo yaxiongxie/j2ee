@@ -18,7 +18,7 @@ import com.xyx.core.bean.CorePersonRole;
 import com.xyx.core.bean.CoreRole;
 import com.xyx.core.bean.CoreRoleAuth;
 
-@Component
+@Component("RoleService")
 public class RoleService extends BaseService {
 
 	public void saveRole(JSONObject jsonObject) throws Exception {

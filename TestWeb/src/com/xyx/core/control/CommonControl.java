@@ -36,14 +36,13 @@ import com.xyx.core.service.CommonService;
 import com.xyx.core.service.PersonService;
 import com.xyx.core.service.RoleService;
 
-@Controller
+@Controller("CommonControl")
 public class CommonControl extends BaseControl{
-	@Autowired
+	
 	public CommonService commonService;
-	@Autowired
 	public PersonService personService;
-	@Autowired
 	public RoleService roleService;
+	
 	
 	Logger logger=Logger.getLogger(CommonControl.class);
 	DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -211,6 +210,20 @@ public class CommonControl extends BaseControl{
     	}
     	System.out.println(CommonData.authMap);
     	returnSuccess(response);
+	}
+
+
+	@Autowired
+	public void setCommonService(CommonService commonService) {
+		this.commonService = commonService;
+	}
+	@Autowired
+	public void setPersonService(PersonService personService) {
+		this.personService = personService;
+	}
+	@Autowired
+	public void setRoleService(RoleService roleService) {
+		this.roleService = roleService;
 	}
 
 }

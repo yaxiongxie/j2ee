@@ -10,7 +10,7 @@ import com.xyx.common.tree.TreeUtil;
 import com.xyx.core.bean.CoreAttachment;
 import com.xyx.core.bean.CorePerson;
 
-@Component
+@Component("CommonService")
 public class CommonService extends BaseService {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })

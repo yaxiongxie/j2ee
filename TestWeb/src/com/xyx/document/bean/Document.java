@@ -12,7 +12,7 @@ import javax.persistence.Table;
 /**
  * Document entity. @author MyEclipse Persistence Tools
  */
-@Entity
+@Entity(name="Document")
 @Table(name="document"
     ,catalog="platform"
 )

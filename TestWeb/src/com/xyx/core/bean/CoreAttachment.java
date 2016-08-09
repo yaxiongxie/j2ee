@@ -12,7 +12,7 @@ import javax.persistence.Table;
 /**
  * CoreAttachment entity. @author MyEclipse Persistence Tools
  */
-@Entity
+@Entity(name="CoreAttachment")
 @Table(name="core_attachment"
     ,catalog="platform"
 )

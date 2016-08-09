@@ -29,11 +29,10 @@ import com.xyx.core.service.CommonService;
 import com.xyx.document.bean.Document;
 import com.xyx.document.service.DocumentService;
 
-@Controller
+@Controller("DocumentControl")
 public class DocumentControl extends BaseControl{
-	@Autowired
+	
 	public DocumentService documentService;
-	@Autowired
 	public CommonService commonService;
 	
 	DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -200,4 +199,15 @@ public class DocumentControl extends BaseControl{
 		}
 	}
 
+	@Autowired
+	public void setDocumentService(DocumentService documentService) {
+		this.documentService = documentService;
+	}
+	@Autowired
+	public void setCommonService(CommonService commonService) {
+		this.commonService = commonService;
+	}
+
+	
+	
 }

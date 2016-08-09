@@ -11,7 +11,7 @@ import javax.persistence.Table;
 /**
  * CorePerson entity. @author MyEclipse Persistence Tools
  */
-@Entity
+@Entity(name="CorePerson")
 @Table(name="core_person"
     ,catalog="platform"
 )

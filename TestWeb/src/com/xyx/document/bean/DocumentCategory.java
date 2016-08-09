@@ -14,7 +14,7 @@ import com.xyx.common.tree.TreeBean;
 /**
  * DocumentCategory entity. @author MyEclipse Persistence Tools
  */
-@Entity
+@Entity(name="DocumentCategory")
 @Table(name="document_category"
     ,catalog="platform"
 )

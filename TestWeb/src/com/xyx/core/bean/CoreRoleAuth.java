@@ -11,7 +11,7 @@ import javax.persistence.Table;
 /**
  * CoreRoleAuth entity. @author MyEclipse Persistence Tools
  */
-@Entity
+@Entity(name="CoreRoleAuth")
 @Table(name="core_role_auth"
     ,catalog="platform"
 )

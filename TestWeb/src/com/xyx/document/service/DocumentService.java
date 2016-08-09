@@ -18,7 +18,7 @@ import com.xyx.core.bean.CorePerson;
 import com.xyx.document.bean.Document;
 import com.xyx.document.bean.DocumentCategory;
 
-@Component
+@Component("DocumentService")
 public class DocumentService extends BaseService {
 
 	public void saveCategory(JSONObject jsonObject) throws Exception {
