@@ -1,4 +1,4 @@
-angular.module("myApp").controller("core.person", ['$scope','$uibModal','$http','toaster','confirmDialog','uploadFiles',function($scope,$uibModal,$http,toaster,confirmDialog,uploadFiles){
+angular.module("myApp").controller("core.person", ['$scope','$uibModal','$http','toaster','confirmDialog','uploadFiles','$ocLazyLoad',function($scope,$uibModal,$http,toaster,confirmDialog,uploadFiles,$ocLazyLoad){
     $scope.name="xieyaxiong";
     $scope.selected=[];
     $scope.updateSelection = function($event, id){
@@ -70,8 +70,8 @@ angular.module("myApp").controller("core.person", ['$scope','$uibModal','$http',
                     obj: function () {
                         return data;
                     },
-                    loadMyCtrl:function($ocLazyLoad){
-                        return $ocLazyLoad.load("modules/core/js/addPerson.js");
+                    loadMyCtrl:function(){
+                        return $ocLazyLoad.load("modules/core/js/addperson.js");
                     }
                 }
             });
@@ -109,8 +109,8 @@ angular.module("myApp").controller("core.person", ['$scope','$uibModal','$http',
                 obj: function () {
                     return {department:selectnode[0].text};
                 },
-                loadMyCtrl:function($ocLazyLoad){
-                    return $ocLazyLoad.load("modules/core/js/addPerson.js");
+                loadMyCtrl:function(){
+                    return $ocLazyLoad.load("modules/core/js/addperson.js");
                 }
             }
         });
@@ -135,8 +135,8 @@ angular.module("myApp").controller("core.person", ['$scope','$uibModal','$http',
                 obj: function () {
                     return {"title":"新增部门","content":""}
                 },
-                loadMyCtrl:function($ocLazyLoad){
-                    return $ocLazyLoad.load("common/js/inputName.js");
+                loadMyCtrl:function(){
+                    return $ocLazyLoad.load("common/js/inputname.js");
                 }
             }
         });
@@ -154,8 +154,8 @@ angular.module("myApp").controller("core.person", ['$scope','$uibModal','$http',
                 obj: function () {
                     return {"title":"编辑部门","content":selectnode[0].text}
                 },
-                loadMyCtrl:function($ocLazyLoad){
-                    return $ocLazyLoad.load("common/js/inputName.js");
+                loadMyCtrl:function(){
+                    return $ocLazyLoad.load("common/js/inputname.js");
                 }
             }
         });

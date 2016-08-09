@@ -159,7 +159,7 @@ myApp.factory('confirmDialog',['$uibModal',function($uibModal){
                     return {"title":title,"content":content}
                 },
                 loadMyCtrl:function($ocLazyLoad){
-                    return $ocLazyLoad.load("common/js/confirmDialog.js");
+                    return $ocLazyLoad.load("common/js/confirmdialog.js");
                 }
             }
         });
@@ -266,8 +266,8 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
             url: "/index",
             templateUrl: "modules/index/newindex.html"
         })
-        .state('core/person', {url: "/core/person",templateUrl: "modules/core/corePerson.html",controller:'core.person',resolve:{loadMyCtrl:function($ocLazyLoad){return $ocLazyLoad.load("modules/core/js/corePerson.js");}}})
-         .state('core/role', {url: "/core/role",templateUrl: "modules/core/coreRole.html",controller:'core.role',resolve:{loadMyCtrl:function($ocLazyLoad){return $ocLazyLoad.load("modules/core/js/coreRole.js");}}})
+        .state('core/person', {url: "/core/person",templateUrl: "modules/core/corePerson.html",controller:'core.person',resolve:{loadMyCtrl:function($ocLazyLoad){return $ocLazyLoad.load("modules/core/js/coreperson.js");}}})
+         .state('core/role', {url: "/core/role",templateUrl: "modules/core/coreRole.html",controller:'core.role',resolve:{loadMyCtrl:function($ocLazyLoad){return $ocLazyLoad.load("modules/core/js/corerole.js");}}})
          .state('document', {url: "/document",templateUrl: "modules/document/document.html",controller:'document',resolve:{loadMyCtrl:function($ocLazyLoad){return $ocLazyLoad.load("modules/document/js/document.js");}}})
          .state('table', {
             url: "/table",

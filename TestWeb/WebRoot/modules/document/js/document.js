@@ -78,7 +78,7 @@ angular.module("myApp").controller("document", ['$scope','$uibModal','$http','to
                 	return {categoryid:1};
                 },
                 loadMyCtrl:function($ocLazyLoad){
-                    return $ocLazyLoad.load("modules/document/js/addDocument.js");
+                    return $ocLazyLoad.load("modules/document/js/adddocument.js");
                 }
             }
         });
@@ -95,7 +95,7 @@ angular.module("myApp").controller("document", ['$scope','$uibModal','$http','to
                     return {"title":"新建文件夹","content":""}
                 },
                 loadMyCtrl:function($ocLazyLoad){
-                    return $ocLazyLoad.load("common/js/inputName.js");
+                    return $ocLazyLoad.load("common/js/inputname.js");
                 }
             }
         });
@@ -114,7 +114,7 @@ angular.module("myApp").controller("document", ['$scope','$uibModal','$http','to
                     return {"title":"修改名称","content":selectnode[0].text}
                 },
                 loadMyCtrl:function($ocLazyLoad){
-                    return $ocLazyLoad.load("common/js/inputName.js");
+                    return $ocLazyLoad.load("common/js/inputname.js");
                 }
             }
         });

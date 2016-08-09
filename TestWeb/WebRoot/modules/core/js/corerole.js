@@ -1,4 +1,4 @@
-angular.module("myApp").controller("core.role", ['$scope','$uibModal','$http','toaster','confirmDialog',function($scope,$uibModal,$http,toaster,confirmDialog){
+angular.module("myApp").controller("core.role", ['$scope','$uibModal','$http','toaster','confirmDialog','$ocLazyLoad',function($scope,$uibModal,$http,toaster,confirmDialog,$ocLazyLoad){
     $scope.name="xieyaxiong";
     $scope.columns=[
         {name:"编号",width:"5%",columnName:"id"},
@@ -40,8 +40,8 @@ angular.module("myApp").controller("core.role", ['$scope','$uibModal','$http','t
                     obj: function () {
                         return data;
                     },
-                    loadMyCtrl:function($ocLazyLoad){
-                        return $ocLazyLoad.load("modules/core/js/addAuth.js");
+                    loadMyCtrl:function(){
+                        return $ocLazyLoad.load("modules/core/js/addauth.js");
                     }
                 }
             });
@@ -65,8 +65,8 @@ angular.module("myApp").controller("core.role", ['$scope','$uibModal','$http','t
                     obj: function () {
                         return data;
                     },
-                    loadMyCtrl:function($ocLazyLoad){
-                        return $ocLazyLoad.load("modules/core/js/addRole.js");
+                    loadMyCtrl:function(){
+                        return $ocLazyLoad.load("modules/core/js/addrole.js");
                     }
                 }
             });
@@ -100,8 +100,8 @@ angular.module("myApp").controller("core.role", ['$scope','$uibModal','$http','t
                     obj: function () {
                         return {authAll:data,id:0};
                     },
-                    loadMyCtrl:function($ocLazyLoad){
-                        return $ocLazyLoad.load("modules/core/js/addRole.js");
+                    loadMyCtrl:function(){
+                        return $ocLazyLoad.load("modules/core/js/addrole.js");
                     }
                 }
             });

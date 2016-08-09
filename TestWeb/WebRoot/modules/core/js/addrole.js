@@ -1,4 +1,4 @@
-angular.module('myApp').controller('core.addRole', function ($scope, $uibModalInstance, obj) {
+angular.module('myApp').controller('core.addRole', ['$scope','$uibModalInstance','obj', function ($scope, $uibModalInstance, obj) {
 	
     $scope.role=obj;
     
@@ -40,4 +40,4 @@ angular.module('myApp').controller('core.addRole', function ($scope, $uibModalIn
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
-});
+}]);

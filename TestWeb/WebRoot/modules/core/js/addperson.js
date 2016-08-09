@@ -1,4 +1,4 @@
-angular.module('myApp').controller('core.addPerson', function ($scope, $uibModalInstance, obj) {
+angular.module('myApp').controller('core.addPerson',['$scope','$uibModalInstance','obj', function ($scope, $uibModalInstance, obj) {
 	
     $scope.person=obj;
 
@@ -19,4 +19,4 @@ angular.module('myApp').controller('core.addPerson', function ($scope, $uibModal
         });
     });
     
-});
+}]);

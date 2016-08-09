@@ -1,4 +1,4 @@
-angular.module('myApp').controller('core.addAuth', function ($scope, $uibModalInstance, obj) {
+angular.module('myApp').controller('core.addAuth',['$scope','$uibModalInstance','obj', function ($scope, $uibModalInstance, obj) {
 	
     $scope.obj=obj;
     
@@ -20,4 +20,4 @@ angular.module('myApp').controller('core.addAuth', function ($scope, $uibModalIn
     $uibModalInstance.rendered.then(function (obj) {
     	$('#tree').treeview({color: "#428bca",data: $scope.obj,showCheckbox:true,showBorder: false});
     });
-});
+}]);
