@@ -33,7 +33,7 @@
     });
 }(angular));
 
-var myApp=angular.module('myApp',['ngLoadScript','ngSanitize','ui.router','angular-loading-bar', 'ngAnimate','oc.lazyLoad','ui.bootstrap','angularBootstrapNavTree','toaster','ng-bootstrap-datepicker','elif'],function($httpProvider) {
+var myApp=angular.module('myApp',['ngLoadScript','ng-fusioncharts','ngSanitize','ui.router','angular-loading-bar', 'ngAnimate','oc.lazyLoad','ui.bootstrap','angularBootstrapNavTree','toaster','ng-bootstrap-datepicker','elif'],function($httpProvider) {
 	  // Use x-www-form-urlencoded Content-Type
 	 $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
 	    $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
@@ -269,7 +269,8 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
         .state('core/person', {url: "/core/person",templateUrl: "modules/core/corePerson.html",controller:'core.person',resolve:{loadMyCtrl:function($ocLazyLoad){return $ocLazyLoad.load("modules/core/js/coreperson.js");}}})
          .state('core/role', {url: "/core/role",templateUrl: "modules/core/coreRole.html",controller:'core.role',resolve:{loadMyCtrl:function($ocLazyLoad){return $ocLazyLoad.load("modules/core/js/corerole.js");}}})
          .state('document', {url: "/document",templateUrl: "modules/document/document.html",controller:'document',resolve:{loadMyCtrl:function($ocLazyLoad){return $ocLazyLoad.load("modules/document/js/document.js");}}})
-         .state('table', {
+         .state('statistics', {url: "/statistics",templateUrl: "modules/statistics/statistics.html",controller:'statistics',resolve:{loadMyCtrl:function($ocLazyLoad){return $ocLazyLoad.load("modules/statistics/js/statistics.js");}}})
+		 .state('table', {
             url: "/table",
             templateUrl: "partials/state2.list.html",
             controller: function($scope) {
