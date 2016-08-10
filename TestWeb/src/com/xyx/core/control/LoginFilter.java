@@ -1,12 +1,16 @@
 package com.xyx.core.control;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -15,9 +19,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
 import com.xyx.core.bean.CommonData;
 import com.xyx.core.bean.CoreAuth;
+import com.xyx.core.bean.CoreLog;
 import com.xyx.core.bean.CorePerson;
+import com.xyx.core.service.CommonService;
 
 public class LoginFilter implements Filter{
 
@@ -65,6 +74,7 @@ public class LoginFilter implements Filter{
 			List<CoreAuth> auths = CommonData.authMap.get(corePerson
 					.getUsername());
 			System.out.println("request path" + path);
+			saveLog(req, path, "", corePerson);
 			boolean isAuth=true;
 			if(auths==null){
 				auths=new ArrayList<CoreAuth>();
@@ -91,6 +101,23 @@ public class LoginFilter implements Filter{
 		}else{
 			chain.doFilter(request, response);
 		}
+	}
+	
+	public void saveLog(HttpServletRequest request,String path,String modelname,CorePerson corePerson){
+		if(path.contains("core") && path.toLowerCase().contains("log")){
+			return ;
+		}
+		DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		ServletContext servletContext = request.getSession().getServletContext();      
+		ApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(servletContext);
+		CommonService commonService=(CommonService)ctx.getBean("CommonService");
+		CoreLog log=new CoreLog();
+		log.setAccessurl(path);
+		log.setCreatetime(dateFormat.format(new Date()));
+		log.setModelname(modelname);
+		log.setUserid(corePerson.getId());
+		log.setUsername(corePerson.getRealname());
+		commonService.save(log);
 	}
 
 	public void init(FilterConfig filterConfig) throws ServletException {
