@@ -2,15 +2,16 @@ angular.module("myApp").controller("core.role", ['$scope','$uibModal','$http','t
     $scope.name="xieyaxiong";
     $scope.columns=[
         {name:"编号",width:"5%",columnName:"id"},
-        {name:"姓名",width:"30%",columnName:"name"},
+        {name:"姓名",width:"20%",columnName:"name"},
         {name:"人数",width:"5%",columnName:"pcount"},
-        {name:"用户名",width:"45%",columnName:"names"}
+        {name:"用户名",width:"63%",columnName:"names"}
     ];
     $scope.operations=[
-        {name:"addT",title:"添加人员",imgClass:"fa fa-plus"},
-        {name:"editT",title:"编辑",imgClass:"fa fa-pencil-square-o"},
-        {name:"deleteT",title:"删除",imgClass:"fa fa-times"}
+        {name:"addT",title:"添加人员",imgClass:"fa fa-plus  fa-lg"},
+        {name:"editT",title:"编辑",imgClass:"fa fa-pencil-square-o fa-lg"},
+        {name:"deleteT",title:"删除",imgClass:"fa fa-times fa-lg"}
 	];
+	$scope.operateWidth="8%";
     $scope.pageOption={"currentPage":1,"pageSize":15};
     $scope.pageChanged = function() {
     	refreshTable();

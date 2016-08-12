@@ -570,3 +570,8 @@ th{
 td{
 	font-size: 12px;
 }
+
+.operateButton{
+	margin-right:8px;
+	cursor:pointer;
+}

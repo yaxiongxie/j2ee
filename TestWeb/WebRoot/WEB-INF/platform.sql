@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50710
 File Encoding         : 65001
 
-Date: 2016-08-03 18:00:08
+Date: 2016-08-11 09:57:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,7 +29,7 @@ CREATE TABLE `core_attachment` (
   `relationid` int(11) DEFAULT NULL,
   `createtime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for core_auth
@@ -42,7 +42,7 @@ CREATE TABLE `core_auth` (
   `groupname` varchar(255) DEFAULT NULL,
   `createtime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for core_department
@@ -56,7 +56,21 @@ CREATE TABLE `core_department` (
   `ordernum` int(11) DEFAULT NULL,
   `createtime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for core_log
+-- ----------------------------
+DROP TABLE IF EXISTS `core_log`;
+CREATE TABLE `core_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) DEFAULT NULL,
+  `userid` int(11) DEFAULT NULL,
+  `accessurl` varchar(255) DEFAULT NULL,
+  `modelname` varchar(255) DEFAULT NULL,
+  `createtime` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=439 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for core_person
@@ -77,7 +91,7 @@ CREATE TABLE `core_person` (
   `department_id` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for core_person_role
@@ -88,7 +102,7 @@ CREATE TABLE `core_person_role` (
   `role_id` int(11) DEFAULT NULL,
   `person_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for core_role
@@ -101,7 +115,7 @@ CREATE TABLE `core_role` (
   `names` varchar(255) DEFAULT NULL,
   `createtime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for core_role_auth
@@ -112,7 +126,7 @@ CREATE TABLE `core_role_auth` (
   `role_id` int(11) DEFAULT NULL,
   `auth_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for document
@@ -129,7 +143,7 @@ CREATE TABLE `document` (
   `isopen` int(11) DEFAULT NULL,
   `categoryid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for document_category

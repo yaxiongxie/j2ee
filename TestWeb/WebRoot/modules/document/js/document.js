@@ -24,14 +24,15 @@ angular.module("myApp").controller("document", ['$scope','$uibModal','$http','to
     }
     $scope.columns=[
         {name:"编号",width:"5%",columnName:"id"},
-        {name:"标题",width:"15%",columnName:"doctitle"},
-        {name:"大小",width:"6%",columnName:"docsize"},
-        {name:"内容摘要",width:"45%",columnName:"doccontent"},
+        {name:"标题",width:"20%",columnName:"doctitle"},
+        {name:"大小",width:"5%",columnName:"docsize"},
+        {name:"内容摘要",width:"50%",columnName:"doccontent"},
         {name:"上传时间",width:"12%",columnName:"createtime"}
     ];
+	$scope.operateWidth="8%";
     $scope.operations=[
-        {name:"downloadT",title:"下载",url:"document/downloadDocument.do",imgClass:"fa fa-download"},
-        {name:"deleteT",title:"删除",imgClass:"fa fa-times"}
+        {name:"downloadT",title:"下载",url:"document/downloadDocument.do",imgClass:"fa fa-download fa-lg"},
+        {name:"deleteT",title:"删除",imgClass:"fa fa-times fa-lg"}
 	];
     $scope.pageOption={"currentPage":1,"pageSize":12,"categoryid":0,"queryString":""};
     $scope.pageChanged = function() {

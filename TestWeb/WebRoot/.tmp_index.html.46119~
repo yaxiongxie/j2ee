@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+    <title>首页</title>
+	<link rel="shortcut icon" href="img/logo.ico" type="image/x-icon"/>
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="bootstrap/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="css/leftsidenav.css" rel="stylesheet">
+      <link href="css/abn_tree.css" rel="stylesheet">
+      <link href="loadingbar/loading-bar.min.css" rel="stylesheet">
+      <link href="css/toaster.min.css" rel="stylesheet">
+      <link href="bootstrap_fileinput/css/fileinput.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jquery.min.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/common/angular.min.js"></script>
+      <script type="text/javascript" src="js/common/angular-animate.min.js"></script>
+    <script type="text/javascript" src="js/common/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="js/common/ocLazyLoad.min.js"></script>
+    <script type="text/javascript" src="js/common/ui-bootstrap-tpls-1.3.3.min.js"></script>
+      <script type="text/javascript" src="js/common/abn_tree_directive.js"></script>
+      <script type="text/javascript" src="loadingbar/loading-bar.min.js"></script>
+      <script type="text/javascript" src="js/common/toaster.min.js"></script>
+      <script type="text/javascript" src="js/common/bootstrap-treeview.min.js"></script>
+      <script type="text/javascript" src="js/common/angular-bootstrap-datepicker.js"></script>
+      <script type="text/javascript" src="js/common/elif.js"></script>
+      <script type="text/javascript" src="js/common/angular-sanitize.min.js"></script>
+
+<script type="text/javascript" src="bootstrap_fileinput/js/fileinput.js"></script>
+<script type="text/javascript" src="bootstrap_fileinput/js/locales/zh.js"></script>
+<script type="text/javascript" src="fusioncharts-suite-xt/js/angular-fusioncharts.min.js"></script>
+<script type="text/javascript" src="fusioncharts-suite-xt/js/fusioncharts.js"></script>
+
+    <script type="text/javascript" src="js/myapp.js"></script>
+  </head>
+
+  <body>
+
+	  <div id="wrapper">
+	    <div ng-include="'top.html'"></div>
+	    <div ng-include="'leftsidenav.html'"></div>
+	    <div id="page-wrapper">
+	    	<div ui-view></div>
+	    </div>
+	    
+	</div>
+      <toaster-container toaster-options="{'time-out': 3000,'position-class':'toast-bottom-right','show-duration':300}"></toaster-container>
+  </body>
+</html>

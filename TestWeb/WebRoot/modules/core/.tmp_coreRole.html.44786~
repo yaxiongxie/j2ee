@@ -1,0 +1,14 @@
+<div class="row">
+	<div class="col-lg-12">
+		<h2 class="page-header">角色管理</h2>
+	</div>
+	<!-- /.col-lg-12 -->
+	<div class="col-lg-12">
+		<div class="col-lg-11"></div>
+		<div class="col-lg-1"><button type="button" class="btn btn-default" ng-click="addRole()"><i class="fa fa-plus" aria-hidden="true"></i> 新增角色</button></div>
+	</div>
+	<div></div>
+	<div class="col-lg-12">
+		<my-table></my-table>
+	</div>
+</div>

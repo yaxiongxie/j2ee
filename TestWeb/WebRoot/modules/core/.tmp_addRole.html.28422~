@@ -1,0 +1,33 @@
+<div class="modal-header">
+	<h3 class="modal-title" ng-if="role.id">编辑角色</h3>
+	<h3 class="modal-title" ng-else>新增角色</h3>
+</div>
+<div class="modal-body">
+
+	<form class="form-horizontal">
+	  <div class="form-group">
+	    <label for="inputEmail3" class="col-sm-2 control-label">角色名称 </label>
+	    <div class="col-sm-10">
+	      <input type="text" class="form-control"  placeholder="name" ng-model="role.name">
+	    </div>
+	  </div>
+		<fieldset>
+			<legend>权限</legend>
+			<div class="form-group" ng-repeat="groupname in groups">
+				<label for="disabledSelect" class="col-sm-2 control-label">{{groupname}}</label><br/><br/>
+				<div class="col-sm-10" >
+					<div ng-repeat="auth in role.authAll" ng-if="auth.groupname==groupname">
+						<input type="checkbox" ng-checked="isSelected(auth.id)" ng-click="updateSelection($event,auth.id)">{{auth.functionName}}
+					</div>
+				</div>
+			</div>
+		</fieldset>
+
+
+	</form>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-primary" type="button" ng-click="ok()">确定</button>
+	<button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+</div>
+

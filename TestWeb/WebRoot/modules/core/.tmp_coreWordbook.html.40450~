@@ -1,0 +1,31 @@
+<div class="row">
+	<div class="col-lg-12">
+		<h2 class="page-header">字典管理</h2>
+	</div>
+	<!-- /.col-lg-12 -->
+
+	<div class="col-lg-3">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<button type="button" class="btn btn-default" ng-click="addCategory()"><i class="fa fa-plus" aria-hidden="true"></i> 新增分类</button>
+				<button type="button" class="btn btn-default" ng-click="editCategory()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 修改分类</button>
+				<button type="button" class="btn btn-default" ng-click="deleteCategory()"><i class="fa fa-times" aria-hidden="true"></i> 删除</button>
+			</div>
+			<div class="panel-body">
+				<div id="tree"></div>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-9" style="padding-left: 0px;">
+		<div class="panel panel-default panel-noborder">
+				<div class="panel-heading panel-border">
+						<form class="form-inline">
+							  <input type="text" class="form-control input-l" placeholder=""q ng-model="pageOption.name">
+							  <button type="button" class="btn btn-primary" ng-click="queryTable()"><i class="fa fa-search" aria-hidden="true"></i> 查询</button>
+							   <button type="button" class="btn btn-default" style="float: right;" ng-click="addWordbook()"><i class="fa fa-plus" aria-hidden="true"></i> 新增人员</button>
+						</form>
+				</div>
+			<div class="panel-body" style="padding: 0px;"><my-table></my-table></div>
+		</div>
+	</div>
+</div>
