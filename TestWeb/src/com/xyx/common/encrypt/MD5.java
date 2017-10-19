@@ -63,6 +63,8 @@ public class MD5 {
     @SuppressWarnings("static-access")
 	public static void main(String[] args) {
         MD5 getMD5 = new MD5();
-        System.out.println(getMD5.GetMD5Code("000000"));
+        System.out.println(getMD5.GetMD5Code("123"));
+        String md5="202cb962ac59075b964b07152d234b70";
+        System.out.println(md5.length());
     }
 }

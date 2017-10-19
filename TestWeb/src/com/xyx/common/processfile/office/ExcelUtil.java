@@ -303,24 +303,33 @@ public class ExcelUtil {
 	
 	public static void main(String[] args) {
 		try{
-//			List<List<String>> list=new ExcelUtil().readExcel("D:\\statistic.xlsx");
-//			for(List<String> l:list){
-//				System.out.println(l);
-//			}
-			int count=0;
-			String string=new String("{0:187652,1:112868,2:26679,3:6612,4:3290,415:1,5:1531,6:803,7:511,8:366,9:220,10:155,11:81,12:77,286:1,13:90,14:33,15:27,17:46,16:20,19:14,18:15,21:11,20:12,23:17,22:7,25:2,24:1,27:4,26:1,29:3,28:3,31:4,30:5,34:2,35:1,32:2,33:1,38:1,39:1,36:16,42:1,43:1,41:3,46:1,44:1,51:1,54:1,52:2,59:1,57:2,56:1,60:1,70:4,64:1,72:1,209:1,103:1}");
-			JSONObject jsonObject=new JSONObject(string);
-			System.out.println(jsonObject);
-			Map<Integer, String> map=new TreeMap<Integer, String>();
-			Iterator<String> iterable=jsonObject.keys();
-			while(iterable.hasNext()){
-				String keyString=iterable.next();
-				map.put(Integer.parseInt(keyString), jsonObject.getString(keyString));
-				count=count+(Integer.parseInt(keyString)*Integer.parseInt(jsonObject.getString(keyString)));
+			List<List<String>> list=new ExcelUtil().readExcel("/Users/xieyaxiong/Documents/camera.xlsx");
+			List<String> resultList=new ArrayList<String>();
+			for(List<String> l:list){
+				System.out.println(resultList.add(l.get(0)));
 			}
-			System.out.println(map);
-			System.out.println(count);
-			new ExcelUtil().writeXlsx(map, "D:\\statistic.xlsx");
+			String ss="";
+			for(String mac:resultList){
+				System.out.println(mac);
+				ss=ss+mac+",";
+			}
+			System.out.println(resultList.size());
+			System.out.println(ss);
+			
+//			int count=0;
+//			String string=new String("{0:187652,1:112868,2:26679,3:6612,4:3290,415:1,5:1531,6:803,7:511,8:366,9:220,10:155,11:81,12:77,286:1,13:90,14:33,15:27,17:46,16:20,19:14,18:15,21:11,20:12,23:17,22:7,25:2,24:1,27:4,26:1,29:3,28:3,31:4,30:5,34:2,35:1,32:2,33:1,38:1,39:1,36:16,42:1,43:1,41:3,46:1,44:1,51:1,54:1,52:2,59:1,57:2,56:1,60:1,70:4,64:1,72:1,209:1,103:1}");
+//			JSONObject jsonObject=new JSONObject(string);
+//			System.out.println(jsonObject);
+//			Map<Integer, String> map=new TreeMap<Integer, String>();
+//			Iterator<String> iterable=jsonObject.keys();
+//			while(iterable.hasNext()){
+//				String keyString=iterable.next();
+//				map.put(Integer.parseInt(keyString), jsonObject.getString(keyString));
+//				count=count+(Integer.parseInt(keyString)*Integer.parseInt(jsonObject.getString(keyString)));
+//			}
+//			System.out.println(map);
+//			System.out.println(count);
+//			new ExcelUtil().writeXlsx(map, "/tmp/statistic.xlsx");
 		}catch (Exception e) {
 			e.printStackTrace();
 			// TODO: handle exception

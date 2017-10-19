@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.j2eedt.core.MYECLIPSE_JAVAEE_6_CONTAINER"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/antlr-2.7.7.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/aopalliance-.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/aspectjweaver-1.6.0.jar"/>
@@ -53,12 +52,13 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jai-imageio-1.1.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/swingx.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/solr-solrj-4.8.1.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.7.0_75"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/httpclient-4.3.1.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/httpcore-4.3.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/httpmime-4.3.1.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/noggit-0.5.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/wstx-asl-3.2.7.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/zookeeper-3.4.6.jar"/>
+	<classpathentry kind="lib" path="/Users/xieyaxiong/Documents/apache-tomcat-7.0.76/lib/servlet-api.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/Java SE 7 [1.7.0_71]"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
